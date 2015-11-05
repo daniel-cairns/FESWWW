@@ -20,6 +20,10 @@
 
   <div id="logo">
     <img src="img/logo/logo.png" alt="">
+    @if( Auth::check());
+    <a href="#" data-reveal-id="loginModal">Login</a>
+    <a href="#" data-reveal-id="registerModal">Register</a>
+    @endif
   </div>
     
     <div id="content" class="clearfix">
@@ -30,8 +34,27 @@
           <div class="hover-window-text">
             <a href="/weddings"><h1>Weddings</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
+            
+            @if( Auth::user()->privilege == 'admin')
+            <a href="#" data-reveal-id="weddingsModal">edit</a>
+            @endif
+
           </div>
         </div>  
+      </div>
+
+      <div id="weddingsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h2 id="modalTitle">Wedding Image Update</h2>
+        <form action="/home" method="post" enctype="multipart/form-data" novalidate>
+          {{ csrf_field() }}
+          
+          <label for="photo">Image</label>
+          
+          <input type="file" name="photo" class="tiny button radius">
+          
+          <input type="submit" value="Update Image" name="" class="tiny button radius">
+
+        </form>
       </div>
 
       <div id="portraits" class="image-box clearfix">
@@ -40,8 +63,16 @@
           <div class="hover-window-text">
             <a href="/portraits"><h1>Portraits</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
+            @if( Auth::user()->privilege == 'admin')
+            <a href="#" data-reveal-id="portraitsModal">edit</a>
+            @endif
+
           </div>
         </div>  
+      </div>
+
+      <div id="portraitsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        portraits
       </div>
       
       <div id="seniors" class="image-box clearfix">
@@ -50,8 +81,16 @@
           <div class="hover-window-text">
             <a href="/seniors"><h1>Seniors</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
+            @if( Auth::user()->privilege == 'admin')
+            <a href="#" data-reveal-id="seniorsModal">edit</a>
+            @endif
+
           </div>
         </div>  
+      </div>
+
+      <div id="seniorsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        seniors
       </div>
       
       <div id="commercial" class="image-box clearfix">
@@ -60,8 +99,16 @@
           <div class="hover-window-text">
             <a href="/commercial"><h1>Commercial</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
+            @if( Auth::user()->privilege == 'admin')
+            <a href="#" data-reveal-id="commercialModal">edit</a>
+            @endif
+
           </div>
         </div>  
+      </div>
+
+      <div id="commercialModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        commercial
       </div>
       
       <div id="models" class="image-box">
@@ -70,8 +117,17 @@
           <div class="hover-window-text">
             <a href="/models"><h1>Models</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
+
+            @if( Auth::user()->privilege == 'admin')
+            <a href="#" data-reveal-id="modelsModal">edit</a>
+            @endif
+
           </div>
         </div>  
+      </div>
+
+      <div id="modelsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        models
       </div>
     
     </div>  <!-- end #content -->

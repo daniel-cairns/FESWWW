@@ -16,25 +16,7 @@
     <header>
       
       <div class="heading clearfix">
-        
-          <h1><a href="/landing"><img src="img/logo/logo.png" alt="Far Edge Studios Logo"></a></h1>
-          
-
-     
-      <form action="index.php" method="get">
-        <input type="hidden" name="page" value="search">
-        <div class="row collapse postfix-round">
-          <div class="small-8 columns">
-            <input type="search" name="query" placeholder="Search">
-          </div>
-          <div class="small-4 columns">
-            <button class="button postfix-round">Search</button>
-          </div>
-        </div>
-        
-      </form>
-  
-        
+        <h1><a href="/"><img src="img/logo/logo.png" alt="Far Edge Studios Logo"></a></h1>
       </div>
     
       <nav class="top-bar" data-topbar role="navigation">
@@ -57,35 +39,83 @@
             <li><a href="/gallery">Gallery</a></li>
             <li><a href="/packages">Packages</a></li>
             <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact Us</a></li>
             <li class="has-dropdown">
-              <a href="#"data-reveal-id="accountModal">Account</a>
+              <a href="#">Account</a>
               <ul class="dropdown">
+                @if( !Auth::check())
                 <li><a href="#" data-reveal-id="loginModal">Login</a></li>
                 <li><a href="#" data-reveal-id="registerModal">Register</a></li>
-                <li><a href="#" data-reveal-id="contactModal">Contact</a></li>
+                @else
+                <li><a href="#" data-reveal-id="logoutModal">Logout</a></li>
+                <li><a href="accountModal">Account Details</a></li>
+                @endif
               </ul>
             </li>
           </ul>
+
+          <div id="loginModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <form action="/auth/login" method="post" novalidate>
+              {{csrf_field()}}
+
+              <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="email@photos.com" value="{{ old('email') }}">
+                {{ $errors->first('email')}}
+              </div>
+              <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                {{ $errors->first('password')}}
+              </div>
+              <input type="submit" value="Login" class="tiny button">
+            </form>
           
-          <!-- Left Nav Section -->
-          
+          </div>
+
+          <div id="registerModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <form action="/auth/register" method="post" novalidate>
+              {{csrf_field()}}
+
+              <div>
+                <label for="name">Username</label>
+                <input type="text" name="name" id="name" placeholder="Your Username" value="{{ old('name') }}">
+                {{ $errors->first('name')}}
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="email@photos.com" value="{{ old('email') }}">
+                {{ $errors->first('email')}}
+              </div>
+              <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                {{ $errors->first('password')}}
+              </div>
+              <div>
+                <label for="password_confirmation">Confirm Password</label>
+                <input type="password" id="password_confirmation" name="password_confirmation">
+              </div>
+              <div>
+                <input type="hidden" name="privilege" value="user">
+              </div>
+              <input type="submit" value="Register" class="tiny button">
+            </form>
+          </div>
+
+          <div id="logoutModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <h2>Logout?</h2>
+            <a href="" class="tiny button radius" aria-label="Close">NO</a>
+            <a href="/auth/logout" class="tiny button radius">YES</a>
+          </div>
+                  
         </section>  
       </nav>
-      
-      <div class="slider">
-        <div style="background-image: url(img/slider/commercial.jpg);"><caption>capture your day</caption></div>
-        <div style="background-image: url(img/slider/wedding1.jpg);"><caption>capture your day</caption></div>
-        <div style="background-image: url(img/slider/wedding2.jpg);"><caption>capture your day</caption></div>
-      </div>
-
-      <div class="caption">
-        <h1>Capture Your Day...</h1>
-      </div>
     </header>
     
     <main>
     
-    @yield('content')      
+      @yield('content')      
 
     </main>
         

@@ -32,9 +32,15 @@ body {
   position: absolute;
   top: 0;
   left: 10;
-  display: none; }
+  display: none;
+  width: 100%; }
   #logo img {
-    width: 280px; }
+    width: 280px;
+    float: left; }
+  #logo a {
+    color: white;
+    float: right;
+    margin: 30px 20px 0 10px; }
 
 #content {
   min-width: 100%;
@@ -80,6 +86,9 @@ body {
         #content .image-box .hover-window .hover-window-text a {
           text-decoration: none;
           color: white; }
+        #content .image-box .hover-window .hover-window-text a:nth-child(2) {
+          color: #2196f3;
+          text-decoration: underline; }
     #content .image-box .hover-window:hover {
       background: none; }
     #content .image-box .hover-window:hover .hover-window-text {
