@@ -24,6 +24,7 @@ Route::get('gallery', 'GalleryController@index');
 Route::get('about', 'AboutController@index');
 
 Route::get('packages', 'PackagesController@index');
+Route::get('package{package}', 'PackagesController@package');
 
 Route::get('contact', 'ContactController@index');
 

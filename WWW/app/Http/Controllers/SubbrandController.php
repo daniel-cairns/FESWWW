@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Subbrands;
+use App\Packages;
 
 class SubbrandController extends Controller
 {
@@ -17,9 +18,6 @@ class SubbrandController extends Controller
      */
     public function index($subbrand)
     {
-
-
-
         switch( $subbrand )
         {
             case 'weddings':
@@ -49,9 +47,9 @@ class SubbrandController extends Controller
 
         }
 
-        return view('subbrand.index', compact('result'));
-        
+        $brandPackage = Packages::all();
 
+        return view('subbrand.index', compact('result', 'brandPackage'));
     }
 
     /**

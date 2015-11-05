@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subbrands extends Model
+class Packages extends Model
 {
-    public $table = 'subbrands';
+    public $table = "packages";
 }

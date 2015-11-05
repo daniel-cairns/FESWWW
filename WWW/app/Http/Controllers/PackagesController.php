@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Packages;
 
 class PackagesController extends Controller
 {
@@ -16,7 +17,16 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        return view('packages.index');
+        $allPackages = Packages::all();
+        
+        return view('packages.index', compact('allPackages'));
+    }
+
+    public function package( $package ) 
+    {
+        $packageName = Packages::where('name') == $package;
+        
+        return view('packages.package', compact('packageName'));
     }
 
     /**

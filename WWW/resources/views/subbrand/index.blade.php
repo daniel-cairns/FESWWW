@@ -28,6 +28,7 @@
     <h3>Gallery</h3>
     <h3>Caption</h3>
     <h3>Description</h3>
+    <h3>Packages</h3>
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
   </div>
 
@@ -39,7 +40,7 @@
   
   <div class="row">
     <div class="columns">
-      <ul class="small-block-grid-2 medium-block-grid-4">
+      <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
         <li><a href="#" data-reveal-id="myModal"><img src="/img/gallery/wed-page-cut-2.jpg" alt=""></a></li>
         <li><a href="#" data-reveal-id="myModal"><img src="/img/gallery/wed-page-cut-3.jpg" alt=""></a></li>
         <li><a href="#" data-reveal-id="myModal"><img src="/img/gallery/wed-page-cut.jpg" alt=""></a></li>
@@ -61,26 +62,21 @@
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
   </div>
 
-  <div class="row">
+  <div class="row" >
     <div class="columns">
       <h2>Packages</h2>
-      <ul class="small-block-grid-1 medium-block-grid-3">
-        <li>
-          <h3>package</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet sapiente soluta tenetur excepturi rem, maiores natus deserunt ratione! Ex enim libero perferendis, quis ratione ducimus impedit molestias ipsa, temporibus animi.</p>
-          <a href="packages.html" class="tiny button radius amber">package details</a>
-        </li>
-        <li>
-          <h3>package</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam laudantium quas iusto autem porro quibusdam assumenda ipsum atque animi inventore deleniti sapiente beatae veritatis, nobis eius quis blanditiis odio nulla.</p>
-          <a href="packages.html" class="tiny button radius amber">package details</a>
-        </li>
-        <li>
-          <h3>package</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error itaque sit deleniti porro recusandae, voluptate. Eveniet, quaerat ullam reprehenderit, sapiente, consequatur rerum esse dolores, mollitia placeat sint at repellat excepturi.</p>
-          <a href="packages.html" class="tiny button radius amber">package details</a>
-        </li>
-      </ul>
+      <div class="row" data-equalizer>
+        @foreach($brandPackage as $package)
+            
+            <div class="columns medium-6 large-4" >
+              <h3>{{$package->name}}</h3>
+              <p data-equalizer-watch>{{$package->description}}</p>
+              <a href="/packages/{{$package->name}}" class="tiny button radius amber">package details</a>
+            </div>
+            
+        @endforeach
+      </div>
+      
     </div>
   </div>
 @endsection
