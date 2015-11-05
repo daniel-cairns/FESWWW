@@ -53,7 +53,7 @@
             <a href="subbrand/weddings"><h1>Weddings</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
             
-            @if( Auth::user()->privilege == 'admin')
+            @if( Auth::check() && Auth::user()->privilege == 'admin')
             <a href="#" data-reveal-id="weddingsModal">edit</a>
             @endif
 
@@ -81,7 +81,7 @@
           <div class="hover-window-text">
             <a href="subbrand/portraits"><h1>Portraits</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
-            @if( Auth::user()->privilege == 'admin')
+            @if( Auth::check() && Auth::user()->privilege == 'admin')
             <a href="#" data-reveal-id="portraitsModal">edit</a>
             @endif
 
@@ -99,7 +99,7 @@
           <div class="hover-window-text">
             <a href="subbrand/seniors"><h1>Seniors</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
-            @if( Auth::user()->privilege == 'admin')
+            @if( Auth::check() && Auth::user()->privilege == 'admin')
             <a href="#" data-reveal-id="seniorsModal">edit</a>
             @endif
 
@@ -117,7 +117,7 @@
           <div class="hover-window-text">
             <a href="subbrand/commercial"><h1>Commercial</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
-            @if( Auth::user()->privilege == 'admin')
+            @if( Auth::check() && Auth::user()->privilege == 'admin')
             <a href="#" data-reveal-id="commercialModal">edit</a>
             @endif
 
@@ -136,7 +136,7 @@
             <a href="subbrand/models"><h1>Models</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
 
-            @if( Auth::user()->privilege == 'admin')
+            @if( Auth::check() && Auth::user()->privilege == 'admin')
             <a href="#" data-reveal-id="modelsModal">edit</a>
             @endif
 

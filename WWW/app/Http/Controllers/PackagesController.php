@@ -22,11 +22,11 @@ class PackagesController extends Controller
         return view('packages.index', compact('allPackages'));
     }
 
-    public function package( $package ) 
+    public function package( $packagePage ) 
     {
-        $packageName = Packages::where('name') == $package;
-        
-        return view('packages.package', compact('packageName'));
+        $package = Packages::where('name', strtolower($packagePage));
+        dd($package);
+        return view('packages.package', compact('package'));
     }
 
     /**

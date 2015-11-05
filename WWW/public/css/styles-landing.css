@@ -64,7 +64,7 @@ body {
       text-align: center;
       overflow: hidden;
       background: rgba(33, 33, 33, 0.3);
-      transition: all 0.3s linear; }
+      transition: all 1s; }
       #content .image-box .hover-window .hover-window-text {
         visibility: hidden;
         position: absolute;

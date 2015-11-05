@@ -1,7 +1,12 @@
 @extends('master')
 
 @section('content')
-
-	<h1>yes</h1>
+	
+	<div class="row">
+		<div class="columns">
+			<h1>{{$package->name}}</h1>		
+		</div>
+	</div>
+	
 
 @endsection
