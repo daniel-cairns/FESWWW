@@ -18,7 +18,7 @@ class CreateSubbrandsImagesTable extends Migration
             $table->integer('image_id')->unsigned();
             $table->foreign('image_id')->references('id')->on('images');
 
-            $table->tinyInteger('subbrand_id')->unsigned();
+            $table->integer('subbrand_id')->unsigned();
             $table->foreign('subbrand_id')->references('id')->on('subbrands');
             
             $table->timestamps();

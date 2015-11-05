@@ -32,22 +32,27 @@ body {
     width: 1366px;
     height: 300px; }
 
-#weddings h1 {
+#Weddings h1 {
   font-family: Monsieur La Doulaise;
-  font-size: 3rem; }
+  font-size: 3rem;
+  margin-top: 20px; }
 
-#portraits h1 {
-  font-family: Monda; }
+#Portraits h1 {
+  font-family: Monda;
+  margin-top: 20px; }
 
-#seniors h1 {
+#Seniors h1 {
   font-family: Great Vibes;
+  margin-top: 20px;
   font-size: 3rem; }
 
-#commercial h1 {
-  font-family: Roboto; }
+#Commercial h1 {
+  font-family: Roboto;
+  margin-top: 20px; }
 
-#models h1 {
-  font-family: Codystar; }
+#Models h1 {
+  font-family: Codystar;
+  margin-top: 20px; }
 
 .fade {
   width: 500px;

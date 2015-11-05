@@ -16,10 +16,10 @@ class CreateBoughtPackagesImagesTable extends Migration
             $table->increments('id');
 
             $table->integer('bought_packages_id')->unsigned();
-            $table->integer('bought_packages_id')->references('id')->on('bought_packages');
+            $table->foreign('bought_packages_id')->references('id')->on('bought_packages');
 
             $table->integer('image_id')->unsigned();
-            $table->integer('image_id')->references('id')->on('images');
+            $table->foreign('image_id')->references('id')->on('images');
             
             $table->timestamps();
         });

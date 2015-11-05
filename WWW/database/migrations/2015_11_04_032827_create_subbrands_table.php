@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStaffTable extends Migration
+class CreateSubbrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateStaffTable extends Migration
     public function up()
     {
         Schema::create('subbrands', function (Blueprint $table) {
-            $table->tinyIncrements('id');
+            $table->increments('id');
 
             $table->char('name', 10);
 
-            $table->char('description', 1000);
+            $table->text('description', 1000);
 
             $table->char('landing_description', 200);
 

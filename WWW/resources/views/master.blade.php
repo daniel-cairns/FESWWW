@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>FES | Weddinggs</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto|Monsieur+La+Doulaise' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/foundation.css"/>
-    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/vendor/modernizr.js"></script>
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/vendor/modernizr.js"></script>
   </head>
 
   <body>
     <header>
       
       <div class="heading clearfix">
-        <h1><a href="/"><img src="img/logo/logo.png" alt="Far Edge Studios Logo"></a></h1>
+        <h1><a href="/"><img src="/img/logo/logo.png" alt="Far Edge Studios Logo"></a></h1>
       </div>
     
       <nav class="top-bar" data-topbar role="navigation">
@@ -31,11 +31,11 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
-            <li><a href="/weddings">Weddings</a></li>
-            <li><a href="/portraits">Portraits</a></li>
-            <li><a href="/seniors">Seniors</a></li>
-            <li><a href="/commercial">Commercial</a></li>
-            <li><a href="/models">Models</a></li>
+            <li><a href="/subbrand/weddings">Weddings</a></li>
+            <li><a href="/subbrand/portraits">Portraits</a></li>
+            <li><a href="/subbrand/seniors">Seniors</a></li>
+            <li><a href="/subbrand/commercial">Commercial</a></li>
+            <li><a href="/subbrand/models">Models</a></li>
             <li><a href="/gallery">Gallery</a></li>
             <li><a href="/packages">Packages</a></li>
             <li><a href="/about">About Us</a></li>
@@ -123,14 +123,14 @@
       <p>Copyright Far Edge Studios 2015 &copy;</p>
     </footer>
    
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/foundation.min.js"></script>
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/foundation.min.js"></script>
     <script>
       $(document).foundation();
     </script>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="slick/slick.min.js"></script>
+    <script type="text/javascript" src="/slick/slick.min.js"></script>
     <script>
       $(document).ready(function(){
         $('.slider').slick({

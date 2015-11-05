@@ -15,10 +15,10 @@ class CreateSubbrandsPackagesTable extends Migration
         Schema::create('subbrands_packages', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->tinyInteger('subbrand_id')->unsigned();
+            $table->integer('subbrand_id')->unsigned();
             $table->foreign('subbrand_id')->references('id')->on('subbrands');
 
-            $table->tinyInteger('package_id')->unsigned();
+            $table->integer('package_id')->unsigned();
             $table->foreign('package_id')->references('id')->on('packages');
 
             $table->timestamps();

@@ -15,10 +15,10 @@ class CreateBoughtPackagesTable extends Migration
         Schema::create('bought_packages', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->smallInteger('client_id')->unsigned();
+            $table->integer('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('clients');
 
-            $table->tinyInteger('package_id')->unsigned();
+            $table->integer('package_id')->unsigned();
             $table->foreign('package_id')->references('id')->on('packages');
 
             $table->enum('status', ['pending', 'printing', 'payed', 'stopped', 'sent']);

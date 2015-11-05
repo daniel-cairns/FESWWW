@@ -6,19 +6,52 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Subbrands;
 
-class WeddingsController extends Controller
+class SubbrandController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($subbrand)
     {
-        $subbrand = Subbrands::where('id'), ;
 
-        return view('weddings.index', compact('name', 'gallery', 'caption', 'description'));
+
+
+        switch( $subbrand )
+        {
+            case 'weddings':
+                // ID 1 is weddings
+                $result = Subbrands::find(1);
+            break;
+
+            case 'portraits':
+                // ID 1 is weddings
+                $result = Subbrands::find(2);
+            break;
+
+            case 'seniors':
+                // ID 1 is weddings
+                $result = Subbrands::find(3);
+            break;
+
+            case 'commercial':
+                // ID 1 is weddings
+                $result = Subbrands::find(4);
+            break;
+
+            case 'models':
+                // ID 1 is weddings
+                $result = Subbrands::find(5);
+            break;
+
+        }
+
+        return view('subbrand.index', compact('result'));
+        
+
     }
 
     /**

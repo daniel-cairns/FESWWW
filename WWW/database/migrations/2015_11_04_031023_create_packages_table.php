@@ -13,7 +13,7 @@ class CreatePackagesTable extends Migration
     public function up()
     {
         Schema::create('packages', function (Blueprint $table) {
-            $table->tinyIncrements('id');
+            $table->increments('id');
 
             $table->char('name', 15);
 

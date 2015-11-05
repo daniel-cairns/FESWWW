@@ -13,12 +13,12 @@ class CreateMessagesTable extends Migration
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->mediumIncrements('id');
+            $table->increments('id');
 
-            $table->smallInteger('client_id')->unsigned();
-            $table->foriegn('client_id')->references('id')->on('clients');
+            $table->integer('client_id')->unsigned();
+            $table->foreign('client_id')->references('id')->on('clients');
 
-            $table->char('message', 1000);
+            $table->text('message', 1000);
 
             $table->enum('status',['read','unread']);
 

@@ -17,15 +17,7 @@ Route::get('/home', 'HomeController@index');
 
 // Pages
 
-Route::get('weddings', 'WeddingsController@index');
-
-Route::get('portraits', 'PortraitsController@index');
-
-Route::get('seniors', 'SeniorsController@index');
-
-Route::get('commercial', 'CommercialController@index');
-
-Route::get('models', 'ModelsController@index');
+Route::get('subbrand/{subbrand}', 'SubbrandController@index');
 
 Route::get('gallery', 'GalleryController@index');
 

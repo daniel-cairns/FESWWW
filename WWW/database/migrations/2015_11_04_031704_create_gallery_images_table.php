@@ -15,11 +15,11 @@ class CreateGalleryImagesTable extends Migration
         Schema::create('gallery_images', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->tinyInteger('gallery_id')->unsigned();
-            $table->tinyInteger('gallery_id')->references('id')->on('gallery');
+            $table->integer('gallery_id')->unsigned();
+            $table->foreign('gallery_id')->references('id')->on('gallery');
 
             $table->integer('image_id')->unsigned();
-            $table->integer('image_id')->references('id')->on('images'); 
+            $table->foreign('image_id')->references('id')->on('images'); 
 
             $table->timestamps();
         });
