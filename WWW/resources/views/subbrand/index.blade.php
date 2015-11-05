@@ -13,7 +13,26 @@
 
   <div class="row" id="{{$result->name}}">
     <div class="columns">
-      <h1>{{$result->name}}</h1>
+      <h1 class="left">{{$result->name}}</h1>
+      
+      @if( Auth::user()->privilege == 'admin')
+      <a href="" class="edit right" data-reveal-id="editModal">Edit Page</a>
+      @endif
+      
+    </div>
+  </div>
+
+  <div id="editModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2 id="modalTitle">Edit {{$result->name}}</h2>
+    <h3>Slider</h3>
+    <h3>Gallery</h3>
+    <h3>Caption</h3>
+    <h3>Description</h3>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <div class="row">
+    <div class="columns">
       <p>{{$result->description}}</p>
     </div>
   </div>
@@ -28,13 +47,13 @@
     </div>
   </div>
 
-  <div id="myModal" class="reveal-modal grey full" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <div class="fade">
       <div class="row">
         <div class="columns">
-          <div><img src="img/gallery/wed-page-cut-2.jpg" alt=""></div>
-          <div><img src="img/gallery/wed-page-cut-3.jpg" alt=""></div>
-          <div><img src="img/gallery/wed-page-cut.jpg" alt=""></div>
+          <div><img src="/img/gallery/wed-page-cut-2.jpg" alt=""></div>
+          <div><img src="/img/gallery/wed-page-cut-3.jpg" alt=""></div>
+          <div><img src="/img/gallery/wed-page-cut.jpg" alt=""></div>
         </div>  
       </div> 
  

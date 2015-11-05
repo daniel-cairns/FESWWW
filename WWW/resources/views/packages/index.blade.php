@@ -1,5 +1,11 @@
 @extends('master')
 
 @section('content')
-	<h1>Packages</h1>	
+	
+	<div class="row">
+		<div class="columns">
+			<h1>Packages</h1>	
+		</div>
+	</div>
+	
 @endsection
