@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Subbrands;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $subbrands = Subbrands::all();
-        
-        return view('home', compact('subbrands'));
+      $users = \DB::table('users')->orderBy('name')->get();
+      
+      return view('admin.admin', compact('users'));
     }
 
     /**
@@ -38,7 +37,7 @@ class HomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store (Request $request)
+    public function store(Request $request)
     {
         //
     }

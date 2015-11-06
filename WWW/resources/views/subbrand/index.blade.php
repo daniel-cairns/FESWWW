@@ -16,7 +16,7 @@
       <h1 class="left">{{$result->name}}</h1>
       
       @if( Auth::check() && Auth::user()->privilege == 'admin')
-      <a href="" class="edit right" data-reveal-id="editModal">Edit Page</a>
+      <a href="" class="tiny button radius amber edit right" data-reveal-id="editModal">Edit Page</a>
       @endif
       
     </div>

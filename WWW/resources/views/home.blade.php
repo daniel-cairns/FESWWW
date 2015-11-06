@@ -45,24 +45,26 @@
   </div>
     
     <div id="content" class="clearfix">
-    
-      <div id="weddings" class="image-box">
-        <img src="img/landing/wedding-home.jpg" alt="">
+      
+      @foreach( $subbrands as $subbrand )
+      <div id="{{$subbrand->name}}" class="image-box">
+        <img src="img/landing/{{$subbrand->name}}-home.jpg" alt="">
         <div class="hover-window">  
           <div class="hover-window-text">
-            <a href="subbrand/weddings"><h1>Weddings</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore voluptas explicabo similique cupiditate, adipisci corrupti ullam rerum ipsum quo! Obcaecati, incidunt, officia. Maxime distinctio, harum excepturi, neque quam architecto reprehenderit.</p></a>
+            <a href="subbrand/weddings"><h1>{{$subbrand->name}}</h1>
+            <p>{{$subbrand->landing_description}}</p></a>
             
             @if( Auth::check() && Auth::user()->privilege == 'admin')
-            <a href="#" data-reveal-id="weddingsModal">edit</a>
+            <a href="#" data-reveal-id="editModal">edit</a>
             @endif
 
           </div>
         </div>  
       </div>
 
-      <div id="weddingsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-        <h2 id="modalTitle">Wedding Image Update</h2>
+      <div id="editModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h2 id="modalTitle">{{$subbrand->name}} Image Update</h2>
+        
         <form action="/home" method="post" enctype="multipart/form-data" novalidate>
           {{ csrf_field() }}
           
@@ -74,8 +76,9 @@
 
         </form>
       </div>
+      @endforeach
 
-      <div id="portraits" class="image-box clearfix">
+      {{-- <div id="portraits" class="image-box clearfix">
         <img src="img/landing/portrait-home.jpg" alt="">
         <div class="hover-window">  
           <div class="hover-window-text">
@@ -146,7 +149,7 @@
 
       <div id="modelsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
         models
-      </div>
+      </div> --}}
     
     </div>  <!-- end #content -->
     

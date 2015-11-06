@@ -28,6 +28,8 @@ Route::get('packages/{packagePage}', 'PackagesController@package');
 
 Route::get('contact', 'ContactController@index');
 
+Route::get('admin', 'AdminController@index');
+
 // Registration
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');

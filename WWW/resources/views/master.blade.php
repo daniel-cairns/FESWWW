@@ -48,7 +48,11 @@
                 <li><a href="#" data-reveal-id="registerModal">Register</a></li>
                 @else
                 <li><a href="#" data-reveal-id="logoutModal">Logout</a></li>
-                <li><a href="accountModal">Account Details</a></li>
+                  @if( Auth::check() && Auth::user()->privilege == 'admin')
+                  <li><a href="/admin">Admin</a></li>
+                  @else
+                  <li><a href="accountModal">Account Details</a></li>
+                  @endif
                 @endif
               </ul>
             </li>

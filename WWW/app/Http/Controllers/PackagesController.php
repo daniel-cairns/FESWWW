@@ -24,8 +24,8 @@ class PackagesController extends Controller
 
     public function package( $packagePage ) 
     {
-        $package = Packages::where('name', strtolower($packagePage));
-        dd($package);
+        $package = Packages::where('name', strtolower($packagePage))->firstOrFail();
+        
         return view('packages.package', compact('package'));
     }
 

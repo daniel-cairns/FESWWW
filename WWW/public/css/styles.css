@@ -3,8 +3,9 @@ body {
   color: #212121 !important; }
 
 .edit {
-  color: #2196f3 !important;
-  text-decoration: underline; }
+  color: #212121 !important;
+  text-decoration: underline;
+  margin-top: 20px; }
 
 .heading {
   background: #727272 !important; }
