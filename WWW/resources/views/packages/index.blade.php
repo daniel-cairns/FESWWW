@@ -1,39 +1,30 @@
 @extends('master')
-
+@section('title')
+	Packages
+@endsection
 @section('content')
 	
 	<div class="row">
 		<div class="columns">
 			<h1 class="left">Packages</h1>
-
-			@if( Auth::check() && Auth::user()->privilege == 'admin')
-      <a href="" class="tiny button radius amber edit right" data-reveal-id="editModal">Edit Page</a>
-      @endif
-
-      <div id="editModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-		    <h2 id="modalTitle">Edit Packages</h2>
-		    @foreach( $allPackages as $package)
-				<h3>{{$package->name}}</h3>
-				<p>{{$package->description}}</p>
-				<span>${{$package->price}}</span>
-				<span>${{$package->hours}}</span>
-				<span>Product: {{$package->product}}</span>
-			@endforeach
-		    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-		  </div>
-
 		</div>
 	</div>
 	
-	<div class="row">
+	@foreach( $subbrands as $subbrand)
+	<div class="row" data-equalizer>
 		<div class="columns">
-			@foreach( $allPackages as $package)
-				<h1>{{$package->name}}</h1>
-				<p>{{$package->description}}</p>
-				<span>${{$package->price}}</span>
-				<span>${{$package->hours}}</span>
-				<span>Product: {{$package->product}}</span>
-			@endforeach
+			<h2>{{$subbrand->name}}</h2>
+			<ul class="medium-block-grid-3">
+				@foreach( $allPackages as $package)
+					<li>
+						<h3>{{$package->name}}</h3>
+						<p data-equalizer-watch>{{$package->description}}</p>
+						<a href="package/{{$package->name}}" class="tiny button radius amber">Package Details</a>
+					</li>
+				@endforeach				
+			</ul>
+			<hr>
 		</div>
 	</div>
+	@endforeach
 @endsection

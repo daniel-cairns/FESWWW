@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Packages;
+use App\Subbrands;
 
 class PackagesController extends Controller
 {
@@ -17,16 +18,16 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $allPackages = Packages::all();
-        
-        return view('packages.index', compact('allPackages'));
+      $allPackages = Packages::all();
+      $subbrands = Subbrands::all('name');
+      return view('packages.index', compact('allPackages', 'subbrands'));
     }
 
     public function package( $packagePage ) 
     {
-        $package = Packages::where('name', strtolower($packagePage))->firstOrFail();
-        
-        return view('packages.package', compact('package'));
+      $package = Packages::where('name', strtolower($packagePage))->firstOrFail();
+      
+      return view('packages.package', compact('package'));
     }
 
     /**
@@ -81,7 +82,7 @@ class PackagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

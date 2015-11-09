@@ -49,7 +49,7 @@ class AdminController extends Controller
             'description' => 'required|min:5|max:100',
         ]);
 
-        $subbrand->subbrandImages;
+        $image = new Images();
 
         // Check if a photo has been subitted in the form
         if($request->hasFile('photo'))
@@ -59,21 +59,15 @@ class AdminController extends Controller
 
             // Use intervention Image to resize the image
             \Image::make($request->file('photo') )
-                                // ->resize( 273,668,function($constraint){$constraint->aspectRatio();})
-                                ->fit( 273, 668)
-                                ->save( 'img/landing/'.$fileName);
-
-            // Delete the old image
-            // \File::Delete('img/landing/'.$subbrand->photo);
-
-            $subbrand->photo = $fileName;
+                                ->save( 'img/original/'.$fileName);
+            $image->name = $fileName;
         }
 
-        $subbrand->landing_description = $request->landing_description;
+        $image->description = $request->description;
 
-        $subbrand->save();
+        $image->save();
 
-        return redirect('/home');
+        return redirect('admin');
     }
 
     /**

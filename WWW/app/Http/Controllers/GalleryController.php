@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Subbrands;
 use App\SubbrandImages;
+use App\Images;
 
 class GalleryController extends Controller
 {
@@ -19,7 +20,8 @@ class GalleryController extends Controller
     public function index()
     {
         $subbrands = Subbrands::all();
-        return view('gallery.index', compact('subbrands'));
+        $images = Images::all();        
+        return view('gallery.index', compact('subbrands', 'images'));
     }
 
     /**

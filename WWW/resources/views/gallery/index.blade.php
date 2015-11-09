@@ -6,7 +6,10 @@
       <h1>Gallery</h1> 
     </div>
   </div>
-
+  @foreach( $images as $image)
+  <img src="img/original/{{$image->name}}" alt="">
+  <p>{{$image->description}}</p>
+  @endforeach
   @foreach( $subbrands as $subbrand)
 
   <div class="row">

@@ -1,4 +1,5 @@
 @extends('master')
+@section('title')
 
 @section('content')
 	<div class="slider">
