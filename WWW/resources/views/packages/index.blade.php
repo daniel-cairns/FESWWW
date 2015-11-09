@@ -7,7 +7,7 @@
 			<h1 class="left">Packages</h1>
 
 			@if( Auth::check() && Auth::user()->privilege == 'admin')
-      <a href="" class="edit right" data-reveal-id="editModal">Edit Page</a>
+      <a href="" class="tiny button radius amber edit right" data-reveal-id="editModal">Edit Page</a>
       @endif
 
       <div id="editModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
@@ -24,7 +24,7 @@
 
 		</div>
 	</div>
-
+	
 	<div class="row">
 		<div class="columns">
 			@foreach( $allPackages as $package)

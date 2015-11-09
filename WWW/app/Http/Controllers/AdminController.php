@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Images;
+use App\Subbrands;
 
 class AdminController extends Controller
 {
@@ -16,9 +19,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-      $users = \DB::table('users')->orderBy('name')->get();
-      
-      return view('admin.admin', compact('users'));
+      $users = User::all();
+      $images = Images::all();
+
+      return view('admin.admin', compact('users','images'));
     }
 
     /**
@@ -39,7 +43,37 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the update form
+        $this->validate($request,[
+            'photo' => 'image',
+            'description' => 'required|min:5|max:100',
+        ]);
+
+        $subbrand->subbrandImages;
+
+        // Check if a photo has been subitted in the form
+        if($request->hasFile('photo'))
+        {
+            // Generate a new file name
+            $fileName = uniqid().'.'.$request->file('photo')->getClientOriginalExtension();
+
+            // Use intervention Image to resize the image
+            \Image::make($request->file('photo') )
+                                // ->resize( 273,668,function($constraint){$constraint->aspectRatio();})
+                                ->fit( 273, 668)
+                                ->save( 'img/landing/'.$fileName);
+
+            // Delete the old image
+            // \File::Delete('img/landing/'.$subbrand->photo);
+
+            $subbrand->photo = $fileName;
+        }
+
+        $subbrand->landing_description = $request->landing_description;
+
+        $subbrand->save();
+
+        return redirect('/home');
     }
 
     /**

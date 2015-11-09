@@ -13,11 +13,10 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
-
-
-// Pages
+Route::post('/home', 'HomeController@update');
 
 Route::get('subbrand/{subbrand}', 'SubbrandController@index');
+// Route::post('subbrand/', 'SubbrandController@')
 
 Route::get('gallery', 'GalleryController@index');
 
@@ -29,6 +28,7 @@ Route::get('packages/{packagePage}', 'PackagesController@package');
 Route::get('contact', 'ContactController@index');
 
 Route::get('admin', 'AdminController@index');
+Route::post('admin', 'AdminController@store');
 
 // Registration
 Route::get('auth/register', 'Auth\AuthController@getRegister');

@@ -8,12 +8,12 @@ class Images extends Model
 {
     public function subbrands_images()
     {
-
+        return $this->hasMany('App\SubbrandImages');
     }
 
-    public function bought_packages() 
+    public function bought_packages_images() 
     {
-
+        
     }
 
     public function gallery_images()

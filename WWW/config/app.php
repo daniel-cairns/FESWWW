@@ -137,6 +137,10 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        // ADDS INTERVENTION IMAGE
+        Intervention\Image\ImageServiceProvider::class,
+     
+
         /*
          * Application Service Providers...
          */
