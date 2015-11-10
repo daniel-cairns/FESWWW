@@ -1,5 +1,7 @@
 @extends('master')
-
+@section('title')
+	Admin
+@endsection
 @section('content')
 	<div class="row">
 		<div class="columns">

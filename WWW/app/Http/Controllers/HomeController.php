@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Subbrands;
+use App\Subbrand;
 use App\SubbrandImages;
 
 class HomeController extends Controller
@@ -19,8 +19,8 @@ class HomeController extends Controller
     public function index()
     {
         // Get all the subbrands from the database
-        $subbrands = Subbrands::all();
-        
+        $subbrands = Subbrand::all();
+
         // Send the subbbrands to the home page HTML 
         return view('home', compact('subbrands'));
     }
@@ -86,7 +86,7 @@ class HomeController extends Controller
         // return $request->subbrandName;
 
         // Find the requested subbrand in the database
-        $subbrand = Subbrands::where('name', $request->subbrandName)->firstOrFail();
+        $subbrand = Subbrand::where('name', $request->subbrandName)->firstOrFail();
 
         $subbrand->subbrandImages;
 

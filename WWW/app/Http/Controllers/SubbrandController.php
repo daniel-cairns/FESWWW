@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Subbrands;
-use App\Packages;
+use App\Subbrand;
+use App\Package;
 
 class SubbrandController extends Controller
 {
@@ -22,32 +22,32 @@ class SubbrandController extends Controller
         {
             case 'weddings':
                 // ID 1 is weddings
-                $result = Subbrands::find(1);
+                $result = Subbrand::find(1);
             break;
 
             case 'portraits':
                 // ID 1 is weddings
-                $result = Subbrands::find(2);
+                $result = Subbrand::find(2);
             break;
 
             case 'seniors':
                 // ID 1 is weddings
-                $result = Subbrands::find(3);
+                $result = Subbrand::find(3);
             break;
 
             case 'commercial':
                 // ID 1 is weddings
-                $result = Subbrands::find(4);
+                $result = Subbrand::find(4);
             break;
 
             case 'models':
                 // ID 1 is weddings
-                $result = Subbrands::find(5);
+                $result = Subbrand::find(5);
             break;
 
         }
 
-        $brandPackage = Packages::all();
+        $brandPackage = Package::all();
 
         return view('subbrand.index', compact('result', 'brandPackage'));
     }

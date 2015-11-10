@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Subbrands;
-use App\SubbrandImages;
-use App\Images;
+use App\Subbrand;
+use App\Image;
 
 class GalleryController extends Controller
 {
@@ -19,8 +18,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $subbrands = Subbrands::all();
-        $images = Images::all();        
+        $subbrands = Subbrand::all();
+        $images = Image::all();        
         return view('gallery.index', compact('subbrands', 'images'));
     }
 

@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Images;
-use App\Subbrands;
+use App\Image;
+use App\Subbrand;
 
 class AdminController extends Controller
 {
@@ -20,7 +20,7 @@ class AdminController extends Controller
     public function index()
     {
       $users = User::all();
-      $images = Images::all();
+      $images = Image::all();
 
       return view('admin.admin', compact('users','images'));
     }
@@ -49,7 +49,7 @@ class AdminController extends Controller
             'description' => 'required|min:5|max:100',
         ]);
 
-        $image = new Images();
+        $image = new Image();
 
         // Check if a photo has been subitted in the form
         if($request->hasFile('photo'))
