@@ -46,6 +46,7 @@ class AdminController extends Controller
     {
         // Validate the update form
         $this->validate($request,[
+            'subbrand' => 'required|exists',
             'photo' => 'image',
             'description' => 'required|min:5|max:100',
         ]);
@@ -61,6 +62,8 @@ class AdminController extends Controller
             // Use intervention Image to resize the image
             \Image::make($request->file('photo') )
                                 ->save( 'img/original/'.$fileName);
+            \Image::make($request->file('photo') )
+                                ->fit();
             $image->name = $fileName;
         }
 

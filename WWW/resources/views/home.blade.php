@@ -27,7 +27,7 @@
     <a href="#" data-reveal-id="registerModal">Register</a>
   </div>
   @else
-  <div id="logo" style="display: block;">
+  <div id="logo">
     <img src="img/logo/logo.png" alt="">
     <li><a href="#" data-reveal-id="logoutModal">Logout</a></li>
   </div>
@@ -140,7 +140,7 @@
     </script>
     <script>
       $("#enter").click(function(){
-        $("#landing").toggle( "slow" );
+        $("#landing").toggle("slow");
         $("#logo").toggle("slow");
       });
     </script>

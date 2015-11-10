@@ -7,7 +7,7 @@
 		<div class="columns">
 			<h1>Administration Page</h1>
 			<div class="row">
-				<div class="columns">
+				<div class="columns large-6">
 					<h2>Clients</h2>
 					<select name="" id="">
 						@foreach( $users as $user)
@@ -15,7 +15,14 @@
 						@endforeach
 					</select>
 				</div>
+{{-- 
+				<div class="columns large-6">
+					@foreach( $users->messages as $message)
+					<p>{{$message->message}}</p>
+					@endforeach
+				</div> --}}
 			</div>
+
 			
 			<div class="row">
 				<div class="columns">
@@ -45,7 +52,7 @@
 								    </div>
 								  </div>  
 		          		
-		          		<input type="hidden" value="{{$subbrand->id}}" name="subbrand">
+		          				<input type="hidden" value="{{$subbrand->id}}" name="subbrand">
 							    <input type="submit" value="Upload a new Image" name="image{{$subbrand->id}}" class="tiny button radius">
 								</form>
 								<hr>
