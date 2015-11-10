@@ -15,8 +15,8 @@ class CreateBoughtPackagesTable extends Migration
         Schema::create('bought_packages', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('client_id')->unsigned();
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->integer('package_id')->unsigned();
             $table->foreign('package_id')->references('id')->on('packages');

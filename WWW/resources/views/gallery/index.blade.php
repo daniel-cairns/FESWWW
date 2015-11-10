@@ -8,11 +8,13 @@
       <h1>Gallery</h1> 
     </div>
   </div>
-  @foreach( $images as $image)
-  <img src="img/original/{{$image->name}}" alt="">
-  <p>{{$image->description}}</p>
-  @endforeach
   @foreach( $subbrands as $subbrand)
+    
+    @foreach( $subbrand->images as $image)
+    <img src="img/original/{{$image->name}}" alt="">
+    <p>{{$image->name}}</p>
+    @endforeach
+  
 
   <div class="row">
     <div class="columns">

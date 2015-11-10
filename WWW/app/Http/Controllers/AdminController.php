@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Image;
 use App\Subbrand;
+use App\Message;
 
 class AdminController extends Controller
 {
@@ -22,7 +23,7 @@ class AdminController extends Controller
       $subbrands    = Subbrand::with('images')->get();
       $users        = User::with('messages')->get();
 
-      return view('admin.admin', compact('users', 'subbrands'));
+      return view('admin.index', compact('users', 'subbrands'));
     }
 
     /**

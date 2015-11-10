@@ -34,6 +34,6 @@ class CreateSubbrandsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('subrands');
+        Schema::drop('subbrands');
     }
 }

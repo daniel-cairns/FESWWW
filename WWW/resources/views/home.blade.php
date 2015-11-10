@@ -19,16 +19,19 @@
     </div>  
   </div>
   @endif
-
+  
+  @if( !Auth::check());
   <div id="logo">
     <img src="img/logo/logo.png" alt="">
-    @if( !Auth::check());
     <a href="#" data-reveal-id="loginModal">Login</a>
     <a href="#" data-reveal-id="registerModal">Register</a>
-    @else
-    <li><a href="#" data-reveal-id="logoutModal">Logout</a></li>
-    @endif
   </div>
+  @else
+  <div id="logo" style="display: block;">
+    <img src="img/logo/logo.png" alt="">
+    <li><a href="#" data-reveal-id="logoutModal">Logout</a></li>
+  </div>
+  @endif
 
   <div id="loginModal" class="reveal-modal" data-reveal aria-labelledby="modaltitle" aria-hidden="true" role="dialog">
     <form action="/auth/login" method="post" novalidate>

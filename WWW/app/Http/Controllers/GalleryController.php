@@ -18,9 +18,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $subbrands = Subbrand::all();
-        $images = Image::all();        
-        return view('gallery.index', compact('subbrands', 'images'));
+        $subbrands = Subbrand::with('images')->get();
+        
+        return view('gallery.index', compact('subbrands'));
     }
 
     /**
