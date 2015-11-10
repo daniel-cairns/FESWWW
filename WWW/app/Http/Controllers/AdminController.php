@@ -19,10 +19,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-      $users = User::all();
-      $images = Image::all();
+      $subbrands    = Subbrand::with('images')->get();
+      $users        = User::with('messages')->get();
 
-      return view('admin.admin', compact('users','images'));
+      return view('admin.admin', compact('users', 'subbrands'));
     }
 
     /**

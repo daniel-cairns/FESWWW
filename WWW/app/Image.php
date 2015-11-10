@@ -15,6 +15,6 @@ class Image extends Model
 
     public function packages() 
     {
-        return $this->belongsToMany('App\Package','bought_packages_images');
+        return $this->belongsToMany('App\Package', 'bought_packages_images');
     }
 }

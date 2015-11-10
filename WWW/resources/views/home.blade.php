@@ -10,13 +10,15 @@
     <script src="/js/vendor/modernizr.js"></script>
   </head>
   <body>
-
+  
+  @if( !Auth::check());
   <div id="landing">
     <h1><img src="img/logo/logo.png" alt=""></h1>
     <div>
       <h2 id="enter">Enter</h2>
     </div>  
   </div>
+  @endif
 
   <div id="logo">
     <img src="img/logo/logo.png" alt="">
