@@ -11,7 +11,7 @@
   </head>
   <body>
   
-  @if( !Auth::check());
+  @if( !Auth::check())
   <div id="landing">
     <h1><img src="img/logo/logo.png" alt=""></h1>
     <div>
@@ -20,14 +20,14 @@
   </div>
   @endif
   
-  @if( !Auth::check());
+  @if( !Auth::check())
   <div id="logo">
     <img src="img/logo/logo.png" alt="">
     <a href="#" data-reveal-id="loginModal">Login</a>
     <a href="#" data-reveal-id="registerModal">Register</a>
   </div>
   @else
-  <div id="logo">
+  <div id="logo" style="display:block;">
     <img src="img/logo/logo.png" alt="">
     <li><a href="#" data-reveal-id="logoutModal">Logout</a></li>
   </div>
@@ -92,7 +92,7 @@
     <div id="content" class="clearfix">
       
       @foreach( $subbrands as $subbrand )
-      <div id="{{$subbrand->name}}" class="image-box">
+      <div id="{{$subbrand->name}}" class="image-box clearfix">
         <img src="img/landing/{{$subbrand->photo}}" alt="">
         <div class="hover-window">  
           <div class="hover-window-text">
