@@ -21,9 +21,9 @@ body {
   background: #b6b6b6 !important; }
   .top-bar ul, .top-bar a {
     background: #b6b6b6 !important; }
-  .top-bar a:hover, .top-bar .active {
-    background: #727272 !important;
-    color: #2196f3 !important; }
+    .top-bar ul:hover, .top-bar ul .active, .top-bar a:hover, .top-bar a .active {
+      background: #727272 !important;
+      color: #ffc107 !important; }
   .top-bar img {
     width: 150px; }
 
@@ -90,7 +90,8 @@ footer {
   background: #b6b6b6 !important;
   color: white !important;
   padding: 20px;
-  text-align: center; }
+  text-align: center;
+  margin-top: 100px; }
   footer ul li {
     list-style: none; }
     footer ul li a {

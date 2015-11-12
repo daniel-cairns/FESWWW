@@ -37,11 +37,11 @@ body {
 
   ul, a {
     background: $lightgrey;
-  }
-
-  a:hover, .active {
-    background: $grey;
-    color: $blue;
+      
+    &:hover, .active {
+      background: $grey;
+      color: $amber;
+    }
   }
 
   img {
@@ -134,6 +134,7 @@ footer {
   color: $white;
   padding: 20px;
   text-align: center;
+  margin-top: 100px;
 
   ul li {
     list-style: none;

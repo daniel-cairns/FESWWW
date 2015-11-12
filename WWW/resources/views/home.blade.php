@@ -93,10 +93,10 @@
       
       @foreach( $subbrands as $subbrand )
       <div id="{{$subbrand->name}}" class="image-box clearfix">
-        <img src="img/landing/{{$subbrand->photo}}" alt="">
+        <img src="img/landing/{{$subbrand->photo}}" alt="{{$subbrand->name}} landing image">
         <div class="hover-window">  
           <div class="hover-window-text">
-            <a href="subbrand/weddings"><h1>{{$subbrand->name}}</h1>
+            <a href="subbrand/{{ $subbrand->slug }}"><h1>{{$subbrand->name}}</h1>
             <p>{{$subbrand->landing_description}}</p></a>
             
             @if( Auth::check() && Auth::user()->privilege == 'admin')

@@ -9,27 +9,33 @@
     </div>
   </div>
   @foreach( $subbrands as $subbrand)
-    
-    @foreach( $subbrand->images as $image)
-    <img src="img/original/{{$image->name}}" alt="">
-    <p>{{$image->name}}</p>
-    @endforeach
-  
-
   <div class="row">
     <div class="columns">
-      
       <h2>{{$subbrand->name}}</h2>
-
       <ul class="small-block-grid-2 medium-block-grid-4">
-        <li><a href="#" data-reveal-id="myModal"><img src="img/gallery/wed-page-cut-2.jpg" alt=""></a></li>
-        <li><a href="#" data-reveal-id="myModal"><img src="img/gallery/wed-page-cut-3.jpg" alt=""></a></li>
-        <li><a href="#" data-reveal-id="myModal"><img src="img/gallery/wed-page-cut.jpg" alt=""></a></li>
-        <li><a href="#" data-reveal-id="myModal"><img src="img/gallery/wed-page-cut.jpg" alt=""></a></li>
+      @foreach( $subbrand->images as $image)
+        <li>
+          <a href="#" data-reveal-id="{{studly_case($image->description)}}Modal">
+            <img src="img/gallery/{{$image->name}}" alt="{{$image->description}}">
+            <p>{{$image->description}}</p>
+          </a>
+        </li>     
+      @endforeach
       </ul>
     </div>
   </div>
-
   @endforeach
   
+  @foreach( $subbrands as $subbrand)
+    @foreach( $subbrand->images as $image)
+      <div id="{{studly_case($image->description)}}Modal" class="reveal-modal" data-reveal aria-labelledby="{{$image->id}}" aria-hidden="true" role="dialog">
+        <h2 id=""></h2>
+        <img src="/img/gallery/{{$image->name}}" alt="">
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+      </div>
+    @endforeach
+  @endforeach  
+<script>
+  
+</script>
 @endsection

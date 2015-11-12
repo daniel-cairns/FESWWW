@@ -10,6 +10,11 @@ class Package extends Model
 
     public function subbrands()
     {
-    	return $this->belongsToMany('App\Subbrand', 'subbrand_packages');
+    	return $this->belongsToMany('App\Subbrand', 'subbrands_packages');
+    }
+
+    public function products()
+    {
+    	return $this->belongsToMany('App\Product', 'packages_products');	
     }
 }

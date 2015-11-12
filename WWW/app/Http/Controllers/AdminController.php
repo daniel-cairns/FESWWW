@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Image;
 use App\Subbrand;
 use App\Message;
+use App\Package;
+use App\Product;
 
 class AdminController extends Controller
 {
@@ -20,10 +21,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-      $subbrands    = Subbrand::with('images')->get();
-      $users        = User::with('messages')->get();
-
-      return view('admin.index', compact('users', 'subbrands'));
+      $subbrands            = Subbrand::with('images','packages')->get();
+      // $users                = User::with('messages');
+      $products             = Product::all();
+      $users                = User::all();
+      $messages             = Message::all();
+      
+      return view('admin.index', compact('users', 'subbrands', 'messages', 'products'));
     }
 
     /**
@@ -42,36 +46,70 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeImage(Request $request)
     {
-        // Validate the update form
-        $this->validate($request,[
-            'subbrand' => 'required|exists',
-            'photo' => 'image',
-            'description' => 'required|min:5|max:100',
-        ]);
+        // Check to see if it is the photo upload form
+        // if($request->input('image', 'image') ){    
+            // Validate the update form
+            $this->validate($request,[
+                'subbrand'      => 'required|exists:subbrands,id',
+                'photo'         => 'required|image',
+                'description'   => 'required|min:5|max:100',
+            ]);
 
-        $image = new Image();
+            $subbrand = Subbrand::findOrFail($request->subbrand);
 
-        // Check if a photo has been subitted in the form
-        if($request->hasFile('photo'))
-        {
-            // Generate a new file name
-            $fileName = uniqid().'.'.$request->file('photo')->getClientOriginalExtension();
+            $image = new Image();
 
-            // Use intervention Image to resize the image
-            \Image::make($request->file('photo') )
-                                ->save( 'img/original/'.$fileName);
-            \Image::make($request->file('photo') )
-                                ->fit();
+            // Check if a photo has been subitted in the form
+            if($request->hasFile('photo'))
+            {
+                // Generate a new file name
+                $fileName = uniqid().'.'.$request->file('photo')->getClientOriginalExtension();
+
+                // Use intervention Image to resize the image
+                \Image::make($request->file('photo') )
+                                    ->save( 'img/original/'.$fileName);
+                \Image::make($request->file('photo') )
+                                    ->fit(600,360)
+                                    ->save( 'img/gallery/'.$fileName);
+                $image->name = $fileName;
+            }
             $image->name = $fileName;
-        }
+           
+            $image->description = $request->description;
 
-        $image->description = $request->description;
+            $subbrand->images()->save($image);
 
-        $image->save();
+            return redirect('admin');
+        
+    }
+    
+    public function storePackage(Request $request)
+    {
+        $this->validate($request,[
+                'name'          => 'required',
+                'price'         => 'required',
+                'hours'         => 'required',
+                'description'   => 'required',
+                'product'       => 'required',
+                'subbrand'      => 'required|exists:subbrands,id'
+            ]);
 
-        return redirect('admin');
+            $package        = new Package();
+            $subbrands      = Subbrand::findOrFail($request->subbrand);
+            $products       = Product::findOrFail($request->product); 
+
+            $package->name          = $request->name;
+            $package->price         = $request->price;
+            $package->hours         = $request->hours;
+            $package->description   = $request->description;
+            $package->product       = $request->product;
+
+            $subbrands->packages()->save($package);
+            $products->packages()->save($package);
+
+            return redirect('admin');
     }
 
     /**

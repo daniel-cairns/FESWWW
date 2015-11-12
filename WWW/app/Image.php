@@ -13,8 +13,8 @@ class Image extends Model
         return $this->belongsToMany('App\Subbrand', 'subbrands_images');
     }
 
-    public function packages() 
-    {
-        return $this->belongsToMany('App\Package', 'bought_packages_images');
-    }
+    // public function packages() 
+    // {
+    //     return $this->belongsToMany('App\Package', 'bought_packages_images');
+    // }
 }

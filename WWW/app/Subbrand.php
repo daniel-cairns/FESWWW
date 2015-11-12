@@ -15,6 +15,6 @@ class Subbrand extends Model
 
     public function packages()
     {
-    	return $this->belongsToMany('App\Package', 'subbrand_packages');
+    	return $this->belongsToMany('App\Package', 'subbrands_packages');
     }
 }

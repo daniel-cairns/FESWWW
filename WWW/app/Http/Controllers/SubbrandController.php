@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Subbrand;
 use App\Package;
+use App\Image;
 
 class SubbrandController extends Controller
 {
@@ -16,40 +17,18 @@ class SubbrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($subbrand)
+    public function index($slug)
     {
-        switch( $subbrand )
-        {
-            case 'weddings':
-                // ID 1 is weddings
-                $result = Subbrand::find(1);
-            break;
 
-            case 'portraits':
-                // ID 1 is weddings
-                $result = Subbrand::find(2);
-            break;
+        $theslug = str_slug($slug);
 
-            case 'seniors':
-                // ID 1 is weddings
-                $result = Subbrand::find(3);
-            break;
-
-            case 'commercial':
-                // ID 1 is weddings
-                $result = Subbrand::find(4);
-            break;
-
-            case 'models':
-                // ID 1 is weddings
-                $result = Subbrand::find(5);
-            break;
-
+        if ($theslug !== $slug) {
+            return redirect('subbrand/' . $theslug);
         }
 
-        $brandPackage = Package::all();
+        $subbrand = Subbrand::where('slug', $theslug)->first();
 
-        return view('subbrand.index', compact('result', 'brandPackage'));
+        return view('subbrand.index', compact('subbrand'));
     }
 
     /**
