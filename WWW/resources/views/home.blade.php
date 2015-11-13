@@ -85,8 +85,8 @@
 
   <div id="logoutModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <h2>Logout?</h2>
-    <a href="" class="tiny button radius" aria-label="Close">NO</a>
     <a href="/auth/logout" class="tiny button radius">YES</a>
+    <a href="" class="tiny button radius" aria-label="Close">NO</a>
   </div>
     
     <div id="content" class="clearfix">

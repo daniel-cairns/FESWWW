@@ -30,6 +30,8 @@ Route::get('contact', 'ContactController@index');
 Route::get('admin', 'AdminController@index');
 Route::post('image', 'AdminController@storeImage');
 Route::post('package', 'AdminController@storePackage');
+Route::post('removePackage', 'AdminController@removePackage');
+Route::post('removeImage', 'AdminController@removeImage');
 
 // Registration
 Route::get('auth/register', 'Auth\AuthController@getRegister');

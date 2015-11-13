@@ -66,7 +66,6 @@
 						      @if(count($errors) > 0)
 						      <span class="alert-box warning">{{$errors->first('description')}}</span>
 						      @endif
-						      
 						    </div>
 						  </div>  
 	        		
@@ -80,9 +79,48 @@
 			      <ul class="medium-block-grid-4">
 			    		@foreach( $subbrand->images as $image )	
 			    		<li>
-			    			<img src="/img/gallery/{{$image->name}}" alt="{{$image->description}}">
-			    			<span>{{$image->description}}</span>
+			    			<div class="row">
+			    				<div class="columns">
+			    					<img src="/img/gallery/{{$image->name}}" alt="{{$image->description}}">
+			    					<span>{{$image->description}}</span>	
+			    				</div>
+			    			</div>
+
+			    			<div class="row">
+			    				<div class="columns small-6">
+			    					<a href="#" data-reveal-id="{{ camel_case($image->description) }}UpdateModal" class="tiny button radius">Update Image</a>
+			    				</div>
+			    				<div class="columns small-6">	
+	              		<a href="#" data-reveal-id="{{ camel_case($image->description) }}RemoveModal" class="tiny button radius warning">Remove Image</a>			
+			    				</div>
+			    			</div>
 			    		</li>
+			    		<div id="{{ camel_case($image->description) }}UpdateModal" class="reveal-modal" data-reveal aria-labelledby="{{ camel_case($image->description) }}" aria-hidden="true" role="dialog">
+								  <h2 id="{{ $image->description }}">Update {{ $image->description }} Image</h2>
+								  <img src="/img/original/{{ $image->name }}" alt="">
+								  <form action="updatePackage">
+								  	
+								  </form>
+								  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+								</div>
+
+								<div id="{{ camel_case($image->description) }}RemoveModal" class="reveal-modal" data-reveal aria-labelledby="{{ camel_case($image->description) }}" aria-hidden="true" role="dialog">
+								  <h2 id="{{ $image->description }}">Remove {{ $image->description }} Image</h2>
+								  <img src="/img/original/{{ $image->name }}" alt="">
+							 		<p>Are you sure you want to remove this image and all it's details from your records?</p>
+									<form action="removeImage" method="POST" novalidate>
+									{{ csrf_field() }}
+										<input type="hidden" value="{{ $image->id }}" name="image_id">
+										<input type="hidden" value="{{ $subbrand->id }}" name="subbrand_id">
+										<input type="submit" class="tiny button radius" name="removePackage" value="Yes">
+										@if(count($errors) > 0)
+					      			<span class="alert-box warning">{{$errors->first('image_id')}}</span>
+					      		@endif
+					      		<a href="" class="tiny button radius" aria-label="Close">No</a>
+										
+							 		</form>
+							  </div>
+
 			    		@endforeach	
 			    	</ul>
 						<hr>
@@ -101,12 +139,12 @@
 									@foreach( $package->products as $product)
 	              	<p>Product: {{ $product->name }}</p>
 	              	@endforeach
-	              	<a href="#" data-reveal-id="{{ $package->name }}UpdateModal" class="tiny button radius">Update Package</a>
+	              	<a href="#" data-reveal-id="{{ camel_case($package->name) }}UpdateModal" class="tiny button radius">Update Package</a>
 	              	
-	              	<a href="#" data-reveal-id="{{ $package->name }}RemoveModal" class="tiny button radius warning">Remove Package</a>
+	              	<a href="#" data-reveal-id="{{ camel_case($package->name) }}RemoveModal" class="tiny button radius warning">Remove Package</a>
               	</li>
               	
-              	<div id="{{ $package->name }}UpdateModal" class="reveal-modal" data-reveal aria-labelledby="{{ $package->name }}" aria-hidden="true" role="dialog">
+              	<div id="{{ camel_case($package->name) }}UpdateModal" class="reveal-modal" data-reveal aria-labelledby="{{ camel_case($package->name) }}" aria-hidden="true" role="dialog">
 								  <h2 id="{{ $package->name }}">Update {{ $package->name }} Package</h2>
 								  <form action="updatePackage">
 								  	
@@ -114,11 +152,21 @@
 								  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 								</div>
 
-								<div id="{{ $package->name }}RemoveModal" class="reveal-modal" data-reveal aria-labelledby="{{ $package->name }}" aria-hidden="true" role="dialog">
+								<div id="{{ camel_case($package->name) }}RemoveModal" class="reveal-modal" data-reveal aria-labelledby="{{ camel_case($package->name) }}" aria-hidden="true" role="dialog">
 								  <h2 id="{{ $package->name }}">Remove {{ $package->name }} Package</h2>
-								 
-								  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-								</div>
+							 		<p>Are you sure you want to remove this package and all it's details from your records?</p>
+									<form action="removePackage" method="POST">
+									{{ csrf_field() }}
+										<input type="hidden" value="{{ $package->id }}" name="package_id">
+										<input type="hidden" value="{{ $subbrand->id }}" name="subbrand_id">
+										<input type="submit" class="tiny button radius" name="removePackage" value="Yes">
+										@if(count($errors) > 0)
+					      			<span class="alert-box warning">{{$errors->first('id')}}</span>
+					      		@endif
+					      		<a href="" class="tiny button radius" aria-label="Close">No</a>
+										
+							 		</form>
+							  </div>
 
 		          @endforeach
 			    	</ul>

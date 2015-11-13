@@ -11,6 +11,8 @@ use App\Subbrand;
 use App\Message;
 use App\Package;
 use App\Product;
+use App\SubbrandPackage;
+use App\SubbrandImage;
 
 class AdminController extends Controller
 {
@@ -48,43 +50,40 @@ class AdminController extends Controller
      */
     public function storeImage(Request $request)
     {
-        // Check to see if it is the photo upload form
-        // if($request->input('image', 'image') ){    
-            // Validate the update form
-            $this->validate($request,[
-                'subbrand'      => 'required|exists:subbrands,id',
-                'photo'         => 'required|image',
-                'description'   => 'required|min:5|max:100',
-            ]);
+        // Validate the request
+        $this->validate($request,[
+            'subbrand'      => 'required|exists:subbrands,id',
+            'photo'         => 'required|image',
+            'description'   => 'required|min:5|max:100',
+        ]);
 
-            $subbrand = Subbrand::findOrFail($request->subbrand);
+        $subbrand = Subbrand::findOrFail($request->subbrand);
 
-            $image = new Image();
+        $image = new Image();
 
-            // Check if a photo has been subitted in the form
-            if($request->hasFile('photo'))
-            {
-                // Generate a new file name
-                $fileName = uniqid().'.'.$request->file('photo')->getClientOriginalExtension();
+        // Check if a photo has been subitted in the form
+        if($request->hasFile('photo'))
+        {
+            // Generate a new file name
+            $fileName = uniqid().'.'.$request->file('photo')->getClientOriginalExtension();
 
-                // Use intervention Image to resize the image
-                \Image::make($request->file('photo') )
-                                    ->save( 'img/original/'.$fileName);
-                \Image::make($request->file('photo') )
-                                    ->fit(600,360)
-                                    ->save( 'img/gallery/'.$fileName);
-                $image->name = $fileName;
-            }
+            // Use intervention Image to resize the image
+            \Image::make($request->file('photo') )
+                                ->save( 'img/original/'.$fileName);
+            \Image::make($request->file('photo') )
+                                ->fit(600,360)
+                                ->save( 'img/gallery/'.$fileName);
             $image->name = $fileName;
-           
-            $image->description = $request->description;
+        }
+        $image->name = $fileName;
+       
+        $image->description = $request->description;
 
-            $subbrand->images()->save($image);
+        $subbrand->images()->save($image);
 
-            return redirect('admin');
-        
+        return redirect('admin');
     }
-    
+
     public function storePackage(Request $request)
     {
         $this->validate($request,[
@@ -94,22 +93,70 @@ class AdminController extends Controller
                 'description'   => 'required',
                 'product'       => 'required',
                 'subbrand'      => 'required|exists:subbrands,id'
-            ]);
+        ]);
 
-            $package        = new Package();
-            $subbrands      = Subbrand::findOrFail($request->subbrand);
-            $products       = Product::findOrFail($request->product); 
+        $package        = new Package();
+        $subbrands      = Subbrand::findOrFail($request->subbrand);
+        $products       = Product::findOrFail($request->product); 
 
-            $package->name          = $request->name;
-            $package->price         = $request->price;
-            $package->hours         = $request->hours;
-            $package->description   = $request->description;
-            $package->product       = $request->product;
+        $package->name          = $request->name;
+        $package->price         = $request->price;
+        $package->hours         = $request->hours;
+        $package->description   = $request->description;
+        $package->product       = $request->product;
 
-            $subbrands->packages()->save($package);
-            $products->packages()->save($package);
+        $subbrands->packages()->save($package);
+        $products->packages()->save($package);
 
-            return redirect('admin');
+        return redirect('admin');
+    }
+
+    public function updatePackage()
+    {
+
+    }
+
+    public function removeImage(Request $request)
+    {
+        // return $request;
+        // Validate the request
+        $this->validate( $request,[
+            'image_id'      => 'required|exists:images,id',
+            'subbrand_id'   => 'required|exists:subbrands,id'
+        ]);
+
+        $image_id       = $request->image_id;
+        $subbrand_id    = $request->subbrand_id;
+        $imageName      = Image::where('id',$image_id)->firstOrFail();
+        // dd( $imageName);
+
+        \File::Delete('img/original/'.$imageName->name);
+        \File::Delete('img/gallery/'.$imageName->name);
+
+        SubbrandImage::where('image_id', $image_id)
+                        ->where('subbrand_id', $subbrand_id)
+                        ->delete();
+
+        return redirect('admin');
+    }
+
+    public function removePackage(Request $request)
+    {
+        $this->validate($request,[
+            'package_id'    => 'required|exists:packages,id',
+            'subbrand_id'   => 'required|exists:subbrands,id'
+        ]);
+
+        $package_id     = $request->package_id;
+        $subbrand_id    = $request->subbrand_id;
+        
+        SubbrandPackage::where('package_id', $package_id)
+                        ->where('subbrand_id', $subbrand_id)
+                        ->delete();
+
+        // Subbrand::findOrFail($package_id)->delete();
+
+        return redirect('admin');
     }
 
     /**
