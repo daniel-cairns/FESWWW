@@ -18,14 +18,14 @@ class PackagesController extends Controller
      */
     public function index()
     {
-      $allPackages = Package::all();
-      $subbrands = Subbrand::all('name');
-      return view('packages.index', compact('allPackages', 'subbrands'));
+      
+      $subbrands = Subbrand::with('packages')->get();
+      return view('packages.index', compact('subbrands'));
     }
 
     public function package( $packagePage ) 
     {
-      $package = Package::where('name', strtolower($packagePage))->firstOrFail();
+      $package = Package::where('name', $packagePage)->firstOrFail();
       
       return view('packages.package', compact('package'));
     }

@@ -15,11 +15,11 @@
 		<div class="columns">
 			<h2>{{$subbrand->name}}</h2>
 			<ul class="medium-block-grid-3">
-				@foreach( $allPackages as $package)
+				@foreach( $subbrand->packages as $package)
 					<li>
 						<h3>{{$package->name}}</h3>
 						<p data-equalizer-watch>{{$package->description}}</p>
-						<a href="package/{{$package->name}}" class="tiny button radius amber">Package Details</a>
+						<a href="package/{{snake_case($package->name)}}" class="tiny button radius amber">Package Details</a>
 					</li>
 				@endforeach				
 			</ul>

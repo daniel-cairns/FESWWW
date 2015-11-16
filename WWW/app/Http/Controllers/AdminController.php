@@ -24,9 +24,9 @@ class AdminController extends Controller
     public function index()
     {
       $subbrands            = Subbrand::with('images','packages')->get();
-      // $users                = User::with('messages');
+      $users                = User::with('messages')->get();
       $products             = Product::all();
-      $users                = User::all();
+      // $users                = User::all();
       $messages             = Message::all();
       
       return view('admin.index', compact('users', 'subbrands', 'messages', 'products'));

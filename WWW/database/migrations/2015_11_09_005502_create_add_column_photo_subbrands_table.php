@@ -13,7 +13,7 @@ class CreateAddColumnPhotoSubbrandsTable extends Migration
     public function up()
     {
         Schema::table('subbrands', function (Blueprint $table) {
-            $table->char('photo', 100);
+            $table->char('photo', 100)->after('caption');
         });
     }
 
