@@ -27,9 +27,7 @@ class SubbrandsTableSeeder extends Seeder
         		'caption'				=> 'The '.$subbrand.' Caption...',
         		'slug'					=> str_slug( $subbrand ),
         		'photo'					=> str_slug( $subbrand ).'-home.jpg',
-        		'created_at'			=> "CURRENT_TIMESTAMP",
-        		'updated_at'			=> "CURRENT_TIMESTAMP"
-
+        		
     		]);
         }
     }

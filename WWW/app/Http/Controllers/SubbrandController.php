@@ -58,9 +58,12 @@ class SubbrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($subbrand, $package)
     {
-        //
+        $subbrand   = Subbrand::where('slug', $subbrand)->first();
+        $package    = Package::where('slug', $package)->first();
+
+        return view('packages.package', compact('subbrand', 'package'));
     }
 
     /**

@@ -3,10 +3,14 @@
 	{{$package->name}}
 @endsection
 @section('content')
-	
 	<div class="row">
 		<div class="columns">
-			<h1 class="left">{{$package->name}}</h1>
+			<h1 class="left">{{$subbrand->name}} Catergory</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns">
+			<h2 class="left">{{$package->name}} Package</h2>
 			@if( Auth::check() && Auth::user()->privilege == 'admin')
       <a href="" class="tiny button radius amber edit right" data-reveal-id="editModal">Edit Package</a>
       @endif
@@ -20,12 +24,14 @@
 			<h3>Dedicated Hours</h3>
 			<p>${{$package->hours}}</p>
 			<h3>Availabe Products</h3>
-			<p>{{$package->product}}</p>		
+			<p>{{$package->product}}</p>
+			<a href="{{$package->slug}}/order" class="tiny button radius">Request a Booking</a>
 		</div>
 	</div>
 	
 	<div id="editModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 		<form action="packages/{{$package->name}}" novalidate>
+		{{ csrf_field() }}
 			<div>
 				<label for="title">Title</label>
 				<input type="text" id="title" name="title" value="{{$package->name}}">

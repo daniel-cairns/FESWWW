@@ -16,11 +16,11 @@
 			<h2>{{$subbrand->name}}</h2>
 			<ul class="medium-block-grid-3">
 				@foreach( $subbrand->packages as $package)
-					<li>
-						<h3>{{$package->name}}</h3>
-						<p data-equalizer-watch>{{$package->description}}</p>
-						<a href="package/{{snake_case($package->name)}}" class="tiny button radius amber">Package Details</a>
-					</li>
+				<li>
+					<h3>{{$package->name}}</h3>
+					<p data-equalizer-watch>{{$package->description}}</p>
+					<a href="subbrand/{{ str_slug($subbrand->name )}}/{{ str_slug($package->name) }}" class="tiny button radius amber">Package Details</a>
+				</li>
 				@endforeach				
 			</ul>
 			<hr>

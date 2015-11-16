@@ -23,11 +23,17 @@ class PackagesController extends Controller
       return view('packages.index', compact('subbrands'));
     }
 
-    public function package( $packagePage ) 
+    public function order($subbrand, $package)
     {
-      $package = Package::where('name', $packagePage)->firstOrFail();
-      
-      return view('packages.package', compact('package'));
+        $subbrand   = Subbrand::where('slug', $subbrand)->first();
+        $package    = Package::where('slug', $package)->first();
+        
+        return view('packages.order', compact('subbrand', 'package'));
+    }
+
+    public function confirm(Request $request)
+    {
+        return view('packages.confirm');
     }
 
     /**

@@ -123,7 +123,8 @@
             <input type="file" name="photo" class="tiny button radius">
             {{$errors->first('photo')}}
           </div>
-           <input type="hidden" name="subbrandName" value="{{$subbrand->name}}">      
+            <input type="hidden" name="subbrandName" value="{{$subbrand->name}}">
+            <input type="hidden" name="MAX_FILE_SIZE" value="2000000">     
           <input type="submit" value="Update {{$subbrand->name}} landing page content" name="landing" class="tiny button radius">
 
         </form>

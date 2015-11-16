@@ -45,45 +45,49 @@
       <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
         @forelse( $subbrand->images as $image )
           
-          <li><a href="#" data-reveal-id="{{studly_case($image->description)}}Modal"><img src="/img/gallery/{{$image->name}}" alt="$image->description"></a></li>
+          <li><a href="#" data-reveal-id="{{ camel_case($image->description) }}Modal"><img src="/img/gallery/{{$image->name}}" alt="$image->description"></a></li>
 
         @empty
-
-          <h6>no subbrand images found</h6>
-          
+         
+          <li><h6>Sorry there a no images found for the {{ $subbrand->name }} category.</h6></li>
+                     
         @endforelse
       </ul>
     </div>
   </div>
 
   @foreach( $subbrand->images as $image )
-
-    <div id="{{studly_case($image->description)}}Modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-      <div class="row">
-        <div class="columns">
-          <div><img src="/img/original/{{$image->name}}" alt=""></div>
-        </div>  
-      </div>      
+    <div id="{{ camel_case($image->description) }}Modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      
+        <h2 id="{{ camel_case($image->description) }}">{{ $image->description }}</h2>
+        <img src="/img/original/{{$image->name}}" alt="">
+      
+          
       <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
-
   @endforeach
 
   <div class="row" >
     <div class="columns">
       <h2>Packages</h2>
       <div class="row" data-equalizer>
-        @foreach($subbrand->packages as $package)
+      @forelse($subbrand->packages as $package)
             
-            <div class="columns medium-6 large-4" >
-              <h3>{{$package->name}}</h3>
-              <p data-equalizer-watch>{{$package->description}}</p>
-              <a href="/packages/{{$package->name}}" class="tiny button radius amber">package details</a>
-            </div>
-            
-        @endforeach
-      </div>
+        <div class="columns medium-6 large-4" >
+          <h3>{{$package->name}}</h3>
+          <p data-equalizer-watch>{{$package->description}}</p>
+          <a href="/subbrand/{{$subbrand->slug }}/{{$package->slug}}" class="tiny button radius amber">package details</a>
+        </div>
       
+      @empty
+        
+        <div class="columns">
+          <h6>Sorry there are no packages for the {{ $subbrand->name }} category</h6>
+        </div>
+          
+      @endforelse
+      </div>
     </div>
   </div>
+
 @endsection

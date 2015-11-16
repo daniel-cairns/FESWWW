@@ -16,14 +16,14 @@ Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@update');
 
 Route::get('subbrand/{subbrand}', 'SubbrandController@index');
-// Route::post('subbrand/', 'SubbrandController@')
+Route::get('subbrand/{subbrand}/{package}', 'SubbrandController@show');
+Route::get('subbrand/{subbrand}/{package}/order', 'PackagesController@order');
+Route::post('confirm', 'PackagesController@confirm');
+Route::get('packages', 'PackagesController@index');
 
 Route::get('gallery', 'GalleryController@index');
 
 Route::get('about', 'AboutController@index');
-
-Route::get('packages', 'PackagesController@index');
-Route::get('packages/{packagePage}', 'PackagesController@package');
 
 Route::get('contact', 'ContactController@index');
 
@@ -32,6 +32,7 @@ Route::post('image', 'AdminController@storeImage');
 Route::post('package', 'AdminController@storePackage');
 Route::post('removePackage', 'AdminController@removePackage');
 Route::post('removeImage', 'AdminController@removeImage');
+Route::post('updateImage', 'AdminController@updateImage');
 
 // Registration
 Route::get('auth/register', 'Auth\AuthController@getRegister');
