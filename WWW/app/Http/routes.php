@@ -18,7 +18,9 @@ Route::post('/home', 'HomeController@update');
 Route::get('subbrand/{subbrand}', 'SubbrandController@index');
 Route::get('subbrand/{subbrand}/{package}', 'SubbrandController@show');
 Route::get('subbrand/{subbrand}/{package}/order', 'PackagesController@order');
+
 Route::post('confirm', 'PackagesController@confirm');
+
 Route::get('packages', 'PackagesController@index');
 
 Route::get('gallery', 'GalleryController@index');
@@ -28,11 +30,12 @@ Route::get('about', 'AboutController@index');
 Route::get('contact', 'ContactController@index');
 
 Route::get('admin', 'AdminController@index');
-Route::post('image', 'AdminController@storeImage');
-Route::post('package', 'AdminController@storePackage');
+Route::post('storeImage', 'AdminController@storeImage');
+Route::post('storePackage', 'AdminController@storePackage');
 Route::post('removePackage', 'AdminController@removePackage');
 Route::post('removeImage', 'AdminController@removeImage');
 Route::post('updateImage', 'AdminController@updateImage');
+Route::post('updatePackage', 'AdminController@updatePackage');
 
 // Registration
 Route::get('auth/register', 'Auth\AuthController@getRegister');

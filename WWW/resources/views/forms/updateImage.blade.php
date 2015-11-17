@@ -1,0 +1,24 @@
+<form action="updateImage" enctype="multipart/form-data" method="POST" novalidate>
+	{{ csrf_field() }}
+	<div>
+		<label for="image">Image Update</label>
+		<input type="file" id="image" name="photo" class="tiny button radius" >		
+	</div>
+	@if(count($errors) > 0)
+		<span class="alert-box warning">{{$errors->first('image')}}</span>
+	@endif
+
+	<div>
+		<label for="description">Description Update</label>
+		<input type="text" id="description" name="description" value="{{ old($image->description) }}" placeholder="{{ $image->description }}">
+	</div>
+	
+	@if(count($errors) > 0)
+		<span class="alert-box warning">{{$errors->first('description')}}</span>
+	@endif
+		
+	<input type="hidden" value="{{ $image->id }}" name="image">
+	<input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
+	<input type="hidden" name="MAX_FILE_SIZE" value="5000000">
+	<input type="submit" value="Update Image" name="updateImage" class="tiny button radius">
+</form>

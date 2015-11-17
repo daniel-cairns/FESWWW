@@ -13,6 +13,7 @@ use App\Package;
 use App\Product;
 use App\SubbrandPackage;
 use App\SubbrandImage;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -32,22 +33,6 @@ class AdminController extends Controller
       return view('admin.index', compact('users', 'subbrands', 'messages', 'products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function storeImage(Request $request)
     {
         // Validate the request
@@ -86,16 +71,19 @@ class AdminController extends Controller
 
     public function updateImage(Request $request)
     {
-        return $request;
+        
         // Validate the request
         $this->validate($request,[
             'subbrand'      => 'exists:subbrands,id',
             'image'         => 'exists:images,id',
             'photo'         => 'image',
-            'description'   => 'min:5|max:100',
+            'description'   => 'required|min:5|max:100',
         ]);
+        // return $request->subbrand_id;
 
-        $subbrand   = Subbrand::findOrFail($request->subbrand);
+        $subbrand   = Subbrand::where($request->subbrand);
+        
+        
         $image      = Image::findOrFail($request->image);
 
         // Check if a photo has been subitted in the form
@@ -118,12 +106,9 @@ class AdminController extends Controller
             
             $image->name = $fileName;
         }
-        
-        $image->name = $fileName;
-       
-        $image->description = $request->description;
 
-        $subbrand->images()->save($image);
+        $image->description = $request->description;
+        $image->save();
 
         return redirect('admin');  
     }
@@ -158,7 +143,7 @@ class AdminController extends Controller
                 'price'         => 'required',
                 'hours'         => 'required',
                 'description'   => 'required',
-                'product'       => 'required',
+                'product'       => 'required|exists:products,id',
                 'subbrand'      => 'required|exists:subbrands,id'
         ]);
 
@@ -179,11 +164,38 @@ class AdminController extends Controller
         return redirect('admin');
     }
 
-    public function updatePackage()
+    public function updatePackage(Request $request)
     {
+        $validate = Validator::make($request->all(),[
+                'name'          => 'required',
+                'price'         => 'required',
+                'hours'         => 'required',
+                'description'   => 'required',
+                'product'       => 'required|exists:products,id',
+                'package_id'    => 'required|exists:packages,id',
+                'subbrand'      => 'required|exists:subbrands,id'
+        ]);
+
+        if( $validate->fails()){
+            return redirect('admin')
+                    ->withErrors($validate, 'updatePackage')
+                    ->withInput();
+        }
+        
+        $package = Package::findOrFail($request->package);
+
+        $package->name          = $request->name;
+        $package->price         = $request->price;
+        $package->hours         = $request->hours;
+        $package->description   = $request->description;
+        $package->slug          = str_slug( $request->name);
+        $package->product       = $request->product;
+
+        $package->save();
+       
+        return redirect('admin');
 
     }
-
     
     public function removePackage(Request $request)
     {
@@ -199,54 +211,6 @@ class AdminController extends Controller
                         ->where('subbrand_id', $subbrand_id)
                         ->delete();
 
-        // Subbrand::findOrFail($package_id)->delete();
-
         return redirect('admin');
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-}
+}   
