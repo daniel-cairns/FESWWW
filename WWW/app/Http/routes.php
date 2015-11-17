@@ -15,20 +15,18 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@update');
 
+//Subbrands 
 Route::get('subbrand/{subbrand}', 'SubbrandController@index');
 Route::get('subbrand/{subbrand}/{package}', 'SubbrandController@show');
 Route::get('subbrand/{subbrand}/{package}/order', 'PackagesController@order');
+Route::post('updateSlider', 'SubbrandController@updateSlider');
 
+//Admin
 Route::post('confirm', 'PackagesController@confirm');
-
 Route::get('packages', 'PackagesController@index');
-
 Route::get('gallery', 'GalleryController@index');
-
 Route::get('about', 'AboutController@index');
-
 Route::get('contact', 'ContactController@index');
-
 Route::get('admin', 'AdminController@index');
 Route::post('storeImage', 'AdminController@storeImage');
 Route::post('storePackage', 'AdminController@storePackage');

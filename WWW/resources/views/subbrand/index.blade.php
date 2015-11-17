@@ -25,8 +25,9 @@
   </div>
 
   <div id="editModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-    <h2 id="modalTitle">Edit {{$subbrand->name}}</h2>
+    <h2 id="modalTitle">Edit the {{$subbrand->name}} page content.</h2>
     <h3>Slider</h3>
+    @include('forms.slider')
     <h3>Gallery</h3>
     <h3>Caption</h3>
     <h3>Description</h3>
@@ -44,9 +45,17 @@
     <div class="columns">
       <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
         @forelse( $subbrand->images as $image )
-          
-          <li><a href="#" data-reveal-id="{{ camel_case($image->description) }}Modal"><img src="/img/gallery/{{$image->name}}" alt="$image->description"></a></li>
+          <li>
+            <a href="#" data-reveal-id="modal{{ $image->id }}">
+              <img src="/img/gallery/{{$image->name}}" alt="{{ $image->description }}">
+            </a>
+          </li>
 
+          <div id="modal{{ $image->id }}" class="reveal-modal" data-reveal aria-labelledby="modal{{ $image->id }}" aria-hidden="true" role="dialog">
+            <h2 id="modal{{ $image->id }}">{{ $image->description }}</h2>
+            <img src="/img/original/{{$image->name}}" alt="">
+            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+          </div>
         @empty
          
           <li><h6>Sorry there a no images found for the {{ $subbrand->name }} category.</h6></li>
@@ -57,14 +66,7 @@
   </div>
 
   @foreach( $subbrand->images as $image )
-    <div id="{{ camel_case($image->description) }}Modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-      
-        <h2 id="{{ camel_case($image->description) }}">{{ $image->description }}</h2>
-        <img src="/img/original/{{$image->name}}" alt="">
-      
-          
-      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-    </div>
+    
   @endforeach
 
   <div class="row" >

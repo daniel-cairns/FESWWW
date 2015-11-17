@@ -12,11 +12,7 @@ use App\Image;
 
 class SubbrandController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index($slug)
     {
 
@@ -31,14 +27,10 @@ class SubbrandController extends Controller
         return view('subbrand.index', compact('subbrand'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+   
+    public function updateSlider()
     {
-        //
+        return 'test';
     }
 
     /**
