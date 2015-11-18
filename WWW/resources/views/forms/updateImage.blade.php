@@ -4,8 +4,8 @@
 		<label for="image">Image Update</label>
 		<input type="file" id="image" name="photo" class="tiny button radius" >		
 	</div>
-	@if(count($errors) > 0)
-		<span class="alert-box warning">{{$errors->first('image')}}</span>
+	@if($errors->updateImage->first('image'))
+		<span class="alert-box warning">{{$errors->updateImage->first('image')}}</span>
 	@endif
 
 	<div>
@@ -13,8 +13,16 @@
 		<input type="text" id="description" name="description" value="{{ old($image->description) }}" placeholder="{{ $image->description }}">
 	</div>
 	
-	@if(count($errors) > 0)
-		<span class="alert-box warning">{{$errors->first('description')}}</span>
+	@if($errors->updateImage->first('description'))
+		<span class="alert-box warning">{{$errors->updateImage->first('description')}}</span>
+	@endif
+
+	@if($errors->updateImage->first('image'))
+		<span class="alert-box warning">{{$errors->updateImage->first('image')}}</span>
+	@endif
+
+	@if($errors->updateImage->first('subbrand'))
+		<span class="alert-box warning">{{$errors->updateImage->first('subbrand')}}</span>
 	@endif
 		
 	<input type="hidden" value="{{ $image->id }}" name="image">

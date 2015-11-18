@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Subbrand;
 use App\Package;
 use App\Image;
+use App\Slider;
+use Validator;
 
 class SubbrandController extends Controller
 {
@@ -22,73 +24,84 @@ class SubbrandController extends Controller
             return redirect('subbrand/' . $theslug);
         }
 
-        $subbrand = Subbrand::where('slug', $theslug)->first();
-
+        $subbrand   = Subbrand::where('slug', $theslug)->first();
+        
         return view('subbrand.index', compact('subbrand'));
     }
 
    
-    public function updateSlider()
+    public function updateSlider(Request $request)
     {
-        return 'test';
+        // Get the images array
+        $images = $request->image;
+        $slug   = $request->subbrandSlug;
+        
+        $subbrand = Subbrand::findOrFail($request->subbrandId);
+        
+        // Check to see if the array is empty
+        if( $images != [])
+        {
+            foreach( $images as $image) {
+                $image = Image::findOrFail($image);                
+                $subbrand->sliders()->save($image);
+            }
+            return redirect( 'subbrand/'.$slug);
+        }else{
+            return'error';
+        }    
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function removeSlider(Request $request)
     {
-        //
+        // Get the sliders array
+        $sliders = $request->slider;
+        $slug   = $request->subbrandSlug;
+        
+        $subbrand = Subbrand::findOrFail($request->subbrandId)->id;
+        
+        // Check to see if the array is empty
+        if( $sliders != [])
+        {
+            foreach( $sliders as $slider) {
+                Slider::where('image_id', $slider)
+                        ->where('subbrand_id', $subbrand)
+                        ->delete();
+            }
+            return redirect( 'subbrand/'.$slug);
+        }else{
+            return 'error';
+        }    
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function updateCaption(Request $request)
+    {
+        // Validate the request
+        $validate = Validator::make($request->all(),[
+            'caption'      => 'required' 
+        ]);
+
+        $caption    = $request->caption;
+        $subbrand   = Subbrand::findOrFail($request->subbrandId);
+        $slug       = $request->subbrandSlug;
+
+        if( $validate->fails()){
+            return redirect('subbrand/'.$slug)
+                    ->withErrors($validate, 'updateCaption')
+                    ->withInput();
+        }
+
+        $subbrand->caption = $caption;
+        $subbrand->save();
+        return redirect('subbrand/'.$slug);
+    }
+
     public function show($subbrand, $package)
     {
+        //
         $subbrand   = Subbrand::where('slug', $subbrand)->first();
         $package    = Package::where('slug', $package)->first();
 
         return view('packages.package', compact('subbrand', 'package'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

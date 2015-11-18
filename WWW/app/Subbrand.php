@@ -17,4 +17,9 @@ class Subbrand extends Model
     {
     	return $this->belongsToMany('App\Package', 'subbrands_packages');
     }
+
+    public function sliders()
+    {
+    	return $this->belongsToMany('App\Image', 'slider_images');
+    }
 }

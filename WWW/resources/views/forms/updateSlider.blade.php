@@ -2,19 +2,37 @@
 	{{ csrf_field() }}
 	<ul class="small-block-grid-5">
 	@foreach( $subbrand->images as $image )
+		
 		<li>
 			<div>
-				<label for="image{{ $image->id }}">{{ $image->description }}</label>
+				<label for="image{{ $image->id }}">{{ $image->description }}
+				<img src="/img/gallery/{{ $image->name }}" alt="{{ $image->description }}"></label>	
 			</div>
+			
 			<div>
-				<img src="/img/gallery/{{ $image->name }}" alt="{{ $image->description }}">
+				<input type="checkbox" value="{{ $image->id }}" id="image{{ $image->id }}" name="image[]">
 			</div>
-			<div>
-				<input type="checkbox" value="{{ $image->id }}" id="image{{ $image->id }}">		
-			</div>
-		</li>	
+		</li>
+		
+		
+		
+		
+		
 	@endforeach	
 	</ul>
-	<input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
+	
+	<div>
+		@if($errors->updateSlider->first('image'))
+    <span class="alert-box warning">{{$errors->updateSlider->first('image')}}</span>
+    @endif
+
+		@if($errors->updateSlider->first('subbrand'))
+    <span class="alert-box warning">{{$errors->storeSlider->first('subbrand')}}</span>
+    @endif
+
+  </div>
+  
+	<input type="hidden" value="{{ $subbrand->slug }}" name="subbrandSlug">
+	<input type="hidden" value="{{ $subbrand->id }}" name="subbrandId">
 	<input type="submit" value="Add images to slider" class="tiny button radius">
 </form>

@@ -7,8 +7,12 @@
 
 	<input type="submit" class="tiny button radius" name="removePackage" value="Yes">
 
-	@if(count($errors) > 0)
-		<span class="alert-box warning">{{$errors->first('id')}}</span>
+	@if($errors->removePackage->first('package_id'))
+		<span class="alert-box warning">{{$errors->removePackage->first('package_id')}}</span>
+	@endif
+
+	@if($errors->removePackage->first('subbrand_id'))
+		<span class="alert-box warning">{{$errors->removePackage->first('subbrand_id')}}</span>
 	@endif
 
 	<a href="" class="tiny button radius" aria-label="Close">No</a>

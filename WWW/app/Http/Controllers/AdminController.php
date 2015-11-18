@@ -13,6 +13,7 @@ use App\Package;
 use App\Product;
 use App\SubbrandPackage;
 use App\SubbrandImage;
+use App\Slider;
 use Validator;
 
 class AdminController extends Controller
@@ -27,7 +28,6 @@ class AdminController extends Controller
       $subbrands            = Subbrand::with('images','packages')->get();
       $users                = User::with('messages')->get();
       $products             = Product::all();
-      // $users                = User::all();
       $messages             = Message::all();
       
       return view('admin.index', compact('users', 'subbrands', 'messages', 'products'));
@@ -36,11 +36,17 @@ class AdminController extends Controller
     public function storeImage(Request $request)
     {
         // Validate the request
-        $this->validate($request,[
+        $validate = Validator::make($request->all(),[
             'subbrand'      => 'required|exists:subbrands,id',
             'photo'         => 'required|image',
             'description'   => 'required|min:5|max:100',
         ]);
+
+        if( $validate->fails()){
+            return redirect('admin')
+                    ->withErrors($validate, 'storeImage')
+                    ->withInput();
+        }
 
         $subbrand = Subbrand::findOrFail($request->subbrand);
 
@@ -73,13 +79,18 @@ class AdminController extends Controller
     {
         
         // Validate the request
-        $this->validate($request,[
+        $validate = Validator::make($request->all(),[
             'subbrand'      => 'exists:subbrands,id',
             'image'         => 'exists:images,id',
             'photo'         => 'image',
             'description'   => 'required|min:5|max:100',
         ]);
-        // return $request->subbrand_id;
+
+        if( $validate->fails()){
+            return redirect('admin')
+                    ->withErrors($validate, 'updateImage')
+                    ->withInput();
+        }
 
         $subbrand   = Subbrand::where($request->subbrand);
         
@@ -116,10 +127,16 @@ class AdminController extends Controller
     public function removeImage(Request $request)
     {
         // Validate the request
-        $this->validate( $request,[
+        $validate = Validator::make($request->all(),[
             'image_id'      => 'required|exists:images,id',
             'subbrand_id'   => 'required|exists:subbrands,id'
         ]);
+
+        if( $validate->fails()){
+            return redirect('admin')
+                    ->withErrors($validate, 'removeImage')
+                    ->withInput();
+        }
 
         $image_id       = $request->image_id;
         $subbrand_id    = $request->subbrand_id;
@@ -133,12 +150,16 @@ class AdminController extends Controller
                         ->where('subbrand_id', $subbrand_id)
                         ->delete();
 
+        Slider::where('image_id', $image_id)
+                        ->where('subbrand_id', $subbrand_id)
+                        ->delete();                
+
         return redirect('admin');
     }
 
     public function storePackage(Request $request)
     {
-        $this->validate($request,[
+        $validate = Validator::make($request->all(),[
                 'name'          => 'required',
                 'price'         => 'required',
                 'hours'         => 'required',
@@ -146,6 +167,12 @@ class AdminController extends Controller
                 'product'       => 'required|exists:products,id',
                 'subbrand'      => 'required|exists:subbrands,id'
         ]);
+
+        if( $validate->fails()){
+            return redirect('admin')
+                    ->withErrors($validate, 'storePackage')
+                    ->withInput();
+        }
 
         $package        = new Package();
         $subbrands      = Subbrand::findOrFail($request->subbrand);

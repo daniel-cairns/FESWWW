@@ -20,6 +20,8 @@ Route::get('subbrand/{subbrand}', 'SubbrandController@index');
 Route::get('subbrand/{subbrand}/{package}', 'SubbrandController@show');
 Route::get('subbrand/{subbrand}/{package}/order', 'PackagesController@order');
 Route::post('updateSlider', 'SubbrandController@updateSlider');
+Route::post('removeSlider', 'SubbrandController@removeSlider');
+Route::post('updateCaption', 'SubbrandController@updateCaption');
 
 //Admin
 Route::post('confirm', 'PackagesController@confirm');

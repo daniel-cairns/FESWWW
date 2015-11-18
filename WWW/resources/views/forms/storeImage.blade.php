@@ -9,16 +9,19 @@
   	<div class="columns large-6">
       <label for="photo"><h2>Image</h2></label>
       <input type="file" name="photo" class="tiny button radius">
-      @if(count($errors) > 0)
-      <span class="alert-box warning">{{$errors->first('photo')}}</span>
+      @if($errors->storeImage->first('photo'))
+      <span class="alert-box warning">{{$errors->storeImage->first('photo')}}</span>
       @endif
     </div>
 
     <div class="columns large-6">
       <label for="description"><h2>Image Description</h2></label>
       <input type="text" id="description" name="description" placeholder="Image Description">
-      @if(count($errors) > 0)
-      <span class="alert-box warning">{{$errors->first('description')}}</span>
+      @if($errors->storeImage->first('description'))
+      <span class="alert-box warning">{{$errors->storeImage->first('description')}}</span>
+      @endif
+      @if($errors->storeImage->first('subbrand'))
+      <span class="alert-box warning">{{$errors->storeImage->first('subbrand')}}</span>
       @endif
     </div>
   </div>  

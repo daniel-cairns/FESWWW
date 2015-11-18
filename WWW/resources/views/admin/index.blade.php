@@ -130,7 +130,7 @@
 
 	    	<div class="row">
 	    		<div class="columns">
-		    		<h2>Create a new package</h2>
+		    		<h2>Create a new package for the {{$subbrand->name}} Catergory</h2>
 		    		
 			    	@include('forms.storePackage')
 		    		

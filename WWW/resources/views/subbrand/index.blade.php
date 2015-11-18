@@ -4,9 +4,9 @@
 @endsection
 @section('content')
 	<div class="slider">
-    <div style="background-image: url(/img/slider/commercial.jpg);"><caption>capture your day</caption></div>
-    <div style="background-image: url(/img/slider/wedding1.jpg);"><caption>capture your day</caption></div>
-    <div style="background-image: url(/img/slider/wedding2.jpg);"><caption>capture your day</caption></div>
+    @foreach( $subbrand->sliders as $slider )
+    <div style="background-image: url(/img/original/{{ $slider->name }});"><caption>{{ $slider->description }}</caption></div>
+    @endforeach
   </div>
 
   <div class="caption">
@@ -26,13 +26,78 @@
 
   <div id="editModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <h2 id="modalTitle">Edit the {{$subbrand->name}} page content.</h2>
-    <h3>Slider</h3>
-    @include('forms.slider')
-    <h3>Gallery</h3>
-    <h3>Caption</h3>
-    <h3>Description</h3>
-    <h3>Packages</h3>
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    <ul class="tabs" data-tab role="tablist">
+      <li class="tab-title active" role="presentation"><a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" aria-controls="panel2-1"><h3>Slider</h3></a></li>
+      <li class="tab-title" role="presentation"><a href="#panel2-2" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-2"><h3>Gallery</h3></a></li>
+      <li class="tab-title" role="presentation"><a href="#panel2-3" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-3"><h3>Caption</h3></a></li>
+      <li class="tab-title" role="presentation"><a href="#panel2-4" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-4"><h3>Description</h3></a></li>
+      <li class="tab-title" role="presentation"><a href="#panel2-5" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-5"><h3>Packages</h3></a></li>
+    </ul>
+    <div class="tabs-content">
+      <section role="tabpanel" aria-hidden="false" class="content active" id="panel2-1">
+        <h3>Update Slider</h3>
+        @include('forms.updateSlider')
+        <h3>Delete from Slider</h3>
+        @include('forms.removeSlider')
+      </section>
+      <section role="tabpanel" aria-hidden="true" class="content" id="panel2-2">
+        <ul class="medium-block-grid-4">
+        @foreach( $subbrand->images as $image ) 
+          <li>
+            <div class="row">
+              <div class="columns">
+                <img src="/img/gallery/{{$image->name}}" alt="{{$image->description}}">
+                <span>{{$image->description}}</span>  
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="columns small-6">
+                <a href="#" data-reveal-id="UpdateModal{{ $image->id }}" class="tiny button radius">Update Image</a>
+              </div>
+
+              <div class="columns small-6"> 
+                <a href="#" data-reveal-id="RemoveModal{{ $image->id }}" class="tiny button radius warning">Remove Image</a>      
+              </div>
+            </div>
+          </li>
+
+          <div id="UpdateModal{{ $image->id }}" class="reveal-modal" data-reveal aria-labelledby="UpdateModal{{ $image->id }}" aria-hidden="true" role="dialog">
+            <h2 id="UpdateModal{{ $image->id }}">Update Image</h2>
+            <ul class="small-block-grid-2">
+              <li>
+                <h2>Description</h2>
+                <p>{{ $image->description }}</p>
+              </li>
+              <li><img src="/img/gallery/{{ $image->name }}" alt=""></li>
+            </ul>
+            @include('forms.updateImage')
+            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+          </div>
+
+          <div id="RemoveModal{{ $image->id }}" class="reveal-modal" data-reveal aria-labelledby="RemoveModal{{ $image->id }}" aria-hidden="true" role="dialog">
+            <h2 id="RemoveModal{{ $image->id }}">Remove {{ $image->description }} Image</h2>
+            <img src="/img/original/{{ $image->name }}" alt="">
+            <p>Are you sure you want to remove this image and all it's details from your records?</p>
+            @include('forms.removeImage')
+          </div>
+          
+          @endforeach 
+        </ul>
+      </section>
+      <section role="tabpanel" aria-hidden="true" class="content" id="panel2-3">
+        @include('forms.updateSubbrandCaption')
+      </section>
+      <section role="tabpanel" aria-hidden="true" class="content" id="panel2-4">
+        <h2>Fourth panel content goes here...</h2>
+        @include('forms.updateSubbrandDescription')
+      </section>
+      <section role="tabpanel" aria-hidden="true" class="content" id="panel2-5">
+        <h2>Fifth panel content goes here...</h2>
+        @include('forms.updateSubbrandPackages')
+      </section>
+    </div>
   </div>
 
   <div class="row">
@@ -41,33 +106,27 @@
     </div>
   </div>
   
-  <div class="row">
-    <div class="columns">
-      <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
-        @forelse( $subbrand->images as $image )
-          <li>
-            <a href="#" data-reveal-id="modal{{ $image->id }}">
-              <img src="/img/gallery/{{$image->name}}" alt="{{ $image->description }}">
-            </a>
-          </li>
-
-          <div id="modal{{ $image->id }}" class="reveal-modal" data-reveal aria-labelledby="modal{{ $image->id }}" aria-hidden="true" role="dialog">
-            <h2 id="modal{{ $image->id }}">{{ $image->description }}</h2>
-            <img src="/img/original/{{$image->name}}" alt="">
-            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-          </div>
-        @empty
-         
-          <li><h6>Sorry there a no images found for the {{ $subbrand->name }} category.</h6></li>
-                     
-        @endforelse
-      </ul>
+  <div class="row gallerySlider">
+    @forelse( $subbrand->images as $image )
+    <div class="columns large-3">
+      <a href="#" data-reveal-id="modal{{ $image->id }}">
+        <img src="/img/gallery/{{$image->name}}" alt="{{ $image->description }}">
+      </a>
     </div>
+    @empty
+    <div class="columns">
+      <h6>Sorry there a no images found for the {{ $subbrand->name }} category.</h6>
+    </div>   
+    @endforelse
   </div>
-
-  @foreach( $subbrand->images as $image )
-    
-  @endforeach
+    @foreach( $subbrand->images as $image )
+    <div id="modal{{ $image->id }}" class="reveal-modal" data-reveal aria-labelledby="modal{{ $image->id }}" aria-hidden="true" role="dialog">
+        <h2 id="modal{{ $image->id }}">{{ $image->description }}</h2>
+        <img src="/img/original/{{$image->name}}" alt="">
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+    @endforeach
+  </div>
 
   <div class="row" >
     <div class="columns">
