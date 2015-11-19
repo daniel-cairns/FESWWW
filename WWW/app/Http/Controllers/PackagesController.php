@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Package;
 use App\Subbrand;
+use Mail;
+
 
 class PackagesController extends Controller
 {
@@ -25,80 +27,59 @@ class PackagesController extends Controller
 
     public function order($subbrand, $package)
     {
-        $subbrand   = Subbrand::where('slug', $subbrand)->first();
-        $package    = Package::where('slug', $package)->first();
         
-        return view('packages.order', compact('subbrand', 'package'));
+      $subbrand   = Subbrand::where('slug', $subbrand)->first();
+      $package    = Package::where('slug', $package)->first();
+      
+      return view('packages.order', compact('subbrand', 'package'));
     }
 
     public function confirm(Request $request)
     {
-        return view('packages.confirm');
+      //validate
+
+      // Get the information from the form
+      $order = [
+          'firstName'   => $request->firstName,
+          'lastName'    => $request->lastName,
+          'email'       => $request->email,
+          'organisation'=> $request->organisation,
+          'comments'    => $request->comments,
+          'date'        => $request->date,
+          'subbrand'    => $request->subbrand,
+          'package'     => $request->package
+      ];
+
+      $subbrand   = Subbrand::where('id', $order['subbrand'])->first();
+      $package    = Package::where('id', $order['package'])->first();
+
+      return view('packages.confirm', compact('order', 'subbrand', 'package'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function sendConfirm(Request $request)
     {
-        //
-    }
+      $subbrand   = Subbrand::where('id', $request->subbrand)->first();
+      $package    = Package::where('id', $request->package)->first();
+      
+      $data = [
+          'firstName'   => $request->firstName,
+          'lastName'    => $request->lastName,
+          'email'       => $request->email,
+          'organisation'=> $request->organisation,
+          'comments'    => $request->comments,
+          'date'        => $request->date,
+          'subbrand'    => $subbrand->name,
+          'package'     => $package->name
+      ];
+      
+      Mail::send('emails.booking', $data, function ($message) {
+        $message->from('admin@FES.com', 'FES');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $message->to('danielcairns30@gmail.com');
+        $message->attach('/img/logo/logo.png');
+      }); 
+      
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+      return 'cheers';
     }
 }

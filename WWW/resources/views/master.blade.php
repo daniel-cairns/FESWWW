@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/foundation.css"/>
     <link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="/css/jquery-ui.css">  
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/vendor/modernizr.js"></script>
   </head>
@@ -135,6 +136,8 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="/slick/slick.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
       $(document).ready(function(){
         $('.slider').slick({
@@ -158,8 +161,10 @@
           dots: true,
           focusOnSelect: true,
           cssEase: 'linear'
-            
-          
+        });
+
+        $(function() {
+          $( "#datepicker" ).datepicker();
         });  
       });
     </script> 

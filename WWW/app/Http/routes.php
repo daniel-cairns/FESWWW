@@ -23,12 +23,12 @@ Route::post('updateSlider', 'SubbrandController@updateSlider');
 Route::post('removeSlider', 'SubbrandController@removeSlider');
 Route::post('updateCaption', 'SubbrandController@updateCaption');
 
-//Admin
+// Packages
 Route::post('confirm', 'PackagesController@confirm');
+Route::post('sendConfirm', 'PackagesController@sendConfirm');
 Route::get('packages', 'PackagesController@index');
-Route::get('gallery', 'GalleryController@index');
-Route::get('about', 'AboutController@index');
-Route::get('contact', 'ContactController@index');
+
+//Admin
 Route::get('admin', 'AdminController@index');
 Route::post('storeImage', 'AdminController@storeImage');
 Route::post('storePackage', 'AdminController@storePackage');
@@ -36,6 +36,11 @@ Route::post('removePackage', 'AdminController@removePackage');
 Route::post('removeImage', 'AdminController@removeImage');
 Route::post('updateImage', 'AdminController@updateImage');
 Route::post('updatePackage', 'AdminController@updatePackage');
+
+// Display pages
+Route::get('gallery', 'GalleryController@index');
+Route::get('about', 'AboutController@index');
+Route::get('contact', 'ContactController@index');
 
 // Registration
 Route::get('auth/register', 'Auth\AuthController@getRegister');
