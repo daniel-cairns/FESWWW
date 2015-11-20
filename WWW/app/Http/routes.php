@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@update');
+Route::get('/account', 'AccountController@index');
 
 //Subbrands 
 Route::get('subbrand/{subbrand}', 'SubbrandController@index');

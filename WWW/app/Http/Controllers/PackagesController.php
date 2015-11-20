@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Package;
 use App\Subbrand;
 use Mail;
+use App\User;
+use App\Message;
+use Auth;
 
 
 class PackagesController extends Controller
@@ -44,7 +47,7 @@ class PackagesController extends Controller
           'lastName'    => $request->lastName,
           'email'       => $request->email,
           'organisation'=> $request->organisation,
-          'comments'    => $request->comments,
+          'comment'     => $request->comment,
           'date'        => $request->date,
           'subbrand'    => $request->subbrand,
           'package'     => $request->package
@@ -61,6 +64,9 @@ class PackagesController extends Controller
       $subbrand   = Subbrand::where('id', $request->subbrand)->first();
       $package    = Package::where('id', $request->package)->first();
       
+      $password   = uniqid();
+      $passCrypt  = bcrypt($password);
+
       $data = [
           'firstName'   => $request->firstName,
           'lastName'    => $request->lastName,
@@ -69,17 +75,42 @@ class PackagesController extends Controller
           'comments'    => $request->comments,
           'date'        => $request->date,
           'subbrand'    => $subbrand->name,
-          'package'     => $package->name
+          'package'     => $package->name,
+          'password'    => $password,
       ];
-      
-      Mail::send('emails.booking', $data, function ($message) {
+
+      $user = User::create([
+            'name'      => $data['firstName'].$data['lastName'],
+            'email'     => $data['email'],
+            'password'  => $passCrypt
+      ]);
+
+      if( !$data['comments'] == '')
+      {
+        Message::create([
+            'message' => $data['comments'],
+            'user_id' => $user->id,
+            'status'  => 'unread'
+        ]);
+      }  
+
+      Mail::send('emails.booking', $data, function ($message) use ($data) {
         $message->from('admin@FES.com', 'FES');
+        $message->subject('package booking');
 
-        $message->to('danielcairns30@gmail.com');
-        $message->attach('/img/logo/logo.png');
-      }); 
+        $message->to($data['email']);
+        // $message->attach($data['logo'], ['as' => 'logo', 'mime' => 'image/png']);
+      });
+
+      Mail::send('emails.newBooking', $data, function ($message) use ($data) {
+        $message->from('admin@FES.com', 'FES');
+        $message->subject('package booking');
+
+        $message->to('danzo169@gmail.com');
+        // $message->attach($data['logo'], ['as' => 'logo', 'mime' => 'image/png']);
+      });
       
-
-      return 'cheers';
+      Auth::login($user);
+      return redirect('/account');
     }
 }
