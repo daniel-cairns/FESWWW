@@ -29,8 +29,21 @@ class AdminController extends Controller
       $users                = User::with('messages')->get();
       $products             = Product::all();
       $messages             = Message::all();
+
+      if( count($users) >= 1 ) 
+      {
+        
+        $usersJson = json_encode($users);
+
+        header('Content-Type: application/json');
+
+        echo $usersJson;
+        
+      }
+
+
       
-      return view('admin.index', compact('users', 'subbrands', 'messages', 'products'));
+      return view('admin.index', compact('users', 'subbrands', 'messages', 'products' , 'usersJson' ));
     }
 
     public function storeImage(Request $request)
@@ -239,5 +252,10 @@ class AdminController extends Controller
                         ->delete();
 
         return redirect('admin');
+    }
+
+    public function userMessage($id)
+    {
+      
     }
 }   

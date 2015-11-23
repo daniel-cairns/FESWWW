@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>FES | @yield('title')</title>
+    <!--[if lt IE 9]><scriptsrc="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <link href='https://fonts.googleapis.com/css?family=Roboto|Monsieur+La+Doulaise' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/foundation.css"/>
     <link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
@@ -42,7 +43,7 @@
             <li><a href="/about">About Us</a></li>
             <li><a href="/contact">Contact Us</a></li>
             <li class="has-dropdown">
-              <a href="#">Account</a>
+              <a href="/account">{{ Auth::user()->name }}</a>
               <ul class="dropdown">
                 @if( !Auth::check())
                 <li><a href="#" data-reveal-id="loginModal">Login</a></li>
@@ -152,6 +153,7 @@
           $( "#datepicker" ).datepicker();
         });  
       });
-    </script> 
+    </script>
+    <script src="/js/ajax.js"></script> 
   </body>
 </html>

@@ -114,7 +114,7 @@ class PackagesController extends Controller
       BoughtPackage::create([
           'user_id'     => $user->id,
           'package_id'  => $package->id,
-          'booking_date' => $date['date']
+          'booking_date' => $data['date']
       ]);
 
       Auth::login($user);
@@ -153,7 +153,7 @@ class PackagesController extends Controller
         // $message->attach($data['logo'], ['as' => 'logo', 'mime' => 'image/png']);
       });
 
-      Mail::send('emails.newBooking', $data, function ($message) use ($data) {
+      Mail::send('emails.userNewBooking', $data, function ($message) use ($data) {
         $message->from('admin@FES.com', 'FES');
         $message->subject('package booking');
 

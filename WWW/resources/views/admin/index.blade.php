@@ -18,7 +18,8 @@
 	
 	<div class="row">
 		<div class="columns large-6">
-			<select name="" id="">
+			<select id="user">
+				<option >select</option>
 				@foreach( $users as $user)
 				<option value="{{$user->id}}">{{$user->name}}</option>
 				@endforeach
@@ -26,10 +27,24 @@
 		</div>
 		
 		<div class="columns large-6">
-			@foreach( $messages as $message)
-			<p>{{$message->message}}</p>
+			
+
+			@foreach( $users as $user)
+				@foreach( $user->messages as $message)
+					@if( $message->status == 'unread')
+					
+					<p id="{{ $message->id }}">{{ $message->message }}</p>
+					
+
+					@endif
+				@endforeach
 			@endforeach
+		
+			@include('ajax.ajax')
+
 		</div>
+
+
 	</div>
 
 	<div class="row">

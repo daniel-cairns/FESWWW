@@ -44,7 +44,7 @@
               
               <div>
               	<label for="datepicker"><h3>Date</h3></label>
-              	<input type="date" id="datepicker" name="date" value="{{ old('date') }}">
+              	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="tiny button radius amber">
               </div>	
           </div>
 				</div>	

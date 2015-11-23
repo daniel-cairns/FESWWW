@@ -39,6 +39,7 @@ Route::post('removePackage', 'AdminController@removePackage');
 Route::post('removeImage', 'AdminController@removeImage');
 Route::post('updateImage', 'AdminController@updateImage');
 Route::post('updatePackage', 'AdminController@updatePackage');
+Route::get('usermessage/{id}', 'AdminController@getUserMessage');
 
 // Display pages
 Route::get('gallery', 'GalleryController@index');

@@ -1,5 +1,5 @@
 <body>
-	<p>Hi there {{ $username }}! </p>
+	<p>Hi there {{ $firstName }} {{ $lastName }}! </p>
 
 	<p>We are please to confirm that you booking has been submitted and and an account has been setup.</p>
 
