@@ -26,8 +26,10 @@ Route::post('updateCaption', 'SubbrandController@updateCaption');
 
 // Packages
 Route::post('confirm', 'PackagesController@confirm');
+Route::post('userConfirm', 'PackagesController@userConfirm');
 Route::post('sendConfirm', 'PackagesController@sendConfirm');
 Route::get('packages', 'PackagesController@index');
+
 
 //Admin
 Route::get('admin', 'AdminController@index');

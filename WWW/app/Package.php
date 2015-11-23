@@ -17,4 +17,9 @@ class Package extends Model
     {
     	return $this->belongsToMany('App\Product', 'packages_products');	
     }
+
+    public function users()
+    {
+    	return$this->belongsToMany('App\User', 'bought_packages');
+    }
 }

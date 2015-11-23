@@ -1,5 +1,5 @@
 <body>
-	<p>A new booking request and account has been set up for {{ $firstName }} {{ $lastName }}! </p>
+	<p>A new booking request and account has been set up for {{ $username }}! </p>
 
 	<p>{{ $email }}</p>
 

@@ -4,6 +4,7 @@ $lightgrey: #b6b6b6 !important;
 $white: #FFFFFF !important;
 $blue: #2196f3 !important;
 $amber: #ffc107 !important;
+$lemon: #FFEB3B !important;
 
 body {
   color: $darkgrey;
@@ -152,6 +153,13 @@ footer {
 
 .amber {
   background: $amber;
+  color: $white;
+  transition: all 0.3s linear;
+
+  &:hover{
+    background: $lemon;
+    color: $lightgrey;
+  }
 }
 
 .grey {

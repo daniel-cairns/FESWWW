@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="columns">
 			<h1>{{$subbrand->name}} Package Booking Request</h1>
-			
+			@if( !Auth::check() )
 			<form action="/confirm" method="POST" novalidate>
 				{{ csrf_field() }}
 				<div class="row">
@@ -52,7 +52,26 @@
 				<input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
 				<input type="hidden" value="{{ $package->id }}" name="package">
 				<input type="submit" value="Request Booking" name="bookPackage" class="tiny button radius">
-			</form>		
+			</form>
+			@else
+			<form action="/userConfirm" method="POST" novalidate>
+				{{ csrf_field() }}
+				<p>Catergory: {{ $subbrand->name }}</p>
+ 				<p>Package: {{ $package->name }}</p>
+ 				<p>Price: {{ $package->price }}</p>
+ 				<p>Hours: {{ $package->hours }}</p>
+ 				<p>Product: {{ $package->product }}</p>
+ 				<div>
+         	<label for="datepicker"><h3>Date</h3></label>
+        	<input type="date" id="datepicker" name="date" value="{{ old('date') }}">
+        </div>	
+				<input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
+				<input type="hidden" value="{{ $package->id }}" name="package">
+				<input type="submit" value="Request Booking" name="userBookPackage" class="tiny button radius">
+			</form>
+			@endif
+
+
 		</div>	
 	</div>
 	

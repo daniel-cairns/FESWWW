@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Package;
+use App\User;
+use Auth;
 
 class AccountController extends Controller
 {
@@ -16,7 +19,10 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('account.index');
+        $user   = User::findOrFail(Auth::user()->id); 
+        // return $user->packages;
+
+        return view('account.index', compact('user'));
     }
 
     /**

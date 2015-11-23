@@ -52,7 +52,7 @@
                   @if( Auth::check() && Auth::user()->privilege == 'admin')
                   <li><a href="/admin">Admin</a></li>
                   @else
-                  <li><a href="accountModal">Account Details</a></li>
+                  <li><a href="account">Account Details</a></li>
                   @endif
                 @endif
               </ul>
