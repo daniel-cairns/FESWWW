@@ -28,11 +28,11 @@
     <h2 id="modalTitle">Edit the {{$subbrand->name}} page content.</h2>
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     <ul class="tabs" data-tab role="tablist">
-      <li class="tab-title active" role="presentation"><a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" aria-controls="panel2-1"><h3>Slider</h3></a></li>
-      <li class="tab-title" role="presentation"><a href="#panel2-2" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-2"><h3>Gallery</h3></a></li>
-      <li class="tab-title" role="presentation"><a href="#panel2-3" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-3"><h3>Caption</h3></a></li>
-      <li class="tab-title" role="presentation"><a href="#panel2-4" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-4"><h3>Description</h3></a></li>
-      <li class="tab-title" role="presentation"><a href="#panel2-5" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-5"><h3>Packages</h3></a></li>
+      <li class="tab-title active" role="presentation"><a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" aria-controls="panel2-1"><h5>Slider</h5></a></li>
+      <li class="tab-title" role="presentation"><a href="#panel2-2" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-2"><h5>Gallery</h5></a></li>
+      <li class="tab-title" role="presentation"><a href="#panel2-3" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-3"><h5>Caption</h5></a></li>
+      <li class="tab-title" role="presentation"><a href="#panel2-4" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-4"><h5>Description</h5></a></li>
+      <li class="tab-title" role="presentation"><a href="#panel2-5" role="tab" tabindex="0" aria-selected="false" aria-controls="panel2-5"><h5>Packages</h5></a></li>
     </ul>
     <div class="tabs-content">
       <section role="tabpanel" aria-hidden="false" class="content active" id="panel2-1">
@@ -90,12 +90,35 @@
         @include('forms.updateSubbrandCaption')
       </section>
       <section role="tabpanel" aria-hidden="true" class="content" id="panel2-4">
-        <h2>Fourth panel content goes here...</h2>
         @include('forms.updateSubbrandDescription')
       </section>
       <section role="tabpanel" aria-hidden="true" class="content" id="panel2-5">
         <h2>Fifth panel content goes here...</h2>
-        @include('forms.updateSubbrandPackages')
+        @foreach($subbrand->packages as $package)
+        <div class="columns large-4" >
+          <h3>{{$package->name}}</h3>
+          <p data-equalizer-watch="{{ $subbrand->id }}">{{$package->description}}</p>
+          <p>Price ${{ $package->price }}</p>
+          <p>Hours {{ $package->hours}}</p>
+          @foreach( $package->products as $product)
+          <p>Product: {{ $product->name }}</p>
+          @endforeach
+          <a href="#" data-reveal-id="{{ camel_case($package->name) }}UpdateModal" class="tiny button radius">Update Package</a>
+          <a href="#" data-reveal-id="{{ camel_case($package->name) }}RemoveModal" class="tiny button radius warning">Remove Package</a>
+        </div>
+                    
+        <div id="{{ camel_case($package->name) }}UpdateModal" class="reveal-modal" data-reveal aria-labelledby="{{ camel_case($package->name) }}" aria-hidden="true" role="dialog">
+          <h2 id="{{ $package->name }}">Update {{ $package->name }} Package</h2>
+          @include('forms.updatePackage')
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
+
+        <div id="{{ camel_case($package->name) }}RemoveModal" class="reveal-modal" data-reveal aria-labelledby="{{ camel_case($package->name) }}" aria-hidden="true" role="dialog">
+          <h2 id="{{ $package->name }}">Remove {{ $package->name }} Package</h2>
+          <p>Are you sure you want to remove this package and all it's details from your records?</p>
+          @include('forms.removePackage')
+        </div>
+        @endforeach
       </section>
     </div>
   </div>

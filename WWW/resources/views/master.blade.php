@@ -43,7 +43,11 @@
             <li><a href="/about">About Us</a></li>
             <li><a href="/contact">Contact Us</a></li>
             <li class="has-dropdown">
-              <a href="/account">{{ Auth::user()->name }}</a>
+              @if( Auth::check())
+              <a href="/account/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
+              @else
+              <a href="/register">Account</a>
+              @endif
               <ul class="dropdown">
                 @if( !Auth::check())
                 <li><a href="#" data-reveal-id="loginModal">Login</a></li>

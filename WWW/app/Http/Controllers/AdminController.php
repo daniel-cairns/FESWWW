@@ -29,21 +29,8 @@ class AdminController extends Controller
       $users                = User::with('messages')->get();
       $products             = Product::all();
       $messages             = Message::all();
-
-      if( count($users) >= 1 ) 
-      {
-        
-        $usersJson = json_encode($users);
-
-        header('Content-Type: application/json');
-
-        echo $usersJson;
-        
-      }
-
-
       
-      return view('admin.index', compact('users', 'subbrands', 'messages', 'products' , 'usersJson' ));
+      return view('admin.index', compact('users', 'subbrands', 'messages', 'products'));
     }
 
     public function storeImage(Request $request)
@@ -56,7 +43,7 @@ class AdminController extends Controller
         ]);
 
         if( $validate->fails()){
-            return redirect('admin')
+            return back()
                     ->withErrors($validate, 'storeImage')
                     ->withInput();
         }
@@ -85,7 +72,7 @@ class AdminController extends Controller
 
         $subbrand->images()->save($image);
 
-        return redirect('admin');
+        return back();
     }
 
     public function updateImage(Request $request)
@@ -100,7 +87,7 @@ class AdminController extends Controller
         ]);
 
         if( $validate->fails()){
-            return redirect('admin')
+            return back()
                     ->withErrors($validate, 'updateImage')
                     ->withInput();
         }
@@ -134,7 +121,7 @@ class AdminController extends Controller
         $image->description = $request->description;
         $image->save();
 
-        return redirect('admin');  
+        return back();  
     }
 
     public function removeImage(Request $request)
@@ -146,7 +133,7 @@ class AdminController extends Controller
         ]);
 
         if( $validate->fails()){
-            return redirect('admin')
+            return back()
                     ->withErrors($validate, 'removeImage')
                     ->withInput();
         }
@@ -167,7 +154,7 @@ class AdminController extends Controller
                         ->where('subbrand_id', $subbrand_id)
                         ->delete();                
 
-        return redirect('admin');
+        return back();
     }
 
     public function storePackage(Request $request)
@@ -182,7 +169,7 @@ class AdminController extends Controller
         ]);
 
         if( $validate->fails()){
-            return redirect('admin')
+            return back()
                     ->withErrors($validate, 'storePackage')
                     ->withInput();
         }
@@ -201,7 +188,7 @@ class AdminController extends Controller
         $subbrands->packages()->save($package);
         $products->packages()->save($package);
 
-        return redirect('admin');
+        return back();
     }
 
     public function updatePackage(Request $request)
@@ -217,7 +204,7 @@ class AdminController extends Controller
         ]);
 
         if( $validate->fails()){
-            return redirect('admin')
+            return back()
                     ->withErrors($validate, 'updatePackage')
                     ->withInput();
         }
@@ -233,8 +220,7 @@ class AdminController extends Controller
 
         $package->save();
        
-        return redirect('admin');
-
+        return back();
     }
     
     public function removePackage(Request $request)
@@ -251,11 +237,17 @@ class AdminController extends Controller
                         ->where('subbrand_id', $subbrand_id)
                         ->delete();
 
-        return redirect('admin');
+        return back();
     }
 
     public function userMessage($id)
     {
       
+      $message = Message::where('user_id', $id)
+                        ->where('status', 'unread')
+                        ->get();
+      
+      return $message;                    
+
     }
 }   

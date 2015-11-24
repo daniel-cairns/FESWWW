@@ -1,4 +1,4 @@
-<form action="storePackage" method="POST" novalidate>
+<form action="/storePackage" method="POST" novalidate>
 	{{ csrf_field() }}
 	<div class="row">
 		<div class="columns large-6">

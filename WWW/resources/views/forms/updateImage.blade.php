@@ -1,4 +1,4 @@
-<form action="updateImage" enctype="multipart/form-data" method="POST" novalidate>
+<form action="/updateImage" enctype="multipart/form-data" method="POST" novalidate>
 	{{ csrf_field() }}
 	<div>
 		<label for="image">Image Update</label>

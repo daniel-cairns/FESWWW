@@ -13,6 +13,7 @@ use App\User;
 use App\Message;
 use App\BoughtPackage;
 use Auth;
+use Carbon\Carbon;
 
 
 class PackagesController extends Controller
@@ -68,6 +69,9 @@ class PackagesController extends Controller
       $password   = uniqid();
       $passCrypt  = bcrypt($password);
 
+      $date = $request->date;
+      $dbDate = Carbon::parse($date);
+
       $data = [
           'firstName'   => $request->firstName,
           'lastName'    => $request->lastName,
@@ -86,7 +90,7 @@ class PackagesController extends Controller
             'password'  => $passCrypt
       ]);
 
-      if( !$data['comments'] == '')
+      if( $data['comments'] != '')
       {
         Message::create([
             'message' => $data['comments'],
@@ -114,7 +118,7 @@ class PackagesController extends Controller
       BoughtPackage::create([
           'user_id'     => $user->id,
           'package_id'  => $package->id,
-          'booking_date' => $data['date']
+          'booking_date' => $dbDate
       ]);
 
       Auth::login($user);
@@ -123,20 +127,24 @@ class PackagesController extends Controller
 
     public function userConfirm(Request $request)
     { 
+      
       $subbrand   = Subbrand::where('id', $request->subbrand)->first();
       $package    = Package::where('id', $request->package)->first();
 
+      $date = $request->date;
+      $dbDate = Carbon::parse($date);
+      
       $data = [
           'username'    => Auth::user()->name,
           'email'       => Auth::user()->email,
           'organisation'=> $request->organisation,
-          'comments'    => $request->comments,
-          'date'        => $request->date,
+          'comments'    => $request->comment,
+          'date'        => $date,
           'subbrand'    => $subbrand->name,
           'package'     => $package->name,
       ];
 
-      if( !$data['comments'] == '')
+      if( $data['comments'] != '')
       {
         Message::create([
             'message' => $data['comments'],
@@ -165,9 +173,21 @@ class PackagesController extends Controller
       BoughtPackage::create([
           'user_id'     => Auth::user()->id,
           'package_id'  => $package->id,
-          'booking_date' => $data['date']
+          'booking_date' => $dbDate
       ]);
 
       return redirect('/account');
+    }
+
+    public function cancelPackage(Request $request)
+    {
+      $user       = Auth::user()->id;
+      $package    = $request->package_id;
+      
+      BoughtPackage::where('user_id', $user)
+                      ->where('package_id', $package)
+                      ->delete();
+
+      return back();
     }
 }

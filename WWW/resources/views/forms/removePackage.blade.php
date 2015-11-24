@@ -1,4 +1,4 @@
-<form action="removePackage" method="POST">
+<form action="/removePackage" method="POST">
 {{ csrf_field() }}
 
 	<input type="hidden" value="{{ $package->id }}" name="package_id">

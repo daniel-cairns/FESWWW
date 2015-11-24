@@ -1,4 +1,4 @@
-<form action="storeImage" method="POST" enctype="multipart/form-data" novalidate>
+<form action="/storeImage" method="POST" enctype="multipart/form-data" novalidate>
 	{{ csrf_field() }}
 
 	<div class="row">

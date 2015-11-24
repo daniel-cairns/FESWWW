@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@update');
-Route::get('/account', 'AccountController@index');
+Route::get('/account/{id}', 'AccountController@index');
 
 //Subbrands 
 Route::get('subbrand/{subbrand}', 'SubbrandController@index');
@@ -23,12 +23,14 @@ Route::get('subbrand/{subbrand}/{package}/order', 'PackagesController@order');
 Route::post('updateSlider', 'SubbrandController@updateSlider');
 Route::post('removeSlider', 'SubbrandController@removeSlider');
 Route::post('updateCaption', 'SubbrandController@updateCaption');
+Route::post('updateDescription', 'SubbrandController@updateDescription');
 
 // Packages
 Route::post('confirm', 'PackagesController@confirm');
 Route::post('userConfirm', 'PackagesController@userConfirm');
 Route::post('sendConfirm', 'PackagesController@sendConfirm');
 Route::get('packages', 'PackagesController@index');
+Route::post('cancelPackage', 'PackagesController@cancelPackage');
 
 
 //Admin
@@ -39,7 +41,7 @@ Route::post('removePackage', 'AdminController@removePackage');
 Route::post('removeImage', 'AdminController@removeImage');
 Route::post('updateImage', 'AdminController@updateImage');
 Route::post('updatePackage', 'AdminController@updatePackage');
-Route::get('usermessage/{id}', 'AdminController@getUserMessage');
+Route::get('userMessage/{id}', 'AdminController@userMessage');
 
 // Display pages
 Route::get('gallery', 'GalleryController@index');

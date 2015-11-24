@@ -1,4 +1,4 @@
-<form action="updatePackage" method="POST" enctype="multipart/form-data" novalidate>
+<form action="/updatePackage" method="POST" enctype="multipart/form-data" novalidate>
   {{ csrf_field() }}
 
 	<div>

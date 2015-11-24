@@ -18,33 +18,8 @@
 	
 	<div class="row">
 		<div class="columns large-6">
-			<select id="user">
-				<option >select</option>
-				@foreach( $users as $user)
-				<option value="{{$user->id}}">{{$user->name}}</option>
-				@endforeach
-			</select>
-		</div>
-		
-		<div class="columns large-6">
-			
-
-			@foreach( $users as $user)
-				@foreach( $user->messages as $message)
-					@if( $message->status == 'unread')
-					
-					<p id="{{ $message->id }}">{{ $message->message }}</p>
-					
-
-					@endif
-				@endforeach
-			@endforeach
-		
 			@include('ajax.ajax')
-
 		</div>
-
-
 	</div>
 
 	<div class="row">
@@ -150,6 +125,13 @@
 			    	@include('forms.storePackage')
 		    		
 		    	</div>	
+      	</div>
+
+      	<div class="row">
+      		<div class="columns">
+      			<h2>Add an Existing Package to the {{ $subbrand->name }} Catergory</h2>
+      			@include('forms.updateSubbrandPackages')
+      		</div>
       	</div>
 		    
 	    </li>

@@ -1,4 +1,4 @@
-<form action="removeImage" method="POST" novalidate>
+<form action="/removeImage" method="POST" novalidate>
 	{{ csrf_field() }}
 	<input type="hidden" value="{{ $image->id }}" name="image_id">
 	<input type="hidden" value="{{ $subbrand->id }}" name="subbrand_id">
