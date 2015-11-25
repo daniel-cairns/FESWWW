@@ -127,4 +127,6 @@ class SubbrandController extends Controller
 
         return view('packages.package', compact('subbrand', 'package'));
     }
+
+    
 }

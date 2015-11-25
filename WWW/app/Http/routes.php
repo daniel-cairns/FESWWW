@@ -43,6 +43,7 @@ Route::post('updateImage', 'AdminController@updateImage');
 Route::post('updatePackage', 'AdminController@updatePackage');
 Route::get('userDisplay/{id}', 'AdminController@userDisplay');
 Route::get('userPackages/{id}', 'AdminController@userPackages');
+Route::post('updateSubbrandPackages', 'AdminController@updateSubbrandPackages');
 
 // Display pages
 Route::get('gallery', 'GalleryController@index');

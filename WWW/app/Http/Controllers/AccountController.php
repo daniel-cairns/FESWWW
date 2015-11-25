@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Package;
 use App\Product;
 use App\BoughtPackage;
+use App\Image;
 use App\User;
 use Auth;
 
@@ -22,9 +23,10 @@ class AccountController extends Controller
      */
     public function index( $slug )
     {
-      $user = User::where('name', $slug)->first();
+      $user     = User::where('name', $slug)->first();
+      $images   = Image::where('description', $user->id)->get();
 
-      return view('account.index', compact('user'));
+      return view('account.index', compact('user', 'images'));
     }
     
 }

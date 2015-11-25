@@ -31,8 +31,9 @@ class AdminController extends Controller
       $users                = User::with('messages')->get();
       $products             = Product::all();
       $messages             = Message::all();
+      $packages             = Package::all();
       
-      return view('admin.index', compact('users', 'subbrands', 'messages', 'products'));
+      return view('admin.index', compact('users', 'subbrands', 'messages', 'products', 'packages'));
     }
 
     public function storeImage(Request $request)
@@ -226,19 +227,28 @@ class AdminController extends Controller
     
     public function removePackage(Request $request)
     {
-        $this->validate($request,[
-            'package_id'    => 'required|exists:packages,id',
-            'subbrand_id'   => 'required|exists:subbrands,id'
-        ]);
+      $this->validate($request,[
+          'package_id'    => 'required|exists:packages,id',
+          'subbrand_id'   => 'required|exists:subbrands,id'
+      ]);
 
-        $package_id     = $request->package_id;
-        $subbrand_id    = $request->subbrand_id;
-        
-        SubbrandPackage::where('package_id', $package_id)
-                        ->where('subbrand_id', $subbrand_id)
-                        ->delete();
+      $package_id     = $request->package_id;
+      $subbrand_id    = $request->subbrand_id;
+      
+      SubbrandPackage::where('package_id', $package_id)
+                      ->where('subbrand_id', $subbrand_id)
+                      ->delete();
 
-        return back();
+      return back();
+    }
+
+    public function updateSubbrandPackages(Request $request)
+    {
+      $subbrand  = Subbrand::findOrFail($request->subbrandId);
+      $package    = $request->packageId;  
+
+      $subbrand->packages()->save($package);
+      return back();     
     }
 
     public function userDisplay($id)

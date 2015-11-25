@@ -67,6 +67,12 @@
 		<div class="row">
 			<div class="columns">
 				<h2>Images</h2>
+				<ul class="small-block-grid-4">
+					@foreach( $images as $image)
+					<li><img src="/img/users/{{ $image->name }}" alt=""></li>
+
+					@endforeach
+				</ul>
 			</div>
 		</div>
 				
