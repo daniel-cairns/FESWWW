@@ -14,6 +14,8 @@ use App\Message;
 use App\BoughtPackage;
 use Auth;
 use Carbon\Carbon;
+use Validator;
+use App\Image;
 
 
 class PackagesController extends Controller
@@ -144,15 +146,6 @@ class PackagesController extends Controller
           'package'     => $package->name,
       ];
 
-      if( $data['comments'] != '')
-      {
-        Message::create([
-            'message' => $data['comments'],
-            'user_id' => Auth::user()->id,
-            'status'  => 'unread'
-        ]);
-      }
-
       Mail::send('emails.userBooking', $data, function ($message) use ($data) {
         $message->from('admin@FES.com', 'FES');
         $message->subject('package booking');
@@ -175,8 +168,8 @@ class PackagesController extends Controller
           'package_id'  => $package->id,
           'booking_date' => $dbDate
       ]);
-
-      return redirect('/account');
+      
+      return redirect('/account/'.Auth::user()->name)->with( 'message', 'Booking submitted!');
     }
 
     public function cancelPackage(Request $request)
@@ -185,9 +178,51 @@ class PackagesController extends Controller
       $package    = $request->package_id;
       
       BoughtPackage::where('user_id', $user)
-                      ->where('package_id', $package)
+                      ->where('id', $package)
                       ->delete();
+      
+      return back()->with('message', 'Booking canceled!');
+    }
 
-      return back();
+    public function uploadPackage(Request $request)
+    {
+        // Validate the request
+        $validate = Validator::make($request->all(),[
+            'userId'    => 'required|exists:users,id',
+            // 'myFile'    => 'required|image',
+            // 'packageId' => 'required|exists:packages,id',
+        ]);
+
+        if( $validate->fails()){
+            return back()
+                    ->withErrors($validate, 'uploadPackage')
+                    ->withInput();
+        }
+     
+        $myFile = $request->myFile;
+        
+        // Check if some photo's have been subitted in the form
+        if( $myFile != [] )
+        {
+          
+          foreach ($myFile as $file) 
+          {
+            $image = new Image();
+
+            // Generate a new file name
+            $fileName = uniqid().'.'.$file->getClientOriginalExtension();
+
+            // Use intervention Image to resize the image
+            \Image::make($file)->save( 'img/users/'.$fileName);
+
+            $image->name = $fileName;
+            $image->description = $request->userId;
+            $image->save();
+          }
+        }
+               
+        // $subbrand->images()->save($image);
+
+        return back()->with('message', 'Upload Successful');
     }
 }

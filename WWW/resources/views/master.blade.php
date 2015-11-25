@@ -44,7 +44,7 @@
             <li><a href="/contact">Contact Us</a></li>
             <li class="has-dropdown">
               @if( Auth::check())
-              <a href="/account/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
+              <a href="/account/{{ Auth::user()->name }}">{{ Auth::user()->name }}</a>
               @else
               <a href="/register">Account</a>
               @endif
@@ -128,36 +128,7 @@
     <script type="text/javascript" src="/slick/slick.min.js"></script>
     <script src="/js/jquery-ui.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script>
-      $(document).ready(function(){
-        $('.slider').slick({
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 5000,
-          dots:true,
-        });
-        $('.fade').slick({
-          infinite: true,
-          speed: 500,
-          fade: true,
-          cssEase: 'linear'
-        });
-        $('.gallerySlider').slick({
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          autoplay: false,
-          infinite: true,
-          dots: true,
-          focusOnSelect: true,
-          cssEase: 'linear'
-        });
-
-        $(function() {
-          $( "#datepicker" ).datepicker();
-        });  
-      });
-    </script>
+    <script src="/js/slider.js"></script>
     <script src="/js/ajax.js"></script> 
   </body>
 </html>

@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@update');
-Route::get('/account/{id}', 'AccountController@index');
+Route::get('/account/{slug}', 'AccountController@index');
 
 //Subbrands 
 Route::get('subbrand/{subbrand}', 'SubbrandController@index');
@@ -31,7 +31,7 @@ Route::post('userConfirm', 'PackagesController@userConfirm');
 Route::post('sendConfirm', 'PackagesController@sendConfirm');
 Route::get('packages', 'PackagesController@index');
 Route::post('cancelPackage', 'PackagesController@cancelPackage');
-
+Route::post('uploadPackage', 'PackagesController@uploadPackage');
 
 //Admin
 Route::get('admin', 'AdminController@index');
@@ -41,7 +41,8 @@ Route::post('removePackage', 'AdminController@removePackage');
 Route::post('removeImage', 'AdminController@removeImage');
 Route::post('updateImage', 'AdminController@updateImage');
 Route::post('updatePackage', 'AdminController@updatePackage');
-Route::get('userMessage/{id}', 'AdminController@userMessage');
+Route::get('userDisplay/{id}', 'AdminController@userDisplay');
+Route::get('userPackages/{id}', 'AdminController@userPackages');
 
 // Display pages
 Route::get('gallery', 'GalleryController@index');

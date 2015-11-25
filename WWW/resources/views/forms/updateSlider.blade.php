@@ -13,11 +13,7 @@
 				<input type="checkbox" value="{{ $image->id }}" id="image{{ $image->id }}" name="image[]">
 			</div>
 		</li>
-		
-		
-		
-		
-		
+			
 	@endforeach	
 	</ul>
 	

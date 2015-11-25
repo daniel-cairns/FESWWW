@@ -17,7 +17,7 @@
 	</div>	
 	
 	<div class="row">
-		<div class="columns large-6">
+		<div class="columns">
 			@include('ajax.ajax')
 		</div>
 	</div>

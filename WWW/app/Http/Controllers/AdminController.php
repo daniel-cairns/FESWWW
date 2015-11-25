@@ -14,7 +14,9 @@ use App\Product;
 use App\SubbrandPackage;
 use App\SubbrandImage;
 use App\Slider;
+use App\BoughtPackage;
 use Validator;
+use Response;
 
 class AdminController extends Controller
 {
@@ -77,7 +79,6 @@ class AdminController extends Controller
 
     public function updateImage(Request $request)
     {
-        
         // Validate the request
         $validate = Validator::make($request->all(),[
             'subbrand'      => 'exists:subbrands,id',
@@ -240,14 +241,22 @@ class AdminController extends Controller
         return back();
     }
 
-    public function userMessage($id)
+    public function userDisplay($id)
     {
       
-      $message = Message::where('user_id', $id)
-                        ->where('status', 'unread')
-                        ->get();
+      $user = User::where('id', $id)->first();
+      $boughtPackages = BoughtPackage::where('user_id', $id)->get();
+      $data = [ 'user' => $user, 'packages' => $boughtPackages];
+
+      return $data;                    
+
+    }
+
+    public function userPackages($id)
+    {
+      $packages = Package::where('id', $id)->get();
       
-      return $message;                    
+      return $packages;                    
 
     }
 }   

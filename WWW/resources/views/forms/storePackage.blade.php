@@ -27,7 +27,7 @@
 
 		<div class="columns large-6">
 			<label for="product">Product</label>
-			<select name="product" id="product" name="product">
+			<select name="product" id="product">
 				<option>Select a product type</option>
 				@foreach( $products as $product)
 					<option value="{{ $product->id }}">{{ $product->name }}</option>

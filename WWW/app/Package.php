@@ -22,4 +22,9 @@ class Package extends Model
     {
     	return$this->belongsToMany('App\User', 'bought_packages');
     }
+
+    public function boughtPackages()
+    {
+        return$this->hasMany('App\BoughtPackage', 'package_id');
+    }
 }
