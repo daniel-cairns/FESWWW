@@ -1,29 +1,29 @@
-<form method="POST" action="/password/reset">
+<form method="POST" action="/password/reset" novalidate>
     {!! csrf_field() !!}
-    <input type="hidden" name="token" value="{{ $token }}">
-
-    @if (count($errors) > 0)
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+    
+    <div>
+        Current Password
+        <input type="password" name="current_password">
+    </div>
+    @if($errors->resetPassword->first('current_password'))
+        <span class="alert-box warning">{{$errors->first('current_password')}}</span>
     @endif
 
     <div>
-        Email
-        <input type="email" name="email" value="{{ old('email') }}">
+        New Password
+        <input type="password" name="new_password">
     </div>
-
-    <div>
-        Password
-        <input type="password" name="password">
-    </div>
+    @if($errors->resetPassword->first('new_password'))
+        <span class="alert-box warning">{{$errors->first('new_password')}}</span>
+    @endif
 
     <div>
         Confirm Password
-        <input type="password" name="password_confirmation">
+        <input type="password" name="new_password_confirmation">
     </div>
+    @if($errors->resetPassword->first('new_password_confirmation'))
+        <span class="alert-box warning">{{$errors->first('new_password_confirmation')}}</span>
+    @endif
 
     <div>
         <button type="submit">

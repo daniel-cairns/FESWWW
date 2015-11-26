@@ -45,7 +45,12 @@
               <div>
               	<label for="datepicker"><h3>Date</h3></label>
               	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="tiny button radius amber">
-              </div>	
+              </div>
+
+              <div id="map-canvas">
+			        	
+			        </div>
+			        
           </div>
 				</div>	
 									
@@ -67,6 +72,8 @@
 			         	<label for="datepicker"><h3>Date</h3></label>
 			        	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="radius">
 			        </div>
+			        
+
 			        <div>
 								<label for="comment"><h3>Comments</h3></label>
 								<textarea name="comment" id="comment" cols="30" rows="10">{{ old('comment') }}</textarea>

@@ -36,7 +36,13 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next)
     {
         if ($this->auth->check()) {
-            return redirect('/account/'.Auth::user()->name);
+            if ( Auth::user()->privilege == 'admin')
+            {
+                return redirect('/admin');   
+            } else {
+                return redirect('/account');    
+            }   
+            
         }    
         return $next($request);
     }

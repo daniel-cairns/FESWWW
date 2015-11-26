@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@update');
-Route::get('/account/{slug}', 'AccountController@index');
+Route::get('account', 'AccountController@index');
 
 //Subbrands 
 Route::get('subbrand/{subbrand}', 'SubbrandController@index');
@@ -60,3 +60,13 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 
 // Logout
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Account
+Route::post('password/reset', 'AccountController@resetPassword');
+Route::post('email/reset', 'AccountController@resetEmail');
+Route::post('username/reset', 'AccountController@resetUsername');
+
+
+
+
+

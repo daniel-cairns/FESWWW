@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">  
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/vendor/modernizr.js"></script>
+    
   </head>
 
   <body>
@@ -44,9 +45,9 @@
             <li><a href="/contact">Contact Us</a></li>
             <li class="has-dropdown">
               @if( Auth::check())
-              <a href="/account/{{ Auth::user()->name }}">{{ Auth::user()->name }}</a>
+              <a href="/account">{{ Auth::user()->name }}</a>
               @else
-              <a href="/register">Account</a>
+              <a href="/auth/register">Account</a>
               @endif
               <ul class="dropdown">
                 @if( !Auth::check())
@@ -129,6 +130,14 @@
     <script src="/js/jquery-ui.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="/js/slider.js"></script>
-    <script src="/js/ajax.js"></script> 
+    <script src="/js/ajax.js"></script>
+    
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ0VWodrY3LUSGSa4ECslrhPDCsIHbjmI&libraries=places">
+    </script>
+    
+
+    <script src="/js/maps.js"></script>
+ 
   </body>
 </html>

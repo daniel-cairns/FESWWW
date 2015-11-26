@@ -17,7 +17,6 @@ use Carbon\Carbon;
 use Validator;
 use App\Image;
 
-
 class PackagesController extends Controller
 {
     /**
@@ -124,6 +123,7 @@ class PackagesController extends Controller
       ]);
 
       Auth::login($user);
+      
       return redirect('/account');
     }
 
@@ -169,7 +169,7 @@ class PackagesController extends Controller
           'booking_date' => $dbDate
       ]);
       
-      return redirect('/account/'.Auth::user()->name)->with( 'message', 'Booking submitted!');
+      return redirect('/account')->with( 'message', 'Booking submitted!');
     }
 
     public function cancelPackage(Request $request)

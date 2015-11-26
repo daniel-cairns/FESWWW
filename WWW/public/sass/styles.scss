@@ -166,6 +166,11 @@ footer {
   background: $lightgrey;
 }
 
+#map-canvas{
+  width: 300px;
+  height: 200px;
+}
+
 .clearfix::before,
 .clearfix::after {
   content: " ";
