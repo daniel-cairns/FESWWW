@@ -20,9 +20,7 @@
 				<p>{{ Auth::user()->email}} <a href="#" data-reveal-id="emailModal" class="right">edit</a></p>
 							
 				<h5>Password</h5>
-				<p>******* <a href="#" data-reveal-id="passwordModal" class="right">edit</a></p>
-				
-				
+				<p>******* <a href="#" data-reveal-id="passwordModal" class="right">edit</a></p>	
 				
 			</div>
 

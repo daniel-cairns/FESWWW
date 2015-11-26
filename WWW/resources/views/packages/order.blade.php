@@ -10,8 +10,13 @@
 			<form action="/confirm" method="POST" novalidate>
 				{{ csrf_field() }}
 				<div class="row">
+					<div class="columns">
+						<h2>Package {{$package->name}}</h2>
+					</div>	
+				</div>
+				<div class="row">
 					<div class="columns centered large-6">
-					<h2>Package {{$package->name}}</h2>
+					
 						<div>
 							<label for="firstName"><h3>First Name</h3></label>
 							<input type="text" id="firstName" name="firstName" value="{{ old('firstName') }}">
@@ -40,23 +45,37 @@
 					</div>
 					
 					<div class="columns large-6">
-          	<h2>Booking Date</h2>
+          	
               
-              <div>
-              	<label for="datepicker"><h3>Date</h3></label>
-              	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="tiny button radius amber">
-              </div>
-
-              <div id="map-canvas">
-			        	
-			        </div>
-			        
+            <div>
+            	<label for="datepicker"><h3>Booking Date</h3></label>
+            	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="tiny button radius amber">
+            </div>
+						
+						
+						<div>
+							<label for="location"><h3>Location</h3></label>
+							<input type="text" id="location" name="location">
+						</div>
+						
+	          <div class="row">
+	          	<div class="columns">
+	          		<div id='map'></div>
+	          		<small>*Your location will only be stored to help speed up the booking process. No address information will be taken</small>
+	          	</div>
+	          </div>  
+            
           </div>
 				</div>	
 									
 				<input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
 				<input type="hidden" value="{{ $package->id }}" name="package">
-				<input type="submit" value="Request Booking" name="bookPackage" class="tiny button radius">
+				<div class="row">
+          	<div class="columns">
+          		<input type="submit" value="Request Booking" name="bookPackage" class="tiny button radius">	
+          	</div>
+          </div>  
+				
 			</form>
 			@else
 				<div class="row">
@@ -72,6 +91,18 @@
 			         	<label for="datepicker"><h3>Date</h3></label>
 			        	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="radius">
 			        </div>
+
+			        <div>
+								<label for="location"><h3>Location</h3></label>
+								<input type="text" id="location" name="location">
+							</div>
+							
+		          <div class="row">
+		          	<div class="columns">
+		          		<div id='map'></div>
+		          		<small>*Your location will only be stored to help speed up the booking process. No address information will be taken</small>
+		          	</div>
+		          </div>  
 			        
 
 			        <div>

@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
     <link rel="stylesheet" href="/css/jquery-ui.css">  
     <link rel="stylesheet" href="/css/styles.css">
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
     <script src="/js/vendor/modernizr.js"></script>
     
   </head>
@@ -27,12 +28,12 @@
           <li class="name">
             <h1><a href="/landing"></a></h1>
           </li>
-           <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+           
           <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
         </ul>
 
         <section class="top-bar-section">
-          <!-- Right Nav Section -->
+          
           <ul class="right">
             <li><a href="/subbrand/weddings">Weddings</a></li>
             <li><a href="/subbrand/portraits">Portraits</a></li>
@@ -131,11 +132,7 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="/js/slider.js"></script>
     <script src="/js/ajax.js"></script>
-    
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ0VWodrY3LUSGSa4ECslrhPDCsIHbjmI&libraries=places">
-    </script>
-    
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
 
     <script src="/js/maps.js"></script>
  

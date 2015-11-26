@@ -1,123 +1,171 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto|Monsieur+La+Doulaise|Codystar|Monda|Great+Vibes);
 body {
-  color: #212121 !important; }
+  color: #212121 !important;
+}
 
 .edit {
   color: #212121 !important;
   text-decoration: underline;
-  margin-top: 20px; }
+  margin-top: 20px;
+}
 
 .heading {
-  background: #727272 !important; }
-  .heading h1 {
-    margin: 0; }
-    .heading h1 img {
-      width: 400px; }
-  .heading form {
-    float: right;
-    padding-right: 10px; }
+  background: #727272 !important;
+}
+
+.heading h1 {
+  margin: 0;
+}
+
+.heading h1 img {
+  width: 400px;
+}
+
+.heading form {
+  float: right;
+  padding-right: 10px;
+}
 
 .top-bar {
-  background: #b6b6b6 !important; }
-  .top-bar ul, .top-bar a {
-    background: #b6b6b6 !important; }
-    .top-bar ul:hover, .top-bar ul .active, .top-bar a:hover, .top-bar a .active {
-      background: #727272 !important;
-      color: #ffc107 !important; }
-  .top-bar img {
-    width: 150px; }
+  background: #b6b6b6 !important;
+}
+
+.top-bar ul, .top-bar a {
+  background: #b6b6b6 !important;
+}
+
+.top-bar ul:hover, .top-bar ul .active, .top-bar a:hover, .top-bar a .active {
+  background: #727272 !important;
+  color: #ffc107 !important;
+}
+
+.top-bar img {
+  width: 150px;
+}
 
 .slider {
   max-width: 1366px;
   margin: 0 auto;
   background: white;
   height: 300px;
-  overflow: hidden; }
-  .slider div {
-    width: 1366px;
-    height: 300px; }
+  overflow: hidden;
+}
+
+.slider div {
+  width: 1366px;
+  height: 300px;
+}
 
 #Weddings h1 {
   font-family: Monsieur La Doulaise;
   font-size: 3rem;
-  margin-top: 20px; }
+  margin-top: 20px;
+}
 
 #Portraits h1 {
   font-family: Monda;
-  margin-top: 20px; }
+  margin-top: 20px;
+}
 
 #Seniors h1 {
   font-family: Great Vibes;
   margin-top: 20px;
-  font-size: 3rem; }
+  font-size: 3rem;
+}
 
 #Commercial h1 {
   font-family: Roboto;
-  margin-top: 20px; }
+  margin-top: 20px;
+}
 
 #Models h1 {
   font-family: Codystar;
-  margin-top: 20px; }
+  margin-top: 20px;
+}
 
 .fade {
   width: 500px;
   height: 300px;
-  margin: 0 auto; }
-  .fade div {
-    width: 500px;
-    height: 300px; }
-    .fade div img {
-      width: 100%; }
+  margin: 0 auto;
+}
+
+.fade div {
+  width: 500px;
+  height: 300px;
+}
+
+.fade div img {
+  width: 100%;
+}
 
 .slick-next,
 .slick-prev,
 .slick-arrow {
-  color: #727272 !important; }
+  color: #727272 !important;
+}
 
 .caption {
   background: #b6b6b6 !important;
   text-align: center;
   max-width: 1366px;
-  margin: 0 auto; }
-  .caption h1 {
-    margin: 0;
-    color: white !important; }
+  margin: 0 auto;
+}
+
+.caption h1 {
+  margin: 0;
+  color: #FFFFFF !important;
+}
 
 h2 {
-  color: #727272 !important; }
+  color: #727272 !important;
+}
 
 footer {
   background: #b6b6b6 !important;
-  color: white !important;
+  color: #FFFFFF !important;
   padding: 20px;
   text-align: center;
-  margin-top: 100px; }
-  footer ul li {
-    list-style: none; }
-    footer ul li a {
-      color: white !important; }
-    footer ul li a:hover {
-      color: #2196f3 !important; }
+  margin-top: 100px;
+}
+
+footer ul li {
+  list-style: none;
+}
+
+footer ul li a {
+  color: #FFFFFF !important;
+}
+
+footer ul li a:hover {
+  color: #2196f3 !important;
+}
 
 .amber {
   background: #ffc107 !important;
-  color: white !important;
-  transition: all 0.3s linear; }
-  .amber:hover {
-    background: #ffeb3b !important;
-    color: #b6b6b6 !important; }
+  color: #FFFFFF !important;
+  transition: all 0.3s linear;
+}
+
+.amber:hover {
+  background: #FFEB3B !important;
+  color: #b6b6b6 !important;
+}
 
 .grey {
-  background: #b6b6b6 !important; }
+  background: #b6b6b6 !important;
+}
 
-#map-canvas {
-  width: 300px;
-  height: 200px; }
+#map {
+  width: 470px;
+  height: 300px;
+}
 
 .clearfix::before,
 .clearfix::after {
   content: " ";
-  display: table; }
+  display: table;
+}
 
 .clearfix:after {
-  clear: both; }
+  clear: both;
+}
