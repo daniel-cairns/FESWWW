@@ -41,8 +41,12 @@ Route::post('removePackage', 'AdminController@removePackage');
 Route::post('removeImage', 'AdminController@removeImage');
 Route::post('updateImage', 'AdminController@updateImage');
 Route::post('updatePackage', 'AdminController@updatePackage');
+
 Route::get('userDisplay/{id}', 'AdminController@userDisplay');
 Route::get('userPackages/{id}', 'AdminController@userPackages');
+Route::get('userImages/{description}', 'AdminController@userImages');
+Route::post('userRemove', 'AdminController@userRemove');
+
 Route::post('updateSubbrandPackages', 'AdminController@updateSubbrandPackages');
 
 // Display pages

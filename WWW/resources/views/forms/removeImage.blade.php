@@ -6,5 +6,8 @@
 	@if($errors->removeImage->first('image_id'))
 		<span class="alert-box warning">{{$errors->removeImage->first('image_id')}}</span>
 	@endif
+	@if($errors->removeImage->first('image_id'))
+		<span class="alert-box warning">{{$errors->removeImage->first('subbrand_id')}}</span>
+	@endif
 	<a href="" class="tiny button radius" aria-label="Close">No</a>
 </form>

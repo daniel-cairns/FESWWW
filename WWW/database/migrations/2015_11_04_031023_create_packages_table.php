@@ -23,7 +23,9 @@ class CreatePackagesTable extends Migration
 
             $table->decimal('hours', 2,0);
 
-            $table->enum('product', ['digital', 'hardcopy']);
+            $table->char('product', 20);
+
+            $table->string('slug')->unique();
 
             $table->timestamps();
         });

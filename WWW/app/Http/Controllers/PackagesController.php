@@ -19,11 +19,7 @@ use App\Image;
 
 class PackagesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
       
@@ -43,7 +39,20 @@ class PackagesController extends Controller
     public function confirm(Request $request)
     {
       //validate
+      $validate = Validator::make($request->all(),[
+            'firstname'     => 'required|min:3|max:20',
+            'lastname'      => 'required|min:3|max:20',
+            'email'         => 'required|email|min:5|max:255',
+            'date'          => 'required',
+            'subbrand'      => 'required|exists:subbrands,id',
+            'package'       => 'required|exists:packaegs,id',
+        ]);
 
+      if( $validate->fails()){
+          return back()
+                  ->withErrors($validate, 'confirm')
+                  ->withInput();
+      }
       // Get the information from the form
       $order = [
           'firstName'   => $request->firstName,
@@ -64,6 +73,22 @@ class PackagesController extends Controller
 
     public function sendConfirm(Request $request)
     {
+      //validate
+      $validate = Validator::make($request->all(),[
+            'firstname'     => 'required|min:3|max:20',
+            'lastname'      => 'required|min:3|max:20',
+            'email'         => 'required|email|min:5|max:255',
+            'date'          => 'required',
+            'subbrand'      => 'required|exists:subbrands,id',
+            'package'       => 'required|exists:packaegs,id',
+        ]);
+
+      if( $validate->fails()){
+          return back()
+                  ->withErrors($validate, 'sendConfirm')
+                  ->withInput();
+      }
+
       $subbrand   = Subbrand::where('id', $request->subbrand)->first();
       $package    = Package::where('id', $request->package)->first();
       
@@ -90,15 +115,6 @@ class PackagesController extends Controller
             'email'     => $data['email'],
             'password'  => $passCrypt
       ]);
-
-      if( $data['comments'] != '')
-      {
-        Message::create([
-            'message' => $data['comments'],
-            'user_id' => $user->id,
-            'status'  => 'unread'
-        ]);
-      }
 
       Mail::send('emails.booking', $data, function ($message) use ($data) {
         $message->from('admin@FES.com', 'FES');

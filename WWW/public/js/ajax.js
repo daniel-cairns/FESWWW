@@ -1,20 +1,15 @@
 $('document').ready(function(){
 
   // Listen for changes on the select element
-  $('#user').change( getUserInfo );
-  
-  
-  $('.insertUser').click( function(){
-    alert('hi');
-  }); 
-  
-
+  $('#user').change(getUserInfo);
+  if ($('#user').click()) {
+    getUserInfo();
+  }
+    
   function getUserInfo(){
   
     var userId = $('#user option:selected').data('user-id');
     
-    console.log(userId);
-
     $.ajax({
       
       url: "/userDisplay/"+userId,
@@ -25,15 +20,46 @@ $('document').ready(function(){
         var packages  = dataFromServer.packages;
         
         $('#userDisplay').html('');
+        $('#userImages').html('');
+        $('#packages').html('');
+        $('#userRemove').html('');
+
         
         $('#userDisplay').hide(500, function(){
           $('#userDisplay').append('<li>'+user.name+'</li><li><a href="mailto:'+user.email+'">'+user.email+'</a></li>');
           $('#userDisplay').show(500);
         });
 
-        $('#packages').html('');
+        $('#removeUser').hide(500, function(){
+          $('#userRemove').val(user.id);
+          $('#removeUser').show(500);
+        });
                 
         $("#userId").val(user.id);
+
+        $.ajax({
+          
+          url: "/userImages/"+user.id,
+
+          success: function(imageFromServer){
+            
+            console.log(imageFromServer);
+            $('#userImages').hide(500, function(){
+              for( var i=0; i<imageFromServer.length; i++){
+                
+                $('#userImages').append('<li><img src="img/users/'+imageFromServer[i].name+'"></li>');
+
+              }
+              $('#userImages').show(500);
+            });
+          },
+
+          error: function() {
+            console.log('cannot connect to images');
+          }
+        
+        });
+
 
         for(var i=0; i<packages.length; i++ )
         {
@@ -68,16 +94,6 @@ $('document').ready(function(){
         console.log('cannot connect to users');
       }
     });
-  }
-
-  function insertUser()
-  {
-    alert('hi');
-    var insertUserId    = $('#user option:selected').data('user-id');
-    var insertPackageId = $('#packages').data('package-id');
-
-    console.log(insertUserId);
-    console.log(insertPackageId); 
   }
 
 });

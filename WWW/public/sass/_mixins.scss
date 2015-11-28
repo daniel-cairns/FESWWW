@@ -1,0 +1,31 @@
+@mixin breakpoint( $device-size ) {
+
+	// widescreen
+	@if $device-size == wide {
+
+		// media query for widescreen devices
+		@media all and ( min-width: 1200px) { @content; }
+
+	}
+	// regular desktop
+	@else if $device-size == desktop {
+
+		//desktop media query
+		@media all and ( min-width: 960px) { @content; }
+
+	}
+	//tablet
+	@else if $device-size == tablet {
+
+		//media querry for talets
+		@media all and ( min-width: 800px) { @content; }
+	}
+
+	//smaller
+	@else if $device-size == smaller {
+		//media querry for small tablets
+		@media all and ( min-width: 672px)  { @content; }
+	}
+
+
+}

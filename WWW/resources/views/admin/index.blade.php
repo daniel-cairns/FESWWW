@@ -4,24 +4,20 @@
 @endsection
 @section('content')
 	<div class="row">
-		<div class="columns">
+		<div class="columns large-6">
 			<h1>Administration Page</h1>
+		</div>
+
+		<div class="columns large-6">
+			@if( session('error'))
+			<span class="alert-box warning">{{ session('error')}}</span>
+			@endif
+			@if( session('message'))
+			<span class="alert-box success">{{ session('message')}}</span>
+			@endif
 		</div>
 	</div>		
 	
-	<div class="row">
-		<div class="columns">
-			<h2>Clients</h2>
-			<hr>
-		</div>
-	</div>	
-	
-	<div class="row">
-		<div class="columns">
-			@include('ajax.ajax')
-		</div>
-	</div>
-
 	<div class="row">
 		<div class="columns">
 			<h2>Subbrands</h2>
@@ -138,5 +134,12 @@
 			@endforeach
 		</ul>	
 	</div>
+</div>	
+				
+<div class="row">
+	<div class="columns">
+		@include('ajax.ajax')
+	</div>
 </div>
+
 @endsection

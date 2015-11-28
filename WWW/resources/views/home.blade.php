@@ -28,8 +28,8 @@
   </div>
   @else
   <div id="logo" style="display:block;">
-    <img src="img/logo/logo.png" alt="">
-    <li><a href="#" data-reveal-id="logoutModal">Logout</a></li>
+    <img src="img/logo/logo.png" alt="far edge studios logo">
+    <a href="#" data-reveal-id="logoutModal">Logout</a>
   </div>
   @endif
 
@@ -90,7 +90,7 @@
   </div>
     
     <div id="content" class="clearfix">
-      
+      <div class="image-box clearfix" id="mobile-logo" style="background-image: url(img/langing/mobile.png);"></div>
       @foreach( $subbrands as $subbrand )
       <div id="{{$subbrand->name}}" class="image-box clearfix" style="background-image: url(img/landing/{{$subbrand->photo}});">
         <div class="hover-window">  
@@ -130,6 +130,8 @@
         <a class="close-reveal-modal" aria-label="Close">&#215;</a>
       </div>
       @endforeach
+
+
           
     </div>  <!-- end #content -->
     

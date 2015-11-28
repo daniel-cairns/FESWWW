@@ -26,7 +26,7 @@
     </div>
   </div>  
 
-<input type="hidden" name="MAX_FILE_SIZE" value="5000000">
-<input type="hidden" value="{{$subbrand->id}}" name="subbrand">
-<input type="submit" value="Upload a new Image" name="image{{$subbrand->id}}" class="tiny button radius">
+  <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
+  <input type="hidden" value="{{$subbrand->id}}" name="subbrand">
+  <input type="submit" value="Upload a new Image" name="image{{$subbrand->id}}" class="tiny button radius">
 </form>

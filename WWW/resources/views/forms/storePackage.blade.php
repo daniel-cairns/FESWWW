@@ -38,10 +38,6 @@
 		  @endif
 		</div>
 
-		<div class="columns large-6">		
-			<input type="submit" value="Upload new package" class="tiny button radius">
-		</div>
-
 		<div class="columns large-6">
 			<label for="description">Description</label>
 			<textarea id="description" name="description"></textarea>
@@ -52,6 +48,10 @@
 		  @if($errors->storePackage->first('subbrand'))
 		  <span class="alert-box warning">{{$errors->storePackage->first('subbrand')}}</span>
 		  @endif
+		</div>
+
+		<div class="columns large-6">		
+			<input type="submit" value="Upload new package" class="tiny button radius">
 		</div>
 	</div>			    		
 	

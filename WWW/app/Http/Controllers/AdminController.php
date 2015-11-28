@@ -17,23 +17,30 @@ use App\Slider;
 use App\BoughtPackage;
 use Validator;
 use Response;
+use Auth;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-      $subbrands            = Subbrand::with('images','packages')->get();
-      $users                = User::with('messages')->get();
-      $products             = Product::all();
-      $messages             = Message::all();
-      $packages             = Package::all();
+        if( Auth::user()->privilege == 'admin' ) {
+                      
+            $subbrands            = Subbrand::with('images','packages')->get();
+            $users                = User::with('messages')->get();
+            $products             = Product::all();
+            $messages             = Message::all();
+            $packages             = Package::all();
       
-      return view('admin.index', compact('users', 'subbrands', 'messages', 'products', 'packages'));
+            return view('admin.index', compact('users', 'subbrands', 'messages', 'products', 'packages'));
+        } else {
+
+            return redirect('/account');
+        }
     }
 
     public function storeImage(Request $request)
@@ -48,6 +55,7 @@ class AdminController extends Controller
         if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'storeImage')
+                    ->with('error', 'error on upload')
                     ->withInput();
         }
 
@@ -91,6 +99,7 @@ class AdminController extends Controller
         if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'updateImage')
+                    ->with('error', 'error on upload')
                     ->withInput();
         }
 
@@ -137,6 +146,7 @@ class AdminController extends Controller
         if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'removeImage')
+                    ->with('error', 'error on upload')
                     ->withInput();
         }
 
@@ -173,6 +183,7 @@ class AdminController extends Controller
         if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'storePackage')
+                    ->with('error', 'error on upload')
                     ->withInput();
         }
 
@@ -208,6 +219,7 @@ class AdminController extends Controller
         if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'updatePackage')
+                    ->with('error', 'error on upload')
                     ->withInput();
         }
         
@@ -227,10 +239,17 @@ class AdminController extends Controller
     
     public function removePackage(Request $request)
     {
-      $this->validate($request,[
+      $validate = Validator::make($request->all(),[
           'package_id'    => 'required|exists:packages,id',
           'subbrand_id'   => 'required|exists:subbrands,id'
       ]);
+
+      if( $validate->fails()){
+            return back()
+                    ->withErrors($validate, 'removePackage')
+                    ->with('error', 'error on upload')
+                    ->withInput();
+        }
 
       $package_id     = $request->package_id;
       $subbrand_id    = $request->subbrand_id;
@@ -239,16 +258,65 @@ class AdminController extends Controller
                       ->where('subbrand_id', $subbrand_id)
                       ->delete();
 
-      return back();
+      return back()->with('message', 'Success on upload');
     }
 
     public function updateSubbrandPackages(Request $request)
     {
+      $validate = Validator::make($request->all(),[
+          'package_id'    => 'required|exists:packages,id',
+          'subbrand_id'   => 'required|exists:subbrands,id'
+      ]);
+
+      if( $validate->fails()){
+            return back()
+                    ->withErrors($validate, 'updateSubbrandPackages')
+                    ->with('error', 'error on upload')
+                    ->withInput();
+        }
+
       $subbrand  = Subbrand::findOrFail($request->subbrandId);
       $package    = $request->packageId;  
 
       $subbrand->packages()->save($package);
       return back();     
+    }
+
+    public function userRemove(Request $request)
+    {
+      $validate = Validator::make($request->all(),[
+          'userId'    => 'required|exists:users,id',
+      ]);
+
+      if( $validate->fails()){
+            return back()
+                    ->withErrors($validate, 'userRemove')
+                    ->with('error', 'error on upload')
+                    ->withInput();
+      }
+            
+      $id = $request->userId;
+            
+      $user = User::where('id', $id)->first();
+      
+      if( $user->privilege == 'admin')
+      {
+        return back()->with('error', 'You cannot delete an admin user!');
+      
+      } else {
+        
+        $images = Image::where('description', $id)->get();
+
+        foreach ($images as $image) 
+        {
+          \File::Delete('img/users/'.$imageName->name);
+          Image::where('id', $image->id)->delete();
+        }
+
+        $user->delete();
+        
+        return back()->with('message', 'The user was removed succesfully'); 
+      }
     }
 
     public function userDisplay($id)
@@ -259,7 +327,6 @@ class AdminController extends Controller
       $data = [ 'user' => $user, 'packages' => $boughtPackages];
 
       return $data;                    
-
     }
 
     public function userPackages($id)
@@ -269,4 +336,29 @@ class AdminController extends Controller
       return $packages;                    
 
     }
+
+    public function userImages($id) {
+
+        $images = Image::where('description', $id)->get();
+
+        return $images;
+    }   
+
+    // public function trycatch(){
+    //     try {
+    //         $capture = Capture::where('user_id', \Auth::user()->id)->where('id', $id)->firstOrFail();
+    //     } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+    //         return view('errors.captureNotFound');
+    //     }
+    // }
+
+    
 }   
+
+
+
+
+
+
+
+

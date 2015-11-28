@@ -1,7 +1,7 @@
 <form action="/removeSlider" method="POST" novalidate>
 	{{ csrf_field() }}
 	<ul class="small-block-grid-5">
-	@foreach( $subbrand->sliders as $slider )
+	@forelse( $subbrand->sliders as $slider )
 		<li>
 			<div>
 				<label for="slider{{ $slider->id }}">{{ $slider->description }}
@@ -12,7 +12,10 @@
 				<input type="checkbox" value="{{ $slider->id }}" id="slider{{ $slider->id }}" name="slider[]">
 			</div>
 		</li>
-  @endforeach	
+
+		@empty
+		<li>No images in the slider yet. Add images from the gallery.</li>
+  @endforelse	
 	</ul>
 
 	<div>

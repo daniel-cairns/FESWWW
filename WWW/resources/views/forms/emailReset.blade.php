@@ -13,7 +13,7 @@
 		New Email
 		<input type="email" name="email">
 		@if($errors->resetEmail->first('email'))
-        <span class="alert-box warning">{{$errors->first('email')}}</span>
+        <span class="alert-box warning">{{$errors->resetEmail->first('email')}}</span>
     	@endif
 	</div>
 
@@ -21,7 +21,7 @@
 		Confirm Email
 		<input type="email" name="email_confirmation">
 		@if($errors->resetEmail->first('email_confirmation'))
-        <span class="alert-box warning">{{$errors->first('email_confirmation')}}</span>
+        <span class="alert-box warning">{{$errors->resetEmail->first('email_confirmation')}}</span>
     	@endif
 	</div>
 

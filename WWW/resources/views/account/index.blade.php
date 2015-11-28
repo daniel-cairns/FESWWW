@@ -52,6 +52,11 @@
 				{{ session('message')}}		
 				</div>
 				@endif
+				@if( session('error'))
+				<div class="alert-box warning">
+				{{ session('error')}}		
+				</div>
+				@endif
 			</div>	
 		
 		</div>

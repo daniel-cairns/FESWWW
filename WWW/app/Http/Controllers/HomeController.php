@@ -64,8 +64,7 @@ class HomeController extends Controller
         $subbrand->save();
 
         return redirect('/home');
-        //return $subbrand;
+       
     }
-
     
 }

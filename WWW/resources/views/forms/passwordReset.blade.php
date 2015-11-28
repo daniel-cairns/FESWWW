@@ -14,7 +14,7 @@
         <input type="password" name="new_password">
     </div>
     @if($errors->resetPassword->first('new_password'))
-        <span class="alert-box warning">{{$errors->first('new_password')}}</span>
+        <span class="alert-box warning">{{$errors->resetPassword->first('new_password')}}</span>
     @endif
 
     <div>
@@ -22,7 +22,7 @@
         <input type="password" name="new_password_confirmation">
     </div>
     @if($errors->resetPassword->first('new_password_confirmation'))
-        <span class="alert-box warning">{{$errors->first('new_password_confirmation')}}</span>
+        <span class="alert-box warning">{{$errors->resetPassword->first('new_password_confirmation')}}</span>
     @endif
 
     <div>

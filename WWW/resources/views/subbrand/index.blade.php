@@ -43,7 +43,7 @@
       </section>
       <section role="tabpanel" aria-hidden="true" class="content" id="panel2-2">
         <ul class="medium-block-grid-4">
-        @foreach( $subbrand->images as $image ) 
+        @forelse( $subbrand->images as $image ) 
           <li>
             <div class="row">
               <div class="columns">
@@ -82,8 +82,10 @@
             <p>Are you sure you want to remove this image and all it's details from your records?</p>
             @include('forms.removeImage')
           </div>
+          @empty 
+          <li>No images in the gallery yet. Add images on the admin page.</li>
           
-          @endforeach 
+          @endforelse 
         </ul>
       </section>
       <section role="tabpanel" aria-hidden="true" class="content" id="panel2-3">
@@ -93,8 +95,7 @@
         @include('forms.updateSubbrandDescription')
       </section>
       <section role="tabpanel" aria-hidden="true" class="content" id="panel2-5">
-        <h2>Fifth panel content goes here...</h2>
-        @foreach($subbrand->packages as $package)
+        @forelse($subbrand->packages as $package)
         <div class="columns large-4" >
           <h3>{{$package->name}}</h3>
           <p data-equalizer-watch="{{ $subbrand->id }}">{{$package->description}}</p>
@@ -118,7 +119,11 @@
           <p>Are you sure you want to remove this package and all it's details from your records?</p>
           @include('forms.removePackage')
         </div>
-        @endforeach
+        @empty
+        <div class="columns large-4" >
+          <p>No packages yet. Add a package on the admin page.</p>
+        </div>
+        @endforelse
       </section>
     </div>
   </div>

@@ -23,6 +23,10 @@ class CreateSubbrandsTable extends Migration
 
             $table->char('caption', 40);
 
+            $table->char('photo', 100);
+
+            $table->string('slug')->unique();
+
             $table->timestamps();
         });
     }

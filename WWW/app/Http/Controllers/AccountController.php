@@ -21,11 +21,7 @@ class AccountController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
       // If the user is an admin, redirect them to the appropriate route
@@ -63,6 +59,7 @@ class AccountController extends Controller
       {
         return back()
                 ->withErrors($validator, 'resetPassword')
+                ->with('error', 'Could not reset pasword!')
                 ->withInput();
       }
       // Change the users password
@@ -99,6 +96,7 @@ class AccountController extends Controller
       {
         return back()
                 ->withErrors($validator, 'resetEmail')
+                ->with('error', 'Couldn\'t change your email')
                 ->withInput();
       }
 
@@ -138,6 +136,7 @@ class AccountController extends Controller
         // return'test';
         return back()
                 ->withErrors($validator, 'resetUsername')
+                ->with('error', 'Could not update username!')
                 ->withInput();
       }
 

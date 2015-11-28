@@ -22,6 +22,9 @@
 								<label for="firstName"><h3>First Name</h3></label>
 								<input type="text" id="firstName" name="firstName" value="{{ old('firstName') }}">
 							</div>
+							@if($errors->confirm->first('new_password'))
+        				<span class="alert-box warning">{{$errors->confirm->first('new_password')}}</span>
+    					@endif
 							
 							<div>
 								<label for="lastName"><h3>Last Name</h3></label>
@@ -48,11 +51,6 @@
 	            	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="tiny button radius amber">
 	            </div>
 													
-							<div>
-								<label for="location"><h3>Location</h3></label>
-								<input type="text" id="location" name="location">
-							</div>
-							
 							<input type="hidden" value="" name="latlng" id="latlng">
 							<input type="hidden" value="" name="address" id="address">
 		          <input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
@@ -101,11 +99,6 @@
 			        </div>
 
 			        <div>
-								<label for="location"><h3>Location</h3></label>
-								<input type="text" id="location" name="location">
-							</div>
-							
-			        <div>
 								<label for="comment"><h3>Comments</h3></label>
 								<textarea name="comment" id="comment" cols="30" rows="10">{{ old('comment') }}</textarea>
 							</div>
@@ -147,5 +140,5 @@
 		</div>	
 	</div>
 	
-	
+@include('javascript.maps')	
 @endsection

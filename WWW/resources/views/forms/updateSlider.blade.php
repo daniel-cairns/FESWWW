@@ -1,7 +1,7 @@
 <form action="/updateSlider" method="POST" enctype="multipart/form-data" novalidate>
 	{{ csrf_field() }}
 	<ul class="small-block-grid-5">
-	@foreach( $subbrand->images as $image )
+	@forelse( $subbrand->images as $image )
 		
 		<li>
 			<div>
@@ -13,8 +13,10 @@
 				<input type="checkbox" value="{{ $image->id }}" id="image{{ $image->id }}" name="image[]">
 			</div>
 		</li>
-			
-	@endforeach	
+		
+		@empty	
+		<li>No slider images yet. Add images to the gallery on the admin page.</li>
+	@endforelse
 	</ul>
 	
 	<div>

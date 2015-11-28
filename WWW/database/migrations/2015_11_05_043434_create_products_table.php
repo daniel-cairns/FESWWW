@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->enum('type', ['digital', 'download', 'hardcopy']);
+            $table->char('name', 15);
             
             $table->timestamps();
         });
