@@ -313,6 +313,12 @@ class AdminController extends Controller
           Image::where('id', $image->id)->delete();
         }
 
+        $packages = BoughtPackage::where('user_id', $id)->get();
+
+        foreach ($packages as $package ) {
+            $package->delete();
+        }
+
         $user->delete();
         
         return back()->with('message', 'The user was removed succesfully'); 
