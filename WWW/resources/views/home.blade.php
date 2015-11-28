@@ -92,8 +92,7 @@
     <div id="content" class="clearfix">
       
       @foreach( $subbrands as $subbrand )
-      <div id="{{$subbrand->name}}" class="image-box clearfix">
-        <img src="img/landing/{{$subbrand->photo}}" alt="{{$subbrand->name}} landing image">
+      <div id="{{$subbrand->name}}" class="image-box clearfix" style="background-image: url(img/landing/{{$subbrand->photo}});">
         <div class="hover-window">  
           <div class="hover-window-text">
             <a href="subbrand/{{ $subbrand->slug }}"><h1>{{$subbrand->name}}</h1>
