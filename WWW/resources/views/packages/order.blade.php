@@ -51,8 +51,7 @@
 	            	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="tiny button radius amber">
 	            </div>
 													
-							<input type="hidden" value="" name="latlng" id="latlng">
-							<input type="hidden" value="" name="address" id="address">
+							<input type="hidden" value="" name="location" id="location">
 		          <input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
 							<input type="hidden" value="{{ $package->id }}" name="package">
 							<input type="submit" value="Request Booking" name="bookPackage" class="tiny button radius">	
@@ -64,7 +63,7 @@
 						<h3>Location</h3>
 						<input type="text" id="search">
 											
-        		<div id='map'></div>
+        		<div id='map2'></div>
         			<small>*Pleaase only enter the location for your booking request. No personal details at this point</small>
 						<div>
 							<span id="mapMessage"></span>	
@@ -75,8 +74,6 @@
 					  <div id="infoPanel">
 					    <b>Marker status:</b>
 					    <div id="markerStatus"><i>Click and drag the marker.</i></div>
-					    <b>Current position:</b>
-					    <div id="info"></div>
 					    <b>Closest matching address:</b>
 					    <div id="address"></div>
 					  </div>
@@ -102,8 +99,7 @@
 								<label for="comment"><h3>Comments</h3></label>
 								<textarea name="comment" id="comment" cols="30" rows="10">{{ old('comment') }}</textarea>
 							</div>
-							<input type="hidden" value="" name="latlng" id="latlng">
-							<input type="hidden" value="" name="address" id="address">
+							<input type="hidden" value="" name="location" id="location">
 							<input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
 							<input type="hidden" value="{{ $package->id }}" name="package">
 							<input type="submit" value="Request Booking" name="userBookPackage" class="tiny button radius">
@@ -114,7 +110,7 @@
 						<h3>Location</h3>
 						<input type="text" id="search">
 											
-        		<div id='map'></div>
+        		<div id='map2'></div>
         			<small>*Pleaase only enter the location for your booking request. No personal details at this point</small>
 						<div>
 							<span id="mapMessage"></span>	
@@ -125,8 +121,6 @@
 					  <div id="infoPanel">
 					    <b>Marker status:</b>
 					    <div id="markerStatus"><i>Click and drag the marker.</i></div>
-					    <b>Current position:</b>
-					    <div id="info"></div>
 					    <b>Closest matching address:</b>
 					    <div id="address"></div>
 					  </div>
@@ -140,5 +134,5 @@
 		</div>	
 	</div>
 	
-@include('javascript.maps')	
+
 @endsection
