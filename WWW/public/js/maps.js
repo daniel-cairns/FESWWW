@@ -163,6 +163,7 @@ function initMap(location) {
 
   $('#searchAddress').click( function() {
     if (document.getElementById('search').value != null ){
+      
       // document.getElementById('mapMessage').innerHTML('');
       geocodeSearch(geocoder, map );
       geocodePosition(map.center);

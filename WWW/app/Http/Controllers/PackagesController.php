@@ -45,7 +45,7 @@ class PackagesController extends Controller
             'email'         => 'required|email|min:5|max:255',
             'date'          => 'required',
             'subbrand'      => 'required|exists:subbrands,id',
-            'package'       => 'required|exists:packaegs,id',
+            'package'       => 'required|exists:packages,id',
         ]);
 
       if( $validate->fails()){
@@ -62,7 +62,8 @@ class PackagesController extends Controller
           'comment'     => $request->comment,
           'date'        => $request->date,
           'subbrand'    => $request->subbrand,
-          'package'     => $request->package
+          'package'     => $request->package,
+          'location'    => $request->location,
       ];
 
       $subbrand   = Subbrand::where('id', $order['subbrand'])->first();

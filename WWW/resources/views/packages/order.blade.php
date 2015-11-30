@@ -22,8 +22,8 @@
 								<label for="firstName"><h3>First Name</h3></label>
 								<input type="text" id="firstName" name="firstName" value="{{ old('firstName') }}">
 							</div>
-							@if($errors->confirm->first('new_password'))
-        				<span class="alert-box warning">{{$errors->confirm->first('new_password')}}</span>
+							@if($errors->confirm->first('confirm'))
+        				<span class="alert-box warning">{{$errors->confirm->first('confirm')}}</span>
     					@endif
 							
 							<div>
@@ -60,7 +60,7 @@
 											<input type="text" id="search">
 										</div>	
 										<div class="columns small-6">
-											<button id="searchAddress" class="tiny radius button">Search</button>
+											<div id="searchAddress" class="tiny radius button">Search</div>
 											<input type="button" id="reset" value="Reset the Map" class="tiny button radius">
 										</div>	
 									</div>
