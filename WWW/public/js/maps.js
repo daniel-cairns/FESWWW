@@ -5,6 +5,8 @@ $(document).ready(function(){
 	navigator.geolocation.getCurrentPosition(initMap);
 
 	$('#reset').click( resetMap );
+
+
 });
 
 var google;
@@ -67,14 +69,6 @@ function updateMarkerAddress(str) {
     document.getElementById('address').innerHTML = str;
 }
 
-// function markerClick() {
-//   marker.addListener('click', function() {
-//     map.setZoom(15);
-//     map.setCenter(marker.getPosition());
-//     updateMarkerPosition(marker.getPosition);
-//   }  
-// }
-
 function geocodeSearch(geocoder, resultsMap) {
   var address = document.getElementById('search').value;
   geocoder.geocode({'address': address}, function(results, status) {
@@ -92,6 +86,25 @@ function geocodeSearch(geocoder, resultsMap) {
         updateMarkerPosition(latLng);
         geocodePosition(latLng);
 
+        google.maps.event.addListener(marker, 'dragstart', function() {
+          updateMarkerAddress('Dragging...');
+        });
+
+        google.maps.event.addListener(marker, 'drag', function() {
+          updateMarkerStatus('Dragging...');
+          updateMarkerPosition(marker.getPosition());
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function() {
+          updateMarkerStatus('Drag ended');
+          geocodePosition(marker.getPosition());
+        });
+
+        document.getElementById('address').addEventListener('keyup', function() {
+          geocodeAddress(geocoder, map);
+          geocodePosition(map.center);
+        });
+
     } else {
         
       if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
@@ -104,7 +117,6 @@ function geocodeSearch(geocoder, resultsMap) {
 
   });
 }
-
 
 function initMap(location) {
   geocoder = new google.maps.Geocoder();
@@ -149,15 +161,15 @@ function initMap(location) {
     geocodePosition(map.center);
   });
 
-  document.getElementById('search').addEventListener('keyup', function() {
-  	if (document.getElementById('search').value != null ){
-  		// document.getElementById('mapMessage').innerHTML('');
+  $('#searchAddress').click( function() {
+    if (document.getElementById('search').value != null ){
+      // document.getElementById('mapMessage').innerHTML('');
       geocodeSearch(geocoder, map );
       geocodePosition(map.center);
     } else {
       document.getElementById('mapMessage').innerHTML('please enter a location');
-    } 
-	});
+    }   
+  });
 }
 
 

@@ -15,7 +15,7 @@
 				</div>
 			@if( !Auth::check() )
 				<div class="row">
-					<div class="columns centered large-6">
+					<div class="columns large-6">
 						<form action="/confirm" method="POST" novalidate>
 							{{ csrf_field() }}
 							<div>
@@ -45,10 +45,39 @@
 								<label for="comment"><h3>Comments</h3></label>
 								<textarea name="comment" id="comment" cols="30" rows="10">{{ old('comment') }}</textarea>
 							</div>
-							
+						</div>
+						<div class="columns large-6">
 	            <div>
 	            	<label for="datepicker"><h3>Booking Date</h3></label>
 	            	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="tiny button radius amber">
+	            </div>
+
+	            <div>
+								<div>
+									<h3>Location</h3>
+									<div class="row">
+										<div class="columns small-6">
+											<input type="text" id="search">
+										</div>	
+										<div class="columns small-6">
+											<button id="searchAddress" class="tiny radius button">Search</button>
+											<input type="button" id="reset" value="Reset the Map" class="tiny button radius">
+										</div>	
+									</div>
+								</div>	
+								<div><span id="mapMessage"></span></div>			
+	        			<div id='map2'></div>
+	        				<small>*Pleaase only enter the location for your booking request. No personal details at this point</small>
+								<div>
+									<div id="infoPanel">
+									  <div style="display:none">
+									  	<b>Marker status:</b>
+									  	<div id="markerStatus"><i>Click and drag the marker.</i></div>
+									  </div> 
+								    <b>Closest matching address:</b>
+								    <div id="address"></div>
+								  </div>
+	        			</div> 
 	            </div>
 													
 							<input type="hidden" value="" name="location" id="location">
@@ -57,28 +86,7 @@
 							<input type="submit" value="Request Booking" name="bookPackage" class="tiny button radius">	
 						</form>
             
-          </div>
-					
-					<div class="columns large-6">
-						<h3>Location</h3>
-						<input type="text" id="search">
-											
-        		<div id='map2'></div>
-        			<small>*Pleaase only enter the location for your booking request. No personal details at this point</small>
-						<div>
-							<span id="mapMessage"></span>	
-						</div>
-        		
-        		<input type="button" id="reset" value="Reset the Map" class="tiny button radius">
-        		
-					  <div id="infoPanel">
-					    <b>Marker status:</b>
-					    <div id="markerStatus"><i>Click and drag the marker.</i></div>
-					    <b>Closest matching address:</b>
-					    <div id="address"></div>
-					  </div>
-	          
-	        </div>   
+          </div>  
 				</div>	
 			@else
 				<div class="row">

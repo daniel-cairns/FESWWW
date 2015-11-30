@@ -81,6 +81,7 @@ class PackagesController extends Controller
             'date'          => 'required',
             'subbrand'      => 'required|exists:subbrands,id',
             'package'       => 'required|exists:packaegs,id',
+            'location'      => 'max:50'
         ]);
 
       if( $validate->fails()){
@@ -108,6 +109,7 @@ class PackagesController extends Controller
           'subbrand'    => $subbrand->name,
           'package'     => $package->name,
           'password'    => $password,
+          'location'    => $request->location,
       ];
 
       $user = User::create([
@@ -133,9 +135,10 @@ class PackagesController extends Controller
       });
 
       BoughtPackage::create([
-          'user_id'     => $user->id,
-          'package_id'  => $package->id,
-          'booking_date' => $dbDate
+          'user_id'       => $user->id,
+          'package_id'    => $package->id,
+          'booking_date'  => $dbDate,
+          'location'      => $request->location,
       ]);
 
       Auth::login($user);
@@ -160,6 +163,7 @@ class PackagesController extends Controller
           'date'        => $date,
           'subbrand'    => $subbrand->name,
           'package'     => $package->name,
+          'location'    => $request->loaction,
       ];
 
       Mail::send('emails.userBooking', $data, function ($message) use ($data) {
@@ -180,9 +184,10 @@ class PackagesController extends Controller
 
 
       BoughtPackage::create([
-          'user_id'     => Auth::user()->id,
-          'package_id'  => $package->id,
-          'booking_date' => $dbDate
+          'user_id'       => Auth::user()->id,
+          'package_id'    => $package->id,
+          'booking_date'  => $dbDate,
+          'location'      => $request->location,
       ]);
       
       return redirect('/account')->with( 'message', 'Booking submitted!');
@@ -205,8 +210,8 @@ class PackagesController extends Controller
         // Validate the request
         $validate = Validator::make($request->all(),[
             'userId'    => 'required|exists:users,id',
-            // 'myFile'    => 'required|image',
-            // 'packageId' => 'required|exists:packages,id',
+            'myFile'    => 'required|array',
+            // 'packageId' => 'required|exists:bought_packages,id',
         ]);
 
         if( $validate->fails()){
