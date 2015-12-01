@@ -31,11 +31,13 @@ body {
   max-width: 1366px;
   margin: 0 auto;
   background: white;
-  height: 300px;
+  height: 500px;
   overflow: hidden; }
   .slider div {
     width: 1366px;
-    height: 300px; }
+    height: 500px;
+    color: #b6b6b6 !important;
+    line-height: 980px; }
 
 #Weddings h1 {
   font-family: Monsieur La Doulaise;

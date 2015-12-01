@@ -25,6 +25,7 @@
 		<p>Comments:</p>
 		<p>{{ $order['comment'] }}</p>
 		<p>{{ $order['date'] }}</p>
+		<p>{{ $order['sendAddress'] }}</p>
 		<form action="/sendConfirm" method="POST" novalidate>
  		{{ csrf_field() }}
  			
@@ -36,6 +37,7 @@
 			<input type="hidden" value="{{ $order['date'] }}" name="date">
  			<input type="hidden" value="{{ $package->id }}" name="package">
 			<input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
+			<input type="hidden" value="{{ $order['location']}}" name="location">
  						
  			<input type="submit" name="sendConfirm" value="Confirm" class="tiny button radius">
  		

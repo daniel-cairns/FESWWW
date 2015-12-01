@@ -54,12 +54,14 @@ body {
   max-width: 1366px;
   margin: 0 auto;
   background: white;
-  height: 300px;
+  height: 500px;
   overflow: hidden;
     
   div {
-    width: 1366px;;
-    height: 300px;       
+    width: 1366px;
+    height: 500px;
+    color: $lightgrey;
+    line-height: 980px;
   }    
 }
 

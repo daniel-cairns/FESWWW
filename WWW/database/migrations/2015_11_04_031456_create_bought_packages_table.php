@@ -23,6 +23,8 @@ class CreateBoughtPackagesTable extends Migration
 
             $table->enum('status', ['pending', 'printing', 'payed', 'stopped', 'sent']);
 
+            $table->string('location', 50);
+
             $table->string('booking_date', 9);
 
             $table->timestamps();

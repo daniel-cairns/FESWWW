@@ -67,6 +67,7 @@ function updateMarkerPosition(latLng) {
 function updateMarkerAddress(str) {
   	console.log(str);
     document.getElementById('address').innerHTML = str;
+    document.getElementById('sendAddress').value = str;
 }
 
 function geocodeSearch(geocoder, resultsMap) {
@@ -157,7 +158,7 @@ function initMap(location) {
   });
 
   document.getElementById('address').addEventListener('keyup', function() {
-    geocodeAddress(geocoder, map);
+    geocodeSearch(geocoder, map);
     geocodePosition(map.center);
   });
 

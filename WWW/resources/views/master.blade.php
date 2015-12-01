@@ -119,6 +119,8 @@
     <footer>
       <p>Copyright Far Edge Studios 2015 &copy;</p>
     </footer>
+
+    
    
     <script src="/js/vendor/jquery.js"></script>
     <script src="/js/foundation.min.js"></script>
@@ -131,11 +133,16 @@
     <script src="/js/jquery-ui.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="/js/slider.js"></script>
+    @if( Request::is('admin'))
     <script src="/js/ajax.js"></script>
+    @endif
     <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
-    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=places"
+    @if( Request::is('*/order') || Request::is('account/*'))
+      <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=places"
         async defer></script>
-    <script src="/js/maps.js"></script>
+      <script src="/js/maps.js"></script>
+    @endif
+
  
   </body>
 </html>

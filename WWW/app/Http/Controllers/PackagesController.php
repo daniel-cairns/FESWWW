@@ -40,17 +40,20 @@ class PackagesController extends Controller
     {
       //validate
       $validate = Validator::make($request->all(),[
-            'firstname'     => 'required|min:3|max:20',
-            'lastname'      => 'required|min:3|max:20',
+            'firstName'     => 'required|min:3|max:20',
+            'lastName'      => 'required|min:3|max:20',
             'email'         => 'required|email|min:5|max:255',
             'date'          => 'required',
             'subbrand'      => 'required|exists:subbrands,id',
             'package'       => 'required|exists:packages,id',
+            'location'      => 'max:50'
         ]);
-
+      
       if( $validate->fails()){
+          // dd($validate);
           return back()
                   ->withErrors($validate, 'confirm')
+                  ->with('error', 'error')
                   ->withInput();
       }
       // Get the information from the form
@@ -64,6 +67,7 @@ class PackagesController extends Controller
           'subbrand'    => $request->subbrand,
           'package'     => $request->package,
           'location'    => $request->location,
+          'sendAddress' => $request->sendAddress,
       ];
 
       $subbrand   = Subbrand::where('id', $order['subbrand'])->first();
@@ -76,12 +80,12 @@ class PackagesController extends Controller
     {
       //validate
       $validate = Validator::make($request->all(),[
-            'firstname'     => 'required|min:3|max:20',
-            'lastname'      => 'required|min:3|max:20',
+            'firstName'     => 'required|min:3|max:20',
+            'lastName'      => 'required|min:3|max:20',
             'email'         => 'required|email|min:5|max:255',
             'date'          => 'required',
             'subbrand'      => 'required|exists:subbrands,id',
-            'package'       => 'required|exists:packaegs,id',
+            'package'       => 'required|exists:packages,id',
             'location'      => 'max:50'
         ]);
 

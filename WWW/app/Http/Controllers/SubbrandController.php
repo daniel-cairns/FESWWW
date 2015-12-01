@@ -27,6 +27,10 @@ class SubbrandController extends Controller
         }
 
         $subbrand = Subbrand::where('slug', $theslug)->first();
+
+        // dd($subbrand->images, $subbrand->sliders);
+
+
         
         return view('subbrand.index', compact('subbrand', 'products'));
     }
@@ -46,9 +50,9 @@ class SubbrandController extends Controller
                 $image = Image::findOrFail($image);                
                 $subbrand->sliders()->save($image);
             }
-            return redirect( 'subbrand/'.$slug);
+            return back()->with('message', 'Update Successful');
         }else{
-            return'error';
+            return back()->with('error', 'Error with Update');
         }    
     }
 
@@ -69,9 +73,9 @@ class SubbrandController extends Controller
                         ->where('subbrand_id', $subbrand)
                         ->delete();
             }
-            return redirect( 'subbrand/'.$slug);
+            return back()->with('message', 'Update Successful');
         }else{
-            return 'error';
+            return back()->with('error', 'Error with Update');
         }    
     }
 

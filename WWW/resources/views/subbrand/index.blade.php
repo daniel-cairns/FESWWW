@@ -14,11 +14,19 @@
   </div>
 
   <div class="row" id="{{$subbrand->name}}">
-    <div class="columns">
+    <div class="columns medium-4">
       <h1 class="left">{{$subbrand->name}}</h1>
-      
+    </div>  
+      @if( session('message'))
+      <div class="alert-box success columns medium-4">{{ session('message')}}</div>
+      @endif
+      @if( session('error'))
+      <div class="alert-box warning columns medium-4">{{ session('error')}}</div>
+      @endif
       @if( Auth::check() && Auth::user()->privilege == 'admin')
-      <a href="#" class="tiny button radius amber edit right" data-reveal-id="editModal">Edit Page</a>
+      <div class="columns medium-4">
+        <a href="#" class="tiny button radius amber edit right" data-reveal-id="editModal">Edit Page</a>
+      </div>
       @endif
       
     </div>
@@ -149,9 +157,9 @@
   </div>
     @foreach( $subbrand->images as $image )
     <div id="modal{{ $image->id }}" class="reveal-modal" data-reveal aria-labelledby="modal{{ $image->id }}" aria-hidden="true" role="dialog">
-        <h2 id="modal{{ $image->id }}">{{ $image->description }}</h2>
-        <img src="/img/original/{{$image->name}}" alt="">
-        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+      <h2 id="modal{{ $image->id }}">{{ $image->description }}</h2>
+      <img src="/img/original/{{$image->name}}" alt="">
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
     @endforeach
   </div>
