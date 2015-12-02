@@ -136,13 +136,15 @@
     @if( Request::is('admin'))
     <script src="/js/ajax.js"></script>
     @endif
-    <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
-    @if( Request::is('*/order') || Request::is('account/*'))
+    @if( Request::is('*/order'))
       <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=places"
         async defer></script>
       <script src="/js/maps.js"></script>
     @endif
-
- 
+    @if( Request::is('account'))
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=places"
+        async defer></script>
+    <script src="/js/account.js"></script>  
+    @endif    
   </body>
 </html>

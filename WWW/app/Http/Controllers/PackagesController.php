@@ -143,7 +143,7 @@ class PackagesController extends Controller
           'user_id'       => $user->id,
           'package_id'    => $package->id,
           'booking_date'  => $dbDate,
-          'location'      => $request->location,
+          'location'      => $data->location,
       ]);
 
       Auth::login($user);
@@ -168,9 +168,9 @@ class PackagesController extends Controller
           'date'        => $date,
           'subbrand'    => $subbrand->name,
           'package'     => $package->name,
-          'location'    => $request->loaction,
+          'location'    => $request->location,
       ];
-
+      // dd($data['location']);
       Mail::send('emails.userBooking', $data, function ($message) use ($data) {
         $message->from('admin@FES.com', 'FES');
         $message->subject('package booking');
@@ -188,11 +188,11 @@ class PackagesController extends Controller
       });
 
 
-      BoughtPackage::create([
+      $newpackage = BoughtPackage::create([
           'user_id'       => Auth::user()->id,
           'package_id'    => $package->id,
           'booking_date'  => $dbDate,
-          'location'      => $request->location,
+          'location'      => $data['location'],
       ]);
       
       return redirect('/account')->with( 'message', 'Booking submitted!');
@@ -246,9 +246,9 @@ class PackagesController extends Controller
             $image->save();
           }
         }
-               
         // $subbrand->images()->save($image);
 
         return back()->with('message', 'Upload Successful');
     }
 }
+
