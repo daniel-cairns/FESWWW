@@ -3,9 +3,9 @@ var google;
 
 function initMap(location) {
   	var maps = $(".map");
-  		console.log(maps);
+  		console.log(maps.length);
 
-  	for (var i=0; maps.length>i; i++) {
+  	for (var i=0; i<maps.length; i++) {
 		var loc 		= $(maps[i]).data('location');
 		var locArray 	= loc.split(', ');
 		var id 			= $(maps[i]).data('id');
@@ -15,12 +15,22 @@ function initMap(location) {
 }
 
 function setMap ( locArray, id ) {
-	
-	mapId = '"map'+id+'"';
-	console.log(mapId);
 
-	map = new google.maps.Map(document.getElementById('"'+id+'"'), {
-    		center: {lat: -44.967, lng: 177.878},
+	console.log(locArray);
+	var lat = locArray[0];
+	var lng = locArray[1];
+	// mapId = '"map'+id+'"';
+	console.log(lat);
+
+	var latLng = new google.maps.LatLng(lat, lng);
+	map = new google.maps.Map(document.getElementById('map'+id), {
+    		center: latLng,
     		zoom: 8
   	});
+
+  	var marker = new google.maps.Marker({
+  	position: latLng,
+  	title: 'Location',
+  	map: map,
+	});
 }

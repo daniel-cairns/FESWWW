@@ -74,11 +74,21 @@
 							<p>Product: {{ $boughtPackage->package->product}}</p>
 							<p>Booking Date: {{ \Carbon\Carbon::parse( $boughtPackage->booking_date )->toFormattedDateString() }}</p>
 							<p>Location: {{ $boughtPackage->location }}</p>
-							<div class="map" data-location="{{ $boughtPackage->location}}" data-id="{{ $boughtPackage->id }}" id="map{{ $boughtPackage->id}}">
+							<div class="row">
+								<div class="columns">
+									<div class="map" data-location="{{ $boughtPackage->location}}" data-id="{{ $boughtPackage->id }}" id="map{{ $boughtPackage->id}}">
 								
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="columns">
+									<a href="#" data-reveal-id="modal{{ $boughtPackage->id }}" class="tiny button radius">Cancel Booking</a>
+								</div>
 							</div>
 							
-							<a href="#" data-reveal-id="modal{{ $boughtPackage->id }}" class="tiny button radius">Cancel Booking</a>
+							
+							
  					  </li>
 					@empty
 						<li>No packages order yet. Click <a href="/packages">here</a> to view whats on offer.</li>
