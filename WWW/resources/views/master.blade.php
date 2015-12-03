@@ -145,6 +145,9 @@
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=places"
         async defer></script>
     <script src="/js/account.js"></script>  
-    @endif    
+    @endif 
+    @if( count($errors) > 0 )
+    {{ dd($errors)}}   
+    @endif
   </body>
 </html>

@@ -14,19 +14,15 @@
 
 		<ul class="small-block-grid-1" id="removeUser">
 			<li>
-				<form action="userRemove" method="POST" novalidate>
-					{{ csrf_field() }}
-					<input type="hidden" value="" id="userRemove" name="userId">
-					<input type="submit" value="Remove User" class="tiny button radius">
-	{{-- 				
-					@if( $errors->userRemove)->first('userId'))
-						<span class="alert-box warning">{{$errors->userRemove->first('userId')}}</span>
-		  			@endif
- --}}
-				</form>
-			</li>	
+				<a href="#" data-reveal-id="userRemoveModal" class="tiny button radius">Remove User</a>
+			</li>		
 		</ul>
-
+		<div id="userRemoveModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+		  <h2 id="modalTitle">Are you sure you want to remove this client and all there stored assets?</h2>
+		  <h3 id="userName"></h3>
+		  @include('forms.userRemove')
+		  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+		</div>
 	</div>
 
 	<div class="columns large-6">
@@ -47,7 +43,7 @@
 		  	@endif
 			<span id="currentUser"></span>
 			<span id="currentPackage"></span>
-			<input type="submit" id="upload" class="tiny button radius" name="upload">
+			<input type="submit" id="upload" class="tiny button radius" name="upload" value="Upload Images">
 		</form>	
 	</div>
 </div>
@@ -57,6 +53,7 @@
 		<ul class="small-block-grid-3" id="packages">
 				
 		</ul>
+		
 		<ul class="small-block-grid-4" id="userImages">
 			
 		</ul>

@@ -128,8 +128,9 @@ class SubbrandController extends Controller
         //
         $subbrand   = Subbrand::where('slug', $subbrand)->first();
         $package    = Package::where('slug', $package)->first();
+        $products   = Product::all();
 
-        return view('packages.package', compact('subbrand', 'package'));
+        return view('packages.package', compact('subbrand', 'package', 'products'));
     }
 
     

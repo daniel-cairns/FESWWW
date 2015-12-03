@@ -36,16 +36,22 @@
 	<div>
 		<label for="product">Product</label>
 		<select name="product" id="product">
-			<option value="">Current product {{ $package->product }}...</option>	
+			<option value="{{ $package->product }}">Current product {{ $package->product }}...</option>	
 			@foreach( $products as $product )
-				<option value="{{ $product->id }}">{{ $product->name }}</option>
+				<option value="{{ $product->name }}">{{ $product->name }}</option>
 			@endforeach
 		</select>
 	</div>
 	@if($errors->updatePackage->first('product'))
 		<span class="alert-box warning">{{$errors->updatePackage->first('product')}}</span>
 	@endif
+	@if($errors->updatePackage->first('package'))
+		<span class="alert-box warning">{{$errors->updatePackage->first('package')}}</span>
+	@endif
+	
+
 
 	<input type="hidden" value="{{ $package->id }}" name="package">
+
 	<input type="submit" value="Update the Package" name="updatePackage" class="tiny button radius">
 </form>

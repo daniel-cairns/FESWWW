@@ -172,10 +172,10 @@ class AdminController extends Controller
     public function storePackage(Request $request)
     {
         $validate = Validator::make($request->all(),[
-                'name'          => 'required',
-                'price'         => 'required',
-                'hours'         => 'required',
-                'description'   => 'required',
+                'name'          => 'required|min:3|max:15',
+                'price'         => 'required|numeric',
+                'hours'         => 'required|numeric',
+                'description'   => 'required|min:3|max:200',
                 'product'       => 'required|exists:products,id',
                 'subbrand'      => 'required|exists:subbrands,id'
         ]);
@@ -196,30 +196,29 @@ class AdminController extends Controller
         $package->hours         = $request->hours;
         $package->description   = $request->description;
         $package->slug          = str_slug( $request->name);
-        $package->product       = $request->product;
+        $package->product       = $products->name;
 
         $subbrands->packages()->save($package);
         $products->packages()->save($package);
 
-        return back();
+        return back()->with('message', 'Update Successful');
     }
 
     public function updatePackage(Request $request)
     {
         $validate = Validator::make($request->all(),[
-                'name'          => 'required',
-                'price'         => 'required',
-                'hours'         => 'required',
-                'description'   => 'required',
-                'product'       => 'required|exists:products,id',
-                'package_id'    => 'required|exists:packages,id',
-                'subbrand'      => 'required|exists:subbrands,id'
+                'name'          => 'min:3|max:15',
+                'price'         => 'numeric',
+                'hours'         => 'numeric',
+                'description'   => 'min:3|max:200',
+                'product'       => 'exists:products,name',
+                'package'       => 'required|exists:packages,id',
         ]);
 
         if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'updatePackage')
-                    ->with('error', 'error on upload')
+                    ->with('error', 'error on update')
                     ->withInput();
         }
         
@@ -233,8 +232,8 @@ class AdminController extends Controller
         $package->product       = $request->product;
 
         $package->save();
-       
-        return back();
+        
+        return back()->with('message', 'Update Successful');
     }
     
     public function removePackage(Request $request)
@@ -309,7 +308,7 @@ class AdminController extends Controller
 
         foreach ($images as $image) 
         {
-          \File::Delete('img/users/'.$imageName->name);
+          \File::Delete('img/users/'.$image->name);
           Image::where('id', $image->id)->delete();
         }
 
@@ -357,8 +356,6 @@ class AdminController extends Controller
     //         return view('errors.captureNotFound');
     //     }
     // }
-
-    
 }   
 
 

@@ -29,36 +29,12 @@
 		</div>
 	</div>
 	
+	<div>
+		
+	</div>
 	<div id="editModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-		<form action="packages/{{$package->name}}" novalidate>
-		{{ csrf_field() }}
-			<div>
-				<label for="title">Title</label>
-				<input type="text" id="title" name="title" value="{{$package->name}}">
-			</div>
-			<div>
-				<label for="description">Description</label>
-				<input type="text" id="description" name="description" value="{{$package->description}}">
-			</div>
-			<div>
-				<label for="price">Price</label>
-				<input type="number" id="price" name="price" min="0" max="1000" value="{{$package->price}}">
-			</div>
-			<div>
-				<label for="hours">Hours</label>
-				<input type="number" id="hours" name="hours" value="{{$package->hours}}">
-			</div>
-			<div>
-				<label for="product">Product</label>
-				<select name="pr" id="product">
-					<option value="">Hardcopy</option>
-					<option value="">Digital</option>
-					<option value="">Download</option>
-				</select>
-			</div>
-
-			<input type="submit" value="Update Package" name="update_package" class="tiny button radius amber">
-		</form>
+		@include('forms.updatePackage')
+		
 		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 	</div>
 	
