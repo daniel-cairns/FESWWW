@@ -34,7 +34,9 @@ class AdminController extends Controller
             $users                = User::with('messages')->get();
             $products             = Product::all();
             $messages             = Message::all();
-            $packages             = Package::all();
+            $packages             = Package::with('subbrands')->get();
+
+            
       
             return view('admin.index', compact('users', 'subbrands', 'messages', 'products', 'packages'));
         } else {
@@ -166,7 +168,7 @@ class AdminController extends Controller
                         ->where('subbrand_id', $subbrand_id)
                         ->delete();                
 
-        return back();
+        return back()->with('message', 'Succesfully removed Image');
     }
 
     public function storePackage(Request $request)
@@ -201,7 +203,7 @@ class AdminController extends Controller
         $subbrands->packages()->save($package);
         $products->packages()->save($package);
 
-        return back()->with('message', 'Update Successful');
+        return back()->with('message', 'Creation of Package Successful');
     }
 
     public function updatePackage(Request $request)
@@ -257,28 +259,34 @@ class AdminController extends Controller
                       ->where('subbrand_id', $subbrand_id)
                       ->delete();
 
-      return back()->with('message', 'Success on upload');
+      return back()->with('message', 'Removal Successful');
     }
 
     public function updateSubbrandPackages(Request $request)
     {
-      $validate = Validator::make($request->all(),[
-          'package_id'    => 'required|exists:packages,id',
-          'subbrand_id'   => 'required|exists:subbrands,id'
-      ]);
+      $packages = $request->packageId;
+      $subbrand = $request->subbrandId;
 
+      $validate = Validator::make($request->all(),[
+          'packageId'    => 'required|array|exists:packages,id',
+          'subbrandId'   => 'required|exists:subbrands,id'
+      ]);
+      
       if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'updateSubbrandPackages')
-                    ->with('error', 'error on upload')
+                    ->with('error', 'error with update')
                     ->withInput();
-        }
-
-      $subbrand  = Subbrand::findOrFail($request->subbrandId);
-      $package    = $request->packageId;  
-
-      $subbrand->packages()->save($package);
-      return back();     
+      }
+      
+      foreach ($packages as $package) {
+        SubbrandPackage::create([
+            'package_id'    => $package,
+            'subbrand_id'   => $subbrand,
+        ]);
+      }
+      
+      return back()->with('message', 'Succesfully added package');     
     }
 
     public function userRemove(Request $request)
@@ -290,7 +298,7 @@ class AdminController extends Controller
       if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'userRemove')
-                    ->with('error', 'error on upload')
+                    ->with('error', 'error on delete')
                     ->withInput();
       }
             
@@ -323,6 +331,32 @@ class AdminController extends Controller
         return back()->with('message', 'The user was removed succesfully'); 
       }
     }
+
+    public function packageAssociation(Request $request)
+    {
+        $validate = Validator::make($request->all(),[
+            'subbrands'   => 'required|array|exists:subbrands,id',
+            'package'     => 'required|exists:packages,id'  
+        ]);
+
+        if( $validate->fails()){
+                return back()
+                        ->withErrors($validate, 'packageAssociation')
+                        ->with('error', 'Error removing package')
+                        ->withInput();
+        }
+
+        $package = $request->package;
+        $subbrands = $request->subbrands;
+
+        foreach ($subbrands as $subbrand ) {
+            SubbrandPackage::where('package_id', $package)
+                            ->where('subbrand_id', $subbrand)
+                            ->delete();
+        }
+
+        return back()->with('message', 'Succesfully package from subbrands');
+    } 
 
     public function userDisplay($id)
     {

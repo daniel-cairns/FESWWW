@@ -134,7 +134,46 @@
 			@endforeach
 		</ul>	
 	</div>
-</div>	
+</div>
+
+<div class="row">
+		<div class="columns">
+			<h2>Packages</h2>
+			<hr>
+			@if( $errors->packageAssociation->first('subbrands'))
+				<p class="alert-box warning">{{ $errors->packageAssociation->first('subbrands') }}</p>
+			@endif
+			@if( $errors->packageAssociation->first('package'))
+				<p class="alert-box warning">{{ $errors->packageAssociation->first('package') }}</p>
+			@endif
+			<ul class="small-block-grid-3">
+			@foreach( $packages as $package)
+				<li>
+					<h3>{{ $package->name }}</h3>
+					<h6>Related subbrands</h6>
+					<form action="/packageAssociation" method="POST" novalidate>
+						{{ csrf_field() }}
+						<ul class="small-block-grid-1">
+							@forelse( $package->subbrands as $subbrand )
+							<li>
+								<label for="{{ $subbrand->id }}">{{ $subbrand->name }}
+									<input type="checkbox" id="{{ $subbrand->id }}" name="subbrands[]" value="{{ $subbrand->id }}">
+								</label>
+							</li>
+							@empty
+								<li>No Subbrands curently associated with this package</li>
+							@endforelse
+							<li><input type="submit" class="tiny button radius" value="Remove Subbrands"></li>
+							<li><a href="" class="tiny button warning radius">Delete Package</a></li>
+						</ul>
+						<input type="hidden" value="{{ $package->id }}" name="package">
+					</form>
+				</li>
+			@endforeach
+
+			</ul>	
+		</div>
+	</div>	
 				
 <div class="row">
 	<div class="columns">

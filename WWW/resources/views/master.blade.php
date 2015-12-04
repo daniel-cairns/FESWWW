@@ -146,8 +146,6 @@
         async defer></script>
     <script src="/js/account.js"></script>  
     @endif 
-    @if( count($errors) > 0 )
-    {{ dd($errors)}}   
-    @endif
+    
   </body>
 </html>

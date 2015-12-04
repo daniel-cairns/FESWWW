@@ -46,6 +46,7 @@ Route::get('userDisplay/{id}', 'AdminController@userDisplay');
 Route::get('userPackages/{id}', 'AdminController@userPackages');
 Route::get('userImages/{description}', 'AdminController@userImages');
 Route::post('userRemove', 'AdminController@userRemove');
+Route::post('packageAssociation', 'AdminController@packageAssociation');
 
 Route::post('updateSubbrandPackages', 'AdminController@updateSubbrandPackages');
 
