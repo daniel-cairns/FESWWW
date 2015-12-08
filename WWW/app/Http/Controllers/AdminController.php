@@ -35,9 +35,7 @@ class AdminController extends Controller
             $products             = Product::all();
             $messages             = Message::all();
             $packages             = Package::with('subbrands')->get();
-
-            
-      
+     
             return view('admin.index', compact('users', 'subbrands', 'messages', 'products', 'packages'));
         } else {
 
