@@ -49,6 +49,7 @@ Route::post('userRemove', 'AdminController@userRemove');
 Route::post('packageAssociation', 'AdminController@packageAssociation');
 
 Route::post('updateSubbrandPackages', 'AdminController@updateSubbrandPackages');
+Route::post('deletePackage', 'AdminController@deletePackage');
 
 // Display pages
 Route::get('gallery', 'GalleryController@index');
@@ -70,6 +71,26 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::post('password/reset', 'AccountController@resetPassword');
 Route::post('email/reset', 'AccountController@resetEmail');
 Route::post('username/reset', 'AccountController@resetUsername');
+
+Route::get('migrate', function(){
+	\Artisan::call('migrate');
+});
+
+Route::get('seed', function(){
+	\Artisan::call('db:seed');
+});
+
+Route::get('reset', function(){
+	\Artisan::call('migrate:refresh');
+});
+
+Route::get('clear', function(){
+	\Artisan::call('cache:clear');
+});
+
+Route::get('cache', function(){
+	\Artisan::call('config:cache');
+});
 
 
 

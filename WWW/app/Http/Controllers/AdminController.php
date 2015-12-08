@@ -18,6 +18,7 @@ use App\BoughtPackage;
 use Validator;
 use Response;
 use Auth;
+use App\PackageProduct;
 
 class AdminController extends Controller
 {
@@ -285,6 +286,28 @@ class AdminController extends Controller
       }
       
       return back()->with('message', 'Succesfully added package');     
+    }
+
+    public function deletePackage(Request $request)
+    {
+        $package = $request->packageId;
+
+        $validate = Validator::make($request->all(),[
+            'packageId' => 'required|exists:packages,id'
+        ]);
+
+        if($validate->fails()){
+            return back()
+                    ->withErrors($validate, 'deletePackage')
+                    ->with('error', 'Unable to delete the selected package. Packages that are related to a subbrand or a client cannot be deleted.')
+                    ->withInput();
+        }
+
+        PackageProduct::where('package_id', $package)->delete();
+        Package::where('id', $package )->delete();
+        
+
+        return back()->with('message', 'Package was succesfully deleted.');
     }
 
     public function userRemove(Request $request)

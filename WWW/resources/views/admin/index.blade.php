@@ -137,43 +137,59 @@
 </div>
 
 <div class="row">
-		<div class="columns">
-			<h2>Packages</h2>
-			<hr>
-			@if( $errors->packageAssociation->first('subbrands'))
-				<p class="alert-box warning">{{ $errors->packageAssociation->first('subbrands') }}</p>
-			@endif
-			@if( $errors->packageAssociation->first('package'))
-				<p class="alert-box warning">{{ $errors->packageAssociation->first('package') }}</p>
-			@endif
-			<ul class="small-block-grid-3">
-			@foreach( $packages as $package)
-				<li>
-					<h3>{{ $package->name }}</h3>
-					<h6>Related subbrands</h6>
-					<form action="/packageAssociation" method="POST" novalidate>
-						{{ csrf_field() }}
-						<ul class="small-block-grid-1">
-							@forelse( $package->subbrands as $subbrand )
-							<li>
-								<label for="{{ $subbrand->id }}">{{ $subbrand->name }}
-									<input type="checkbox" id="{{ $subbrand->id }}" name="subbrands[]" value="{{ $subbrand->id }}">
-								</label>
-							</li>
-							@empty
-								<li>No Subbrands curently associated with this package</li>
-							@endforelse
-							<li><input type="submit" class="tiny button radius" value="Remove Subbrands"></li>
-							<li><a href="" class="tiny button warning radius">Delete Package</a></li>
-						</ul>
-						<input type="hidden" value="{{ $package->id }}" name="package">
-					</form>
-				</li>
-			@endforeach
+	<div class="columns">
+		<h2>Packages</h2>
+		<hr>
+		@if( $errors->packageAssociation->first('subbrands'))
+			<p class="alert-box warning">{{ $errors->packageAssociation->first('subbrands') }}</p>
+		@endif
+		@if( $errors->packageAssociation->first('package'))
+			<p class="alert-box warning">{{ $errors->packageAssociation->first('package') }}</p>
+		@endif
+		<ul class="small-block-grid-3">
+		@foreach( $packages as $package)
+			<li>
+				<h3>{{ $package->name }}</h3>
+				<h6>Related subbrands</h6>
+				<form action="/packageAssociation" method="POST" novalidate>
+					{{ csrf_field() }}
+					<ul class="small-block-grid-1">
+						@forelse( $package->subbrands as $subbrand )
+						<li>
+							<label for="{{ $subbrand->id }}">{{ $subbrand->name }}
+								<input type="checkbox" id="{{ $subbrand->id }}" name="subbrands[]" value="{{ $subbrand->id }}">
+							</label>
+						</li>
+						@empty
+							<li>No Subbrands curently associated with this package</li>
+						@endforelse
+						<li><input type="submit" class="tiny button radius" value="Remove Subbrands"></li>
+						<li><a href="#" data-reveal-id="deleteModal{{ $package->id }}" class="tiny button warning radius">Delete Package</a></li>
+					</ul>
+					<input type="hidden" value="{{ $package->id }}" name="package">
+				</form>
+			</li>
+		@endforeach
 
-			</ul>	
-		</div>
-	</div>	
+		</ul>	
+	</div>
+</div>	
+
+
+@foreach( $packages as $package)
+<div id="deleteModal{{ $package->id }}" class="reveal-modal" data-reveal aria-labelledby="{{ $package->name }}" aria-hidden="true" role="dialog">
+  <h2 id="{{ $package->name }}">{{ $package->name }}</h2>
+  <p class="lead">Are you sure you want delete this package?</p>
+  <form action="deletePackage" method="POST" novalidate>
+  	{{ csrf_field() }}
+		<input type="hidden" value="{{ $package->id }}" name="packageId">
+		<input type="submit" value="Delete" class="tiny button radius">  	
+  </form>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+@endforeach
+
+
 				
 <div class="row">
 	<div class="columns">

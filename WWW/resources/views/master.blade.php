@@ -59,7 +59,7 @@
                   @if( Auth::check() && Auth::user()->privilege == 'admin')
                   <li><a href="/admin">Admin</a></li>
                   @else
-                  <li><a href="account">Account Details</a></li>
+                  <li><a href="/account">Account Details</a></li>
                   @endif
                 @endif
               </ul>
@@ -117,10 +117,22 @@
     </main>
         
     <footer>
-      <p>Copyright Far Edge Studios 2015 &copy;</p>
+      <div class="row">
+        <div class="columns large-4">
+          <p>Copyright Far Edge Studios {{ date('Y')}} &copy;</p>
+        </div>
+        <div class="columns large-4">
+          <ul>
+            <li><h6><a href="">Contact Us</a></h6></li>
+            <li><a href="">email</a></li>
+            <li><a href="">phone</a></li>
+          </ul>
+        </div>
+        <div class="columns large-4">
+          <a href="/sitemap">Sitemap</a>
+        </div>
+      </div>
     </footer>
-
-    
    
     <script src="/js/vendor/jquery.js"></script>
     <script src="/js/foundation.min.js"></script>
