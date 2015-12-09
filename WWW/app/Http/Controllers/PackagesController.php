@@ -25,7 +25,7 @@ class PackagesController extends Controller
     {
       $products = Product::all();
       $subbrands = Subbrand::with('packages')->get();
-      
+
       return view('packages.index', compact('subbrands', 'products'));
     }
 
@@ -117,6 +117,7 @@ class PackagesController extends Controller
           'package'     => $package->name,
           'password'    => $password,
           'location'    => $request->location,
+          'address'     => $request->sendAddress,
       ];
 
       $user = User::create([
@@ -126,7 +127,7 @@ class PackagesController extends Controller
       ]);
 
       Mail::send('emails.booking', $data, function ($message) use ($data) {
-        $message->from('admin@FES.com', 'FES');
+        $message->from('info@faredgestudios.co.nz', 'FES');
         $message->subject('package booking');
 
         $message->to($data['email']);
@@ -134,10 +135,10 @@ class PackagesController extends Controller
       });
 
       Mail::send('emails.newBooking', $data, function ($message) use ($data) {
-        $message->from('admin@FES.com', 'FES');
+        $message->from('info@faredgestudios.co.nz', 'FES');
         $message->subject('package booking');
 
-        $message->to('danzo169@gmail.com');
+        $message->to('info@faredgestudios.co.nz');
         // $message->attach($data['logo'], ['as' => 'logo', 'mime' => 'image/png']);
       });
 
@@ -171,10 +172,11 @@ class PackagesController extends Controller
           'subbrand'    => $subbrand->name,
           'package'     => $package->name,
           'location'    => $request->location,
+          'address'     => $request->sendAddress,
       ];
       // dd($data['location']);
       Mail::send('emails.userBooking', $data, function ($message) use ($data) {
-        $message->from('admin@FES.com', 'FES');
+        $message->from('info@faredgestudios.co.nz', 'FES');
         $message->subject('package booking');
 
         $message->to($data['email']);
@@ -182,13 +184,12 @@ class PackagesController extends Controller
       });
 
       Mail::send('emails.userNewBooking', $data, function ($message) use ($data) {
-        $message->from('admin@FES.com', 'FES');
+        $message->from('info@faredgestudios.co.nz', 'FES');
         $message->subject('package booking');
 
-        $message->to('danzo169@gmail.com');
+        $message->to('info@faredgestudios.co.nz');
         // $message->attach($data['logo'], ['as' => 'logo', 'mime' => 'image/png']);
       });
-
 
       $newpackage = BoughtPackage::create([
           'user_id'       => Auth::user()->id,

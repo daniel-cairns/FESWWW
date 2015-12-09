@@ -17,7 +17,7 @@ class CreatePackagesTable extends Migration
 
             $table->char('name', 15);
 
-            $table->char('description', 200);
+            $table->text('description', 500);
 
             $table->decimal('price', 7,2);
 

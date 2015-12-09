@@ -3,7 +3,7 @@
 
 	<div>
 		<label for="name">Title/Name</label>
-		<input type="text" name="name" id="name" value="{{ old($package->name) }}" placeholder="{{ $package->name }}">
+		<input type="text" name="name" id="name" value="{{ old('name') ? old('name') : $package->name }}" placeholder="{{ $package->name }}">
 	</div>
 	@if($errors->updatePackage->first('name'))
 		<span class="alert-box warning">{{$errors->updatePackage->first('name')}}</span>
@@ -11,7 +11,7 @@
 	
 	<div>
 		<label for="description">Description</label>
-		<input type="text" name="description" id="description" value="{{ old($package->description) }}" placeholder="{{ $package->description }}">
+		<textarea type="text" name="description" id="description" placeholder="{{ $package->description }}">{{ old('description') ? old('description') : $package->description }}</textarea>
 	</div>
 	@if($errors->updatePackage->first('description'))
 		<span class="alert-box warning">{{$errors->updatePackage->first('description')}}</span>
@@ -19,7 +19,7 @@
 	
 	<div>
 		<label for="price">Price</label>
-		<input type="number" name="price" id="price" value="{{ old($package->price) }}" placeholder="{{ $package->price }}">
+		<input type="number" name="price" id="price" value="{{ old('price') ? old('price') : $package->price }}" placeholder="{{ $package->price }}">
 	</div>
 	@if($errors->updatePackage->first('price'))
 		<span class="alert-box warning">{{$errors->updatePackage->first('price')}}</span>
@@ -27,7 +27,7 @@
 
 	<div>
 		<label for="hours">Hours</label>
-		<input type="number" name="hours" id="hours" value="{{ old($package->hours) }}" placeholder="{{ $package->hours }}">
+		<input type="number" name="hours" id="hours" value="{{ old('hours') ? old('hours') : $package->hours }}" placeholder="{{ $package->hours }}">
 	</div>
 	@if($errors->updatePackage->first('hours'))
 		<span class="alert-box warning">{{$errors->updatePackage->first('hours')}}</span>
@@ -36,9 +36,9 @@
 	<div>
 		<label for="product">Product</label>
 		<select name="product" id="product">
-			<option value="{{ $package->product }}">Current product {{ $package->product }}...</option>	
+			<option>Current product {{ $package->product }}...</option>	
 			@foreach( $products as $product )
-				<option value="{{ $product->name }}">{{ $product->name }}</option>
+				<option value="{{ $product->id }}">{{ $product->name }}</option>
 			@endforeach
 		</select>
 	</div>

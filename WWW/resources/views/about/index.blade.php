@@ -1,12 +1,12 @@
 @extends('master')
 @section('title')
-	Gallery
+	About Us
 @endsection
 @section('content')
 	<div class="slider">
-    <div style="background-image: url(img/slider/commercial.jpg);"><caption>capture your day</caption></div>
-    <div style="background-image: url(img/slider/wedding1.jpg);"><caption>capture your day</caption></div>
-    <div style="background-image: url(img/slider/wedding2.jpg);"><caption>capture your day</caption></div>
+	  @foreach( $images as $image )
+	  <div style="background-image: url(img/original/{{ $image->name }});"><caption>capture your day</caption></div>
+	  @endforeach
   </div>
 
   <div class="caption">
@@ -14,7 +14,8 @@
   </div>
 	<div class="row">
 		<div class="columns">
-			<h1>About Us</h1>	
+			<h1>About Us</h1>
+			<p>{{ $about->description }}</p>	
 		</div>
 	</div>
 	

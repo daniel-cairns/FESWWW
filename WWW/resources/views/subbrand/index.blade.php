@@ -163,10 +163,15 @@
     </div>
     @endforeach
   </div>
-
+  
+  @if( count($subbrand->packages) > 0 )
   <div class="row" >
     <div class="columns">
+      @if( Request::is('subbrand/commercial'))
+      <h2>Pricing Options</h2>
+      @else
       <h2>Packages</h2>
+      @endif
       <div class="row" data-equalizer>
       @forelse($subbrand->packages as $package)
             
@@ -186,5 +191,6 @@
       </div>
     </div>
   </div>
+  @endif
 
 @endsection

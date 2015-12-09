@@ -11,7 +11,8 @@
     <link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
     <link rel="stylesheet" href="/css/jquery-ui.css">  
     <link rel="stylesheet" href="/css/styles.css">
-    <link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="/js/vendor/modernizr.js"></script>
     
   </head>
@@ -35,13 +36,13 @@
         <section class="top-bar-section">
           
           <ul class="right">
-            <li><a href="/subbrand/weddings">Weddings</a></li>
-            <li><a href="/subbrand/portraits">Portraits</a></li>
-            <li><a href="/subbrand/seniors">Seniors</a></li>
-            <li><a href="/subbrand/commercial">Commercial</a></li>
-            <li><a href="/subbrand/models">Models</a></li>
+            @foreach( \App\Subbrand::all() as $subbrand)
+            <li><a href="/subbrand/{{ $subbrand->slug }}">{{ $subbrand->name }}</a></li>
+            @endforeach
             <li><a href="/gallery">Gallery</a></li>
+            @if( Auth::check() && Auth::user()->privilege == 'admin' )
             <li><a href="/packages">Packages</a></li>
+            @endif
             <li><a href="/about">About Us</a></li>
             <li><a href="/contact">Contact Us</a></li>
             <li class="has-dropdown">
@@ -124,12 +125,14 @@
         <div class="columns large-4">
           <ul>
             <li><h6><a href="">Contact Us</a></h6></li>
-            <li><a href="">email</a></li>
-            <li><a href="">phone</a></li>
+            <li><a href="">Email <i class="fa fa-envelope"> info@faredgestudios.co.nz</i></a></li>
+            <li><a href="">Phone <i class="fa fa-phone-square"> +6402102504932</i></a></li>
           </ul>
         </div>
         <div class="columns large-4">
-          <a href="/sitemap">Sitemap</a>
+          <ul>
+            <li><a href="/sitemap">Sitemap</a></li>
+          </ul>
         </div>
       </div>
     </footer>

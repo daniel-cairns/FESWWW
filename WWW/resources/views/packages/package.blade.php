@@ -4,12 +4,20 @@
 @endsection
 @section('content')
 	<div class="row">
-		<div class="columns">
+		@if( session('error'))
+			<span class="alert-box warning">{{ session('error')}}</span>
+		@endif
+
+		@if( session('message'))
+			<span class="alert-box warning">{{ session('message')}}</span>
+		@endif
+
+		<div class="large-8 large-centered columns">    
 			<h1 class="left">{{$subbrand->name}} Catergory</h1>
 		</div>
 	</div>
 	<div class="row">
-		<div class="columns">
+		<div class="large-8 large-centered columns">    
 			<h2 class="left">{{$package->name}} Package</h2>
 			@if( Auth::check() && Auth::user()->privilege == 'admin')
       <a href="" class="tiny button radius amber edit right" data-reveal-id="editModal">Edit Package</a>
@@ -17,12 +25,12 @@
     </div>  
   </div>
   <div class="row">
-		<div class="columns">    
+		<div class="large-8 large-centered columns">    
 			<p>{{$package->description}}</p>
 			<h3>Price</h3>
 			<p>${{$package->price}}</p>
 			<h3>Dedicated Hours</h3>
-			<p>${{$package->hours}}</p>
+			<p>{{$package->hours}}</p>
 			<h3>Availabe Products</h3>
 			<p>{{$package->product}}</p>
 			<a href="{{$package->slug}}/order" class="tiny button radius">Request a Booking</a>

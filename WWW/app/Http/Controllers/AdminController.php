@@ -176,7 +176,7 @@ class AdminController extends Controller
                 'name'          => 'required|min:3|max:15',
                 'price'         => 'required|numeric',
                 'hours'         => 'required|numeric',
-                'description'   => 'required|min:3|max:200',
+                'description'   => 'required|min:3|max:500',
                 'product'       => 'required|exists:products,id',
                 'subbrand'      => 'required|exists:subbrands,id'
         ]);
@@ -211,28 +211,31 @@ class AdminController extends Controller
                 'name'          => 'min:3|max:15',
                 'price'         => 'numeric',
                 'hours'         => 'numeric',
-                'description'   => 'min:3|max:200',
-                'product'       => 'exists:products,name',
+                'description'   => 'min:3|max:500',
+                'product'       => 'required|exists:products,id',
                 'package'       => 'required|exists:packages,id',
         ]);
 
+        // dd( $request);
         if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'updatePackage')
-                    ->with('error', 'error on update')
+                    ->with('error', 'error with update')
                     ->withInput();
         }
         
         $package = Package::findOrFail($request->package);
-
+        $products = Product::where('id', $request->product)->first();
+        
         $package->name          = $request->name;
         $package->price         = $request->price;
         $package->hours         = $request->hours;
         $package->description   = $request->description;
         $package->slug          = str_slug( $request->name);
-        $package->product       = $request->product;
+        $package->product       = $products->name;
 
         $package->save();
+        $products->packages()->save($package);
         
         return back()->with('message', 'Update Successful');
     }

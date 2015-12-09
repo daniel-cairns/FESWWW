@@ -9,6 +9,7 @@
     </div>
   </div>
   @foreach( $subbrands as $subbrand)
+  @if( count($subbrand->images) > 0 )
   <div class="row">
     <div class="columns">
       <h2>{{$subbrand->name}}</h2>
@@ -35,6 +36,7 @@
       </div>
     </div>
   </div>
+  @endif
   @endforeach
  
   

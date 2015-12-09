@@ -3,7 +3,6 @@
 
 	<p>{{ $email }}</p>
 
-	<p>Package {{ $subbrand }} {{ $package }} on {{ $date }} at {{ $location }}</p>
+	<p>Package {{ $subbrand }} {{ $package }} on {{ $date }} at {{ $address }}</p>
 	
-	<img src="http://http://faredgestudios.co.nz/images/far%20edge%20studios%20web.jpg" alt="FES logo">
 </body>
