@@ -125,8 +125,8 @@
         <div class="columns large-4">
           <ul>
             <li><h6><a href="">Contact Us</a></h6></li>
-            <li><a href="">Email <i class="fa fa-envelope"> info@faredgestudios.co.nz</i></a></li>
-            <li><a href="">Phone <i class="fa fa-phone-square"> +6402102504932</i></a></li>
+            <li><a href="mailto:{{ \App\About::first()->email }}">Email <i class="fa fa-envelope"> {{ \App\About::first()->email }}</i></a></li>
+            <li><a href="tel:{{ \App\About::first()->phone }}">Phone <i class="fa fa-phone-square"> {{ \App\About::first()->phone }}</i></a></li>
           </ul>
         </div>
         <div class="columns large-4">
