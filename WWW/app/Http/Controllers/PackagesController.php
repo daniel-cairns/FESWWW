@@ -16,17 +16,15 @@ use Auth;
 use Carbon\Carbon;
 use Validator;
 use App\Image;
-use App\Product;
 
 class PackagesController extends Controller
 {
     
     public function index()
     {
-      $products = Product::all();
       $subbrands = Subbrand::with('packages')->get();
 
-      return view('packages.index', compact('subbrands', 'products'));
+      return view('packages.index', compact('subbrands'));
     }
 
     public function order($subbrand, $package)
@@ -249,8 +247,7 @@ class PackagesController extends Controller
             $image->save();
           }
         }
-        // $subbrand->images()->save($image);
-
+        
         return back()->with('message', 'Upload Successful');
     }
 }

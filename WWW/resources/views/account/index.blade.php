@@ -71,7 +71,6 @@
 							<p>{{ $boughtPackage->package->description }}</p>
 							<p>Price: {{ $boughtPackage->package->price }}</p>
 							<p>Hours: {{ $boughtPackage->package->hours }}</p>
-							<p>Product: {{ $boughtPackage->package->product}}</p>
 							<p>Booking Date: {{ \Carbon\Carbon::parse( $boughtPackage->booking_date )->toFormattedDateString() }}</p>
 							<p id="address{{ $boughtPackage->id }}"></p>
 							
@@ -100,7 +99,6 @@
 					<p data-equalizer-watch>{{ $boughtPackage->package->description }}</p>
 					<p>Price: {{ $boughtPackage->package->price }}</p>
 					<p>Hours: {{ $boughtPackage->package->hours }}</p>
-					<p>Product: {{ $boughtPackage->package->product}}</p>
 					<p>Booking Date: {{ \Carbon\Carbon::parse( $boughtPackage->booking_date )->toFormattedDateString() }}</p>
 				  <form action="/cancelPackage" method="POST" novalidate>
 						{{ csrf_field() }}

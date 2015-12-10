@@ -91,10 +91,7 @@
 	              <p data-equalizer-watch="{{ $subbrand->id }}">{{$package->description}}</p>
 	              <p>Price ${{ $package->price }}</p>
 	              <p>Hours {{ $package->hours}}</p>
-								@foreach( $package->products as $product)
-	              <p>Product: {{ $product->name }}</p>
-	              @endforeach
-	              <a href="#" data-reveal-id="{{ camel_case($package->name) }}UpdateModal" class="tiny button radius">Update Package</a>
+				  			<a href="#" data-reveal-id="{{ camel_case($package->name) }}UpdateModal" class="tiny button radius">Update Package</a>
 	              <a href="#" data-reveal-id="{{ camel_case($package->name) }}RemoveModal" class="tiny button radius warning">Remove Package</a>
             	</div>
                         	

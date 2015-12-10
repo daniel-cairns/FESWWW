@@ -26,19 +26,6 @@
 		</div>
 
 		<div class="columns large-6">
-			<label for="product">Product</label>
-			<select name="product" id="product">
-				<option>Select a product type</option>
-				@foreach( $products as $product)
-					<option value="{{ $product->id }}">{{ $product->name }}</option>
-				@endforeach	
-			</select>
-			@if($errors->storePackage->first('product'))
-		  <span class="alert-box warning">{{$errors->storePackage->first('product')}}</span>
-		  @endif
-		</div>
-
-		<div class="columns large-6">
 			<label for="description">Description</label>
 			<textarea id="description" name="description" value="{{ old('description') }}"></textarea>
 			@if($errors->storePackage->first('description'))

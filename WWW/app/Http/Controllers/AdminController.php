@@ -10,7 +10,6 @@ use App\Image;
 use App\Subbrand;
 use App\Message;
 use App\Package;
-use App\Product;
 use App\SubbrandPackage;
 use App\SubbrandImage;
 use App\Slider;
@@ -18,7 +17,6 @@ use App\BoughtPackage;
 use Validator;
 use Response;
 use Auth;
-use App\PackageProduct;
 
 class AdminController extends Controller
 {
@@ -33,11 +31,10 @@ class AdminController extends Controller
                       
             $subbrands            = Subbrand::with('images','packages')->get();
             $users                = User::with('messages')->get();
-            $products             = Product::all();
             $messages             = Message::all();
             $packages             = Package::with('subbrands')->get();
      
-            return view('admin.index', compact('users', 'subbrands', 'messages', 'products', 'packages'));
+            return view('admin.index', compact('users', 'subbrands', 'messages', 'packages'));
         } else {
 
             return redirect('/account');
@@ -177,7 +174,6 @@ class AdminController extends Controller
                 'price'         => 'required|numeric',
                 'hours'         => 'required|numeric',
                 'description'   => 'required|min:3|max:500',
-                'product'       => 'required|exists:products,id',
                 'subbrand'      => 'required|exists:subbrands,id'
         ]);
 
@@ -190,18 +186,15 @@ class AdminController extends Controller
 
         $package        = new Package();
         $subbrands      = Subbrand::findOrFail($request->subbrand);
-        $products       = Product::findOrFail($request->product); 
-
+        
         $package->name          = $request->name;
         $package->price         = $request->price;
         $package->hours         = $request->hours;
         $package->description   = $request->description;
         $package->slug          = str_slug( $request->name);
-        $package->product       = $products->name;
-
+        
         $subbrands->packages()->save($package);
-        $products->packages()->save($package);
-
+        
         return back()->with('message', 'Creation of Package Successful');
     }
 
@@ -212,7 +205,6 @@ class AdminController extends Controller
                 'price'         => 'numeric',
                 'hours'         => 'numeric',
                 'description'   => 'min:3|max:500',
-                'product'       => 'required|exists:products,id',
                 'package'       => 'required|exists:packages,id',
         ]);
 
@@ -225,18 +217,15 @@ class AdminController extends Controller
         }
         
         $package = Package::findOrFail($request->package);
-        $products = Product::where('id', $request->product)->first();
-        
+                
         $package->name          = $request->name;
         $package->price         = $request->price;
         $package->hours         = $request->hours;
         $package->description   = $request->description;
         $package->slug          = str_slug( $request->name);
-        $package->product       = $products->name;
-
-        $package->save();
-        $products->packages()->save($package);
         
+        $package->save();
+                
         return back()->with('message', 'Update Successful');
     }
     
@@ -306,10 +295,8 @@ class AdminController extends Controller
                     ->withInput();
         }
 
-        PackageProduct::where('package_id', $package)->delete();
         Package::where('id', $package )->delete();
         
-
         return back()->with('message', 'Package was succesfully deleted.');
     }
 

@@ -7,7 +7,6 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Subbrand;
 use App\Package;
-use App\Product;
 use App\Image;
 use App\Slider;
 use Validator;
@@ -18,8 +17,6 @@ class SubbrandController extends Controller
     public function index($slug)
     {
 
-        $products = Product::all();
-
         $theslug = str_slug($slug);
 
         if ($theslug !== $slug) {
@@ -29,10 +26,8 @@ class SubbrandController extends Controller
         $subbrand = Subbrand::where('slug', $theslug)->first();
 
         // dd($subbrand->images, $subbrand->sliders);
-
-
         
-        return view('subbrand.index', compact('subbrand', 'products'));
+        return view('subbrand.index', compact('subbrand'));
     }
    
     public function updateSlider(Request $request)
@@ -128,10 +123,8 @@ class SubbrandController extends Controller
         //
         $subbrand   = Subbrand::where('slug', $subbrand)->first();
         $package    = Package::where('slug', $package)->first();
-        $products   = Product::all();
-        
-        return view('packages.package', compact('subbrand', 'package', 'products'));
+            
+        return view('packages.package', compact('subbrand', 'package'));
     }
-
     
 }

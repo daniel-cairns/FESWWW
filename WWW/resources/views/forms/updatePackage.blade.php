@@ -33,18 +33,6 @@
 		<span class="alert-box warning">{{$errors->updatePackage->first('hours')}}</span>
 	@endif
 	
-	<div>
-		<label for="product">Product</label>
-		<select name="product" id="product">
-			<option>Current product {{ $package->product }}...</option>	
-			@foreach( $products as $product )
-				<option value="{{ $product->id }}">{{ $product->name }}</option>
-			@endforeach
-		</select>
-	</div>
-	@if($errors->updatePackage->first('product'))
-		<span class="alert-box warning">{{$errors->updatePackage->first('product')}}</span>
-	@endif
 	@if($errors->updatePackage->first('package'))
 		<span class="alert-box warning">{{$errors->updatePackage->first('package')}}</span>
 	@endif

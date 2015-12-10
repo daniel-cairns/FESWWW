@@ -31,8 +31,6 @@
 			<p>${{$package->price}}</p>
 			<h3>Dedicated Hours</h3>
 			<p>{{$package->hours}}</p>
-			<h3>Availabe Products</h3>
-			<p>{{$package->product}}</p>
 			<a href="{{$package->slug}}/order" class="tiny button radius">Request a Booking</a>
 		</div>
 	</div>

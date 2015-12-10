@@ -66,7 +66,7 @@
 	            
 	            <div>
 	            	<label for="datepicker"><h3>Booking Date</h3></label>
-	            	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="tiny button radius">
+	            	<input type="text" id="datepicker" name="date" value="{{ old('date') }}" class="tiny button radius">
 	            </div>
 	            
 	            @if($errors->confirm->first('date'))
@@ -127,10 +127,9 @@
 		 				<p>Package: {{ $package->name }}</p>
 		 				<p>Price: {{ $package->price }}</p>
 		 				<p>Hours: {{ $package->hours }}</p>
-		 				<p>Product: {{ $package->product }}</p>
 		 				<div>
 		         	<label for="datepicker"><h3>Date</h3></label>
-		        	<input type="date" id="datepicker" name="date" value="{{ old('date') }}" class="radius">
+		        	<input type="text" id="datepicker" name="date" value="{{ old('date') }}" class="radius">
 		        </div>
 				
 		        <div>
@@ -182,7 +181,6 @@
 					<input type="hidden" value="" name="location" id="location">
 					<input type="hidden" value="{{ $subbrand->id }}" name="subbrand">
 					<input type="hidden" value="{{ $package->id }}" name="package">
-					
 					<input type="hidden" value="" id="sendAddress" name="sendAddress">
 				</form>
 					

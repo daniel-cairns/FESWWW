@@ -1,6 +1,5 @@
 $(document).ready(function(){
-	//mapbox token
-	// L.mapbox.accessToken = 'pk.eyJ1IjoiZGFuaWVsLWNhaXJucyIsImEiOiI4MUZ2X0ZBIn0.nfrx3pNY9P4LRbXUtM1rPQ';
+	
 	// get users location and run the intitialise function
 	navigator.geolocation.getCurrentPosition(initMap);
 
