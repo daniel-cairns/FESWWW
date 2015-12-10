@@ -63,17 +63,18 @@
 		<div class="row" data-equalizer>
 			<div class="columns">
 			<h2>Ordered Packages</h2>
-				<ul class="small-block-grid-3">
+				<ul class="small-block-grid-3" >
 					@forelse($user->boughtPackages as $boughtPackage)
 						
-						<li>
+						<li data-equalizer-watch>
 							<h5>{{ $boughtPackage->package->name }}</h5>
-							<p data-equalizer-watch>{{ $boughtPackage->package->description }}</p>
+							<p>{{ $boughtPackage->package->description }}</p>
 							<p>Price: {{ $boughtPackage->package->price }}</p>
 							<p>Hours: {{ $boughtPackage->package->hours }}</p>
 							<p>Product: {{ $boughtPackage->package->product}}</p>
 							<p>Booking Date: {{ \Carbon\Carbon::parse( $boughtPackage->booking_date )->toFormattedDateString() }}</p>
-							<p>Location: {{ $boughtPackage->location }}</p>
+							<p id="address{{ $boughtPackage->id }}"></p>
+							
 							<div class="row">
 								<div class="columns">
 									<div class="map" data-location="{{ $boughtPackage->location}}" data-id="{{ $boughtPackage->id }}" id="map{{ $boughtPackage->id}}">
@@ -86,10 +87,7 @@
 									<a href="#" data-reveal-id="modal{{ $boughtPackage->id }}" class="tiny button radius">Cancel Booking</a>
 								</div>
 							</div>
-							
-							
-							
- 					  </li>
+					    </li>
 					@empty
 						<li>No packages order yet. Click <a href="/packages">here</a> to view whats on offer.</li>
 					@endforelse

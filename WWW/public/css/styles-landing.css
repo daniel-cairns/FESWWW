@@ -83,7 +83,7 @@ body {
         background-size: cover;
         float: left;
         width: 20%;
-        height: 1000px;
+        height: 900px;
         position: relative; } }
     #content .image-box .hover-window {
       position: absolute;
@@ -109,7 +109,7 @@ body {
         -moz-transition: all 0.3s linear; }
         @media all and (min-width: 672px) {
           #content .image-box .hover-window .hover-window-text {
-            min-height: 50%; } }
+            min-height: 60%; } }
         #content .image-box .hover-window .hover-window-text h1 {
           color: #ffc107;
           margin-top: 2rem; }
@@ -129,7 +129,7 @@ body {
       visibility: visible; }
       @media all and (min-width: 672px) {
         #content .image-box .hover-window:hover .hover-window-text {
-          top: 50%; } }
+          top: 40%; } }
 
 #Seniors h1 {
   font-family: Great Vibes;

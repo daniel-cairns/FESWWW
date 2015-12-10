@@ -146,7 +146,7 @@ class PackagesController extends Controller
           'user_id'       => $user->id,
           'package_id'    => $package->id,
           'booking_date'  => $dbDate,
-          'location'      => $data->location,
+          'location'      => $data['location'],
       ]);
 
       Auth::login($user);

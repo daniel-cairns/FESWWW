@@ -3,6 +3,6 @@
 
 	<p>{{ $email }}</p>
 
-	<p>Package {{ $subbrand }} {{ $package }} on {{ $date }} at {{ $adsress }}</p>
+	<p>Package {{ $subbrand }} {{ $package }} on {{ $date }} at {{ $address }}</p>
 	
 </body>

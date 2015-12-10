@@ -1,5 +1,6 @@
 var map;
 var google;
+var geocoder;
 
 function initMap(location) {
   	var maps = $(".map");
@@ -33,4 +34,30 @@ function setMap ( locArray, id ) {
   	title: 'Location',
   	map: map,
 	});
+
+	geocodePosition(latLng, id);
 }
+
+function geocodePosition(pos, id) {
+	geocoder = new google.maps.Geocoder();
+
+	geocoder.geocode({
+  	latLng: pos
+	}, 
+	function(responses) {
+  	if (responses && responses.length > 0) {
+    		updateMarkerAddress(responses[0].formatted_address, id);
+  	} else {
+    		updateMarkerAddress('Cannot determine address at this location.');
+  	}
+	
+	});
+}
+
+function updateMarkerAddress(str, id) {
+  	console.log(str);
+  	console.log(id);
+    document.getElementById('address'+id).innerHTML = str;
+}
+
+
