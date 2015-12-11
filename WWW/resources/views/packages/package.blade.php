@@ -1,6 +1,6 @@
 @extends('master')
 @section('title')
-	{{$package->name}}
+	{{$package->name}} Package
 @endsection
 @section('content')
 	<div class="row">
@@ -11,6 +11,9 @@
 		@if( session('message'))
 			<span class="alert-box warning">{{ session('message')}}</span>
 		@endif
+		<div class="columns">
+			<img src="/img/original/{{ $image->name }}" alt="">
+		</div>
 
 		<div class="large-8 large-centered columns">    
 			<h1 class="left">{{$subbrand->name}} Catergory</h1>
@@ -43,6 +46,5 @@
 		
 		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 	</div>
-	
 
 @endsection

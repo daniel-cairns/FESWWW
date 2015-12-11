@@ -5,7 +5,7 @@
 @section('content')
 	<div class="slider">
 	  @foreach( $images as $image )
-	  <div style="background-image: url(img/original/{{ $image->name }});"><caption>capture your day</caption></div>
+	  <div style="background-image: url(img/original/{{ $image->name }});"><caption>{{ $image->description }}</caption></div>
 	  @endforeach
   </div>
 

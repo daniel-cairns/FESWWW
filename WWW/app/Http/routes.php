@@ -72,6 +72,12 @@ Route::post('password/reset', 'AccountController@resetPassword');
 Route::post('email/reset', 'AccountController@resetEmail');
 Route::post('username/reset', 'AccountController@resetUsername');
 
+// Contact 
+Route::post('contact', 'ContactController@contact');
+
+// Sitemap
+Route::get('sitemap', 'SiteMapController@index');
+
 Route::get('migrate', function(){
 	\Artisan::call('migrate');
 });

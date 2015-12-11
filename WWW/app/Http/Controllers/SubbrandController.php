@@ -123,8 +123,18 @@ class SubbrandController extends Controller
         //
         $subbrand   = Subbrand::where('slug', $subbrand)->first();
         $package    = Package::where('slug', $package)->first();
-            
-        return view('packages.package', compact('subbrand', 'package'));
+
+        $images = $subbrand->images;
+        $imagecount = count($images);
+
+        if( $imagecount > 1 )
+        {
+            $image = $images->random(1);
+        }else{
+            $image = $images;
+        } 
+                    
+        return view('packages.package', compact('subbrand', 'package', 'image'));
     }
     
 }

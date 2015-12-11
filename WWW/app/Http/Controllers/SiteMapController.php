@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Subbrand;
+use App\Package;
 
-class ContactController extends Controller
+class SiteMapController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +18,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact.index');
+        $subbrands  = Subbrand::all();
+        $packages   = Package::all();
+
+        return view('sitemap.index', compact('subbrands', 'packages'));
     }
 }
+    

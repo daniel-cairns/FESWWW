@@ -85,12 +85,14 @@ function getUserInfo(){
           url: "/userPackages/"+packages[i].package_id,
 
           success: function(packageFromServer){
-            
+            console.log('test');
+            console.log(packageFromServer);
             $('#packages').hide(500, function(){  
 
               for(var i=0; i<packageFromServer.length; i++)
               {
                 var currentPackage = packageFromServer[i];
+                console.log(currentPackage.status);
 
                 $('#packages').append('<li><ul class="small-block-grid-1" data-equalizer-watch="'+currentPackage.id+'"><li><h5>'+currentPackage.name+'</h5></li><li>'+currentPackage.description+'</li><li>'+currentPackage.status+'</li><li><button class="tiny button radius insertPackage" data-package-id="'+currentPackage.id+'">Select Package</button></li></ul></li>');
               }
@@ -105,6 +107,7 @@ function getUserInfo(){
           }
         });
       }
+      
     },
 
     error: function(){
