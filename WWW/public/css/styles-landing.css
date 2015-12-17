@@ -4,36 +4,49 @@ body {
   margin: 0;
   font-family: arial;
   background: #212121;
-  position: relative; }
+  position: relative;
+}
 
 #landing {
   z-index: 2;
   position: absolute;
   min-width: 100%;
-  height: 1000px;
+  height: 900px;
   top: 0;
   left: 10;
   text-align: center;
-  color: white;
-  background: rgba(33, 33, 33, 0.3); }
+  color: #ffffff;
+  background: rgba(33, 33, 33, 0.3);
+}
+
+#landing h1 {
+  width: 320px;
+  margin: 100px auto 20px;
+}
+
+@media all and (min-width: 672px) {
   #landing h1 {
-    width: 320px;
-    margin: 100px auto 20px; }
-    @media all and (min-width: 672px) {
-      #landing h1 {
-        width: 600px;
-        margin: 100px auto 20px; } }
-  #landing h1 + div {
-    border: 2px solid white;
-    width: 200px;
-    margin: 20px auto;
-    border-radius: 15px;
-    transition: all 0.3s linear; }
-    #landing h1 + div:hover {
-      cursor: pointer;
-      background: rgba(33, 33, 33, 0.3); }
-  #landing h2 {
-    color: white; }
+    width: 600px;
+    margin: 100px auto 20px;
+  }
+}
+
+#landing h1 + div {
+  border: 2px solid #ffffff;
+  width: 200px;
+  margin: 20px auto;
+  border-radius: 15px;
+  transition: all 0.3s linear;
+}
+
+#landing h1 + div:hover {
+  cursor: pointer;
+  background: rgba(33, 33, 33, 0.3);
+}
+
+#landing h2 {
+  color: #ffffff;
+}
 
 #logo {
   z-index: 1;
@@ -41,117 +54,190 @@ body {
   top: 0;
   left: 10;
   display: none;
-  width: 50%; }
-  @media all and (min-width: 672px) {
-    #logo {
-      width: 100%; } }
-  #logo img {
+  width: 50%;
+}
+
+@media all and (min-width: 672px) {
+  #logo {
     width: 100%;
-    float: left; }
-    @media all and (min-width: 672px) {
-      #logo img {
-        width: 280px;
-        float: left;
-        display: block; } }
-  #logo a {
+  }
+}
+
+#logo img {
+  width: 100%;
+  float: left;
+}
+
+@media all and (min-width: 672px) {
+  #logo img {
+    width: 280px;
     float: left;
-    color: white;
-    margin: 30px 20px 0 20px;
-    transition: all 0.3s linear; }
-    @media all and (min-width: 672px) {
-      #logo a {
-        float: right; } }
-    #logo a:hover {
-      color: #ffc107; }
+    display: block;
+  }
+}
+
+#logo a {
+  float: left;
+  color: #ffffff;
+  margin: 30px 20px 0 20px;
+  transition: all 0.3s linear;
+}
+
+@media all and (min-width: 672px) {
+  #logo a {
+    float: right;
+  }
+}
+
+#logo a:hover {
+  color: #FFC107;
+}
 
 #content {
   width: 100%;
   min-height: 100%;
   margin: auto;
-  position: relative; }
-  @media all and (min-width: 672px) {
-    #content #mobile-logo {
-      display: none; } }
+  position: relative;
+}
+
+@media all and (min-width: 672px) {
+  #content #mobile-logo {
+    display: none;
+  }
+}
+
+#content .image-box {
+  background-size: cover;
+  width: 50%;
+  height: 200px;
+  float: left;
+  position: relative;
+}
+
+@media all and (min-width: 672px) {
   #content .image-box {
     background-size: cover;
-    width: 50%;
-    height: 200px;
     float: left;
-    position: relative; }
-    @media all and (min-width: 672px) {
-      #content .image-box {
-        background-size: cover;
-        float: left;
-        width: 20%;
-        height: 900px;
-        position: relative; } }
-    #content .image-box .hover-window {
-      position: absolute;
-      min-height: 100%;
-      min-width: 100%;
-      top: 0;
-      left: 0;
-      text-align: center;
-      overflow: hidden;
-      background: rgba(33, 33, 33, 0.3);
-      transition: all 1s; }
-      #content .image-box .hover-window .hover-window-text {
-        visibility: hidden;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: rgba(33, 33, 33, 0.3);
-        min-height: 100%;
-        min-width: 100%;
-        -moz-box-shadow: inset 0 0 5px #000000;
-        -webkit-box-shadow: inset 0 0 5px #000000;
-        box-shadow: inset 0 0 5px #000000;
-        -moz-transition: all 0.3s linear; }
-        @media all and (min-width: 672px) {
-          #content .image-box .hover-window .hover-window-text {
-            min-height: 60%; } }
-        #content .image-box .hover-window .hover-window-text h1 {
-          color: #ffc107;
-          margin-top: 2rem; }
-        #content .image-box .hover-window .hover-window-text p {
-          width: 80%;
-          margin: 20px auto; }
-        #content .image-box .hover-window .hover-window-text a {
-          text-decoration: none;
-          color: white; }
-        #content .image-box .hover-window .hover-window-text a:nth-child(2) {
-          color: #2196f3;
-          text-decoration: underline; }
-    #content .image-box .hover-window:hover {
-      background: none; }
-    #content .image-box .hover-window:hover .hover-window-text {
-      top: 0;
-      visibility: visible; }
-      @media all and (min-width: 672px) {
-        #content .image-box .hover-window:hover .hover-window-text {
-          top: 40%; } }
+    width: 20%;
+    height: 900px;
+    position: relative;
+  }
+}
+
+#content .image-box .hover-window {
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  overflow: hidden;
+  background: rgba(33, 33, 33, 0.3);
+  transition: all 1s;
+}
+
+#content .image-box .hover-window .hover-window-text {
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(33, 33, 33, 0.3);
+  min-height: 100%;
+  min-width: 100%;
+  -moz-box-shadow: inset 0 0 5px #000000;
+  -webkit-box-shadow: inset 0 0 5px #000000;
+  box-shadow: inset 0 0 5px #000000;
+  -moz-transition: all 0.3s linear;
+}
+
+@media all and (min-width: 672px) {
+  #content .image-box .hover-window .hover-window-text {
+    min-height: 60%;
+  }
+}
+
+#content .image-box .hover-window .hover-window-text h1 {
+  color: #FFC107;
+  margin-top: 2rem;
+}
+
+#content .image-box .hover-window .hover-window-text p {
+  width: 80%;
+  margin: 20px auto;
+}
+
+#content .image-box .hover-window .hover-window-text a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+#content .image-box .hover-window .hover-window-text a:nth-child(2) {
+  color: #2196f3;
+  text-decoration: underline;
+}
+
+#content .image-box .hover-window:hover {
+  background: none;
+}
+
+#content .image-box .hover-window:hover .hover-window-text {
+  top: 0;
+  visibility: visible;
+}
+
+@media all and (min-width: 672px) {
+  #content .image-box .hover-window:hover .hover-window-text {
+    top: 40%;
+  }
+}
+
+footer ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+footer ul li {
+  display: inline-block;
+  width: 24%;
+  text-align: center;
+}
+
+footer ul li h6 {
+  color: #ffffff;
+}
+
+footer ul li a {
+  color: #ffffff;
+}
 
 #Seniors h1 {
   font-family: Great Vibes;
-  font-size: 3rem; }
+  font-size: 3rem;
+}
 
 #Portraits h1 {
-  font-family: Monda; }
+  font-family: Monda;
+}
 
 #Commercial h1 {
-  font-family: Roboto; }
+  font-family: Roboto;
+}
 
 #Weddings h1 {
   font-family: Monsieur La Doulaise;
-  font-size: 3rem; }
+  font-size: 3rem;
+}
 
 #Models h1 {
-  font-family: Codystar; }
+  font-family: Codystar;
+}
 
 .clearfix::before,
 .clearfix::after {
   content: " ";
-  display: table; }
+  display: table;
+}
 
 .clearfix:after {
-  clear: both; }
+  clear: both;
+}

@@ -7,6 +7,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto|Monsieur+La+Doulaise|Codystar|Monda|Great+Vibes' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/foundation.css" />
     <link rel="stylesheet" href="css/styles-landing.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="/js/vendor/modernizr.js"></script>
   </head>
   <body>
@@ -134,6 +135,16 @@
 
           
     </div>  <!-- end #content -->
+    <div>
+      <footer>
+          <ul>
+            <li><h6>Copyright Far Edge Studios {{ date('Y')}} &copy;</h6></li>
+            <li><a href="mailto:{{ \App\About::first()->email }}">Email <i class="fa fa-envelope"> {{ \App\About::first()->email }}</i></a></li>
+            <li><a href="tel:{{ \App\About::first()->phone }}">Phone <i class="fa fa-phone-square"> {{ \App\About::first()->phone }}</i></a></li>
+            <li><a href="/sitemap">Sitemap</a></li>
+          </ul>
+      </footer>
+    </div>
     
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>

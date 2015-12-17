@@ -34,10 +34,12 @@ class HomeController extends Controller
             'photo' => 'image'
         ]);
 
-        // return $request->subbrandName;
-
         // Find the requested subbrand in the database
-        $subbrand = Subbrand::where('name', $request->subbrandName)->firstOrFail();
+        try {
+           $subbrand = Subbrand::where('name', $request->subbrandName)->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
 
         $subbrand->subbrandImages;
 

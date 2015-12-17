@@ -119,7 +119,7 @@
       @yield('content')      
 
     </main>
-        
+  
     <footer>
       <div class="row">
         <div class="columns large-4">
@@ -139,6 +139,8 @@
         </div>
       </div>
     </footer>
+  
+    
    
     <script src="/js/vendor/jquery.js"></script>
     <script src="/js/foundation.min.js"></script>

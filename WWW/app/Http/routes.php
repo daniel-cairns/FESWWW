@@ -78,6 +78,10 @@ Route::post('contact', 'ContactController@contact');
 // Sitemap
 Route::get('sitemap', 'SiteMapController@index');
 
+Route::get('/back', function(){
+	return redirect(Session::get('_previous')['url']);
+});
+
 Route::get('migrate', function(){
 	\Artisan::call('migrate');
 });

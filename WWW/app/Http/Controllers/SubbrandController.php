@@ -22,9 +22,12 @@ class SubbrandController extends Controller
         if ($theslug !== $slug) {
             return redirect('subbrand/' . $theslug);
         }
-
-        $subbrand = Subbrand::where('slug', $theslug)->first();
-
+        
+        try {
+            $subbrand = Subbrand::where('slug', $theslug)->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.error');
+        }    
         // dd($subbrand->images, $subbrand->sliders);
         
         return view('subbrand.index', compact('subbrand'));
@@ -36,13 +39,21 @@ class SubbrandController extends Controller
         $images = $request->image;
         $slug   = $request->subbrandSlug;
         
-        $subbrand = Subbrand::findOrFail($request->subbrandId);
-        
+        try {
+            $subbrand = Subbrand::findOrFail($request->subbrandId);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
+                
         // Check to see if the array is empty
         if( $images != [])
         {
             foreach( $images as $image) {
-                $image = Image::findOrFail($image);                
+                try {
+                    $image = Image::findOrFail($image); 
+                } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+                    return view('errors.adminError');
+                }  
                 $subbrand->sliders()->save($image);
             }
             return back()->with('message', 'Update Successful');
@@ -58,8 +69,12 @@ class SubbrandController extends Controller
         $sliders = $request->slider;
         $slug   = $request->subbrandSlug;
         
-        $subbrand = Subbrand::findOrFail($request->subbrandId)->id;
-        
+        try {
+            $subbrand = Subbrand::findOrFail($request->subbrandId)->id;
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
+                
         // Check to see if the array is empty
         if( $sliders != [])
         {
@@ -81,8 +96,13 @@ class SubbrandController extends Controller
             'caption'      => 'required' 
         ]);
 
+        try {
+            $subbrand = Subbrand::findOrFail($request->subbrandId);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
+
         $caption    = $request->caption;
-        $subbrand   = Subbrand::findOrFail($request->subbrandId);
         $slug       = $request->subbrandSlug;
 
         if( $validate->fails()){
@@ -103,8 +123,13 @@ class SubbrandController extends Controller
             'description'      => 'required' 
         ]);
 
+        try {
+            $subbrand = Subbrand::findOrFail($request->subbrandId);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
+
         $description    = $request->description;
-        $subbrand   = Subbrand::findOrFail($request->subbrandId);
         $slug       = $request->subbrandSlug;
 
         if( $validate->fails()){
@@ -121,9 +146,19 @@ class SubbrandController extends Controller
     public function show($subbrand, $package)
     {
         //
-        $subbrand   = Subbrand::where('slug', $subbrand)->first();
-        $package    = Package::where('slug', $package)->first();
 
+        try {
+            $subbrand = Subbrand::where('slug', $subbrand)->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.error');
+        }
+
+        try {
+            $package = Package::where('slug', $package)->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.error');
+        }    
+        
         $images = $subbrand->images;
         $imagecount = count($images);
 
@@ -132,8 +167,8 @@ class SubbrandController extends Controller
             $image = $images->random(1);
         }else{
             $image = $images;
-        } 
-                    
+        }
+
         return view('packages.package', compact('subbrand', 'package', 'image'));
     }
     

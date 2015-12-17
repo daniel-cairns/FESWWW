@@ -1,3 +1,5 @@
+@import "mixins";
+
 $darkgrey: #212121 !important;
 $grey: #727272 !important;
 $lightgrey: #b6b6b6 !important;
@@ -51,11 +53,16 @@ body {
 }
 
 .slider {
+  display: none;
   max-width: 1366px;
   margin: 0 auto;
   background: white;
   height: 500px;
   overflow: hidden;
+
+  @include breakpoint ( smaller ) {
+    display: block;
+  }
     
   div {
     width: 1366px;

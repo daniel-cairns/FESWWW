@@ -48,16 +48,29 @@ class AdminController extends Controller
             'subbrand'      => 'required|exists:subbrands,id',
             'photo'         => 'required|image',
             'description'   => 'required|min:5|max:100',
+            
         ]);
+
+        $validateSize = Validator::make($request->all(),[
+            'MAX_FILE_SIZE' => 'size:5000000',   
+        ]);
+
+        if( $validateSize->fails()){
+            return back()->with('error', 'The selected image is to large');
+        }    
 
         if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'storeImage')
-                    ->with('error', 'error on upload')
+                    ->with('error', 'error with upload')
                     ->withInput();
         }
 
-        $subbrand = Subbrand::findOrFail($request->subbrand);
+        try {
+            $subbrand = Subbrand::findOrFail($request->subbrand);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
 
         $image = new Image();
 
@@ -69,19 +82,20 @@ class AdminController extends Controller
 
             // Use intervention Image to resize the image
             \Image::make($request->file('photo') )
+                                ->fit(1366,500)
                                 ->save( 'img/original/'.$fileName);
+
             \Image::make($request->file('photo') )
                                 ->fit(600,360)
                                 ->save( 'img/gallery/'.$fileName);
             $image->name = $fileName;
         }
-        $image->name = $fileName;
-       
+                
         $image->description = $request->description;
 
         $subbrand->images()->save($image);
 
-        return back();
+        return back()->with('message', 'Image uploaded successfully');
     }
 
     public function updateImage(Request $request)
@@ -101,11 +115,18 @@ class AdminController extends Controller
                     ->withInput();
         }
 
-        $subbrand   = Subbrand::where($request->subbrand);
+        try {
+            $subbrand = Subbrand::findOrFail($request->subbrand);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
         
-        
-        $image      = Image::findOrFail($request->image);
-
+        try {
+            $image = Image::findOrFail($request->image);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
+               
         // Check if a photo has been subitted in the form
         if($request->hasFile('photo'))
         {
@@ -150,9 +171,13 @@ class AdminController extends Controller
 
         $image_id       = $request->image_id;
         $subbrand_id    = $request->subbrand_id;
-        $imageName      = Image::where('id',$image_id)->firstOrFail();
-        // dd( $imageName);
-
+        
+        try {
+           $imageName = Image::where('id',$image_id)->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
+        
         \File::Delete('img/original/'.$imageName->name);
         \File::Delete('img/gallery/'.$imageName->name);
 
@@ -184,8 +209,13 @@ class AdminController extends Controller
                     ->withInput();
         }
 
-        $package        = new Package();
-        $subbrands      = Subbrand::findOrFail($request->subbrand);
+        $package = new Package();
+
+        try {
+           $subbrands = Subbrand::findOrFail($request->subbrand);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
         
         $package->name          = $request->name;
         $package->price         = $request->price;
@@ -193,6 +223,7 @@ class AdminController extends Controller
         $package->description   = $request->description;
         $package->slug          = str_slug( $request->name);
         
+
         $subbrands->packages()->save($package);
         
         return back()->with('message', 'Creation of Package Successful');
@@ -216,8 +247,12 @@ class AdminController extends Controller
                     ->withInput();
         }
         
-        $package = Package::findOrFail($request->package);
-                
+        try {
+           $package = Package::findOrFail($request->package);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+            return view('errors.adminError');
+        }  
+                        
         $package->name          = $request->name;
         $package->price         = $request->price;
         $package->hours         = $request->hours;
@@ -394,13 +429,7 @@ class AdminController extends Controller
         return $images;
     }   
 
-    // public function trycatch(){
-    //     try {
-    //         $capture = Capture::where('user_id', \Auth::user()->id)->where('id', $id)->firstOrFail();
-    //     } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-    //         return view('errors.captureNotFound');
-    //     }
-    // }
+    
 }   
 
 

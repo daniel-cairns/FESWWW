@@ -19,8 +19,7 @@ class AboutController extends Controller
     {
         $about = About::first();
         $image = Image::all();
-        
-        
+                
         $imagecount = count($image);
 
         if( $imagecount > 6 )

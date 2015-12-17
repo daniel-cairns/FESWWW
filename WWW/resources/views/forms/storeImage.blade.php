@@ -7,6 +7,8 @@
 		</div>		
   
   	<div class="columns large-6">
+      <p>Max file size is 5mb</p>
+
       <label for="photo"><h2>Image</h2></label>
       <input type="file" name="photo" class="tiny button radius">
       @if($errors->storeImage->first('photo'))
@@ -15,6 +17,7 @@
     </div>
 
     <div class="columns large-6">
+      <p>Ideal pixel ratio is 1366x500</p>
       <label for="description"><h2>Image Description</h2></label>
       <input type="text" id="description" name="description" placeholder="Image Description">
       @if($errors->storeImage->first('description'))

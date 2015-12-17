@@ -78,7 +78,7 @@
 									<h3>Location</h3>
 									<div class="row">
 										<div class="columns small-6">
-											<input type="text" id="search">
+											<input type="text" id="search" placeholder="enter a location...">
 										</div>	
 										<div class="columns small-6">
 											<div id="searchAddress" class="tiny radius button">Search</div>
@@ -143,7 +143,7 @@
 							<h3>Location</h3>
 							<div class="row">
 								<div class="columns small-6">
-									<input type="text" id="search">
+									<input type="text" id="search" placeholder="enter a location...">
 								</div>	
 								<div class="columns small-6">
 									<div id="searchAddress" class="tiny radius button">Search</div>

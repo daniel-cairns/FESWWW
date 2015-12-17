@@ -30,9 +30,18 @@ class PackagesController extends Controller
     public function order($subbrand, $package)
     {
         
-      $subbrand   = Subbrand::where('slug', $subbrand)->first();
-      $package    = Package::where('slug', $package)->first();
-      
+      try {
+        $subbrand   = Subbrand::where('slug', $subbrand)->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }
+
+      try {
+        $package    = Package::where('slug', $package)->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }      
+          
       return view('packages.order', compact('subbrand', 'package'));
     }
 
@@ -70,8 +79,17 @@ class PackagesController extends Controller
           'sendAddress' => $request->sendAddress,
       ];
 
-      $subbrand   = Subbrand::where('id', $order['subbrand'])->first();
-      $package    = Package::where('id', $order['package'])->first();
+      try {
+        $subbrand   = Subbrand::where('id', $order['subbrand'])->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }
+
+      try {
+        $package    = Package::where('id', $order['package'])->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }      
 
       return view('packages.confirm', compact('order', 'subbrand', 'package'));
     }
@@ -95,9 +113,18 @@ class PackagesController extends Controller
                   ->withInput();
       }
 
-      $subbrand   = Subbrand::where('id', $request->subbrand)->first();
-      $package    = Package::where('id', $request->package)->first();
-      
+      try {
+        $subbrand   = Subbrand::where('id', $request->subbrand)->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }
+
+      try {
+        $package    = Package::where('id', $request->package)->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }
+
       $password   = uniqid();
       $passCrypt  = bcrypt($password);
 
@@ -155,9 +182,18 @@ class PackagesController extends Controller
     public function userConfirm(Request $request)
     { 
       
-      $subbrand   = Subbrand::where('id', $request->subbrand)->first();
-      $package    = Package::where('id', $request->package)->first();
+      try {
+        $subbrand = Subbrand::where('id', $request->subbrand)->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }
 
+      try {
+        $package = Package::where('id', $request->package)->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }
+      
       $date = $request->date;
       $dbDate = Carbon::parse($date);
       
