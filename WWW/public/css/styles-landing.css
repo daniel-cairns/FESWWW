@@ -95,7 +95,6 @@ body {
 
 #content {
   width: 100%;
-  min-height: 100%;
   margin: auto;
   position: relative;
 }
@@ -208,6 +207,10 @@ footer ul li h6 {
 
 footer ul li a {
   color: #ffffff;
+}
+
+footer ul li a:hover {
+  color: #FFC107;
 }
 
 #Seniors h1 {

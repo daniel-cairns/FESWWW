@@ -60,3 +60,11 @@
 	</div>
 </div>
 
+<div id="packageModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Awesome. I have it.</h2>
+	@include('forms.updateStatus')	  
+
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+

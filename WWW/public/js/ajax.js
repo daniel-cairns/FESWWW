@@ -7,14 +7,7 @@ $('document').ready(function(){
     getUserInfo();
   }
 
-  $('.insertPackage').click(function(){
-    $(this).slidUp();
-  });
-
-  selectUserPackage();
-
 });
-    
    
 function getUserInfo()
 {
@@ -29,12 +22,12 @@ function getUserInfo()
       
       var user      = dataFromServer.user;
       var packages  = dataFromServer.packages;
-      console.log(packages);
       
       $('#userDisplay').html('');
       $('#userImages').html('');
       $('#packages').html('');
       $('#userRemove').html('');
+      $('#ajaxModals').html('');
 
       
       $('#userDisplay').hide(500, function(){
@@ -51,7 +44,7 @@ function getUserInfo()
       $("#userId").val(user.id);
 
       getUserImages(user);
-      getUserPackages(packages);
+      getUserPackages(packages, user);
     },
     error: function(){
       console.log('cannot connect to users');
@@ -72,7 +65,7 @@ function getUserImages(user)
       {
         $('#userImages').before('<div class="row"><div class="columns"><h2>Images</h2></div></div>');
       }
-      console.log(imageFromServer);
+      
       $('#userImages').hide(500, function(){
         for( var i=0; i<imageFromServer.length; i++){
           
@@ -90,7 +83,7 @@ function getUserImages(user)
   });
 }  
 
-function getUserPackages(packages){
+function getUserPackages(packages, user){
   
   if (packages.length > 0)
   {
@@ -103,15 +96,15 @@ function getUserPackages(packages){
       url: "/userPackages/"+packages[i].package_id,
 
       success: function(packageFromServer){
-        console.log('test');
-        console.log(packageFromServer);
+
         $('#packages').hide(500, function(){  
 
           for(var i=0; i<packageFromServer.length; i++)
           {
             var currentPackage = packageFromServer[i];
       
-            $('#packages').append('<li><ul class="small-block-grid-1" data-equalizer-watch="'+currentPackage.id+'"><li><h5>'+currentPackage.name+'</h5></li><li>'+currentPackage.description+'</li><li>'+packages[i].status+'</li><li><button class="tiny button radius insertPackage" id="package_id'+currentPackage.id+'"data-package-id="'+currentPackage.id+'">Select Package</button></li></ul></li>');
+            $('#packages').append('<li><ul class="small-block-grid-1" data-equalizer-watch="'+currentPackage.id+'"><li><h5>'+currentPackage.name+'</h5></li><li>'+currentPackage.description+'</li><li>'+packages[i].status+'</li><li><button class="tiny button radius insertPackage" id="package_id'+currentPackage.id+'" data-package-id="'+currentPackage.id+'" data-reveal-id="packageModal">Select Package</button></li></ul></li>');
+            
           }
           
           $('#packages').show(500);
@@ -123,13 +116,24 @@ function getUserPackages(packages){
         console.log('cannot connect to packages');
       }
     });
-  }  
+  }
+
+  $('.insertPackage').click(function(){
+    alert('test');
+    console.log('test');
+    selectUserPackage();
+  });
+
 }
 
 function selectUserPackage()
 {
-  var userPackage = $('.imsertPackage').data('package-id');
+  console.log('test');
 
-  console.log(userPackage);
+  var userPackage = $(this).data('package-id');
+
+  $('#boughtPackage').value(userPackage);
+  
+  console.log(userPackage+'test');
 }
 

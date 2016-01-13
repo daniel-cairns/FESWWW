@@ -12,7 +12,9 @@
 			<span class="alert-box warning">{{ session('message')}}</span>
 		@endif
 		<div class="columns">
-			<img src="/img/original/{{ $image->name }}" alt="">
+			@if( count($image) > 0 )
+			<img src="/img/original/{{ $image->name }}" alt="{{ $image->description }}">
+			@endif
 		</div>
 
 		<div class="large-8 large-centered columns">    

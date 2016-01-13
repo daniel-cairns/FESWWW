@@ -252,13 +252,14 @@ class PackagesController extends Controller
         // Validate the request
         $validate = Validator::make($request->all(),[
             'userId'    => 'required|exists:users,id',
-            'myFile'    => 'required|array',
+            'myFile[]'    => 'required|array',
             // 'packageId' => 'required|exists:bought_packages,id',
         ]);
 
         if( $validate->fails()){
             return back()
                     ->withErrors($validate, 'uploadPackage')
+                    ->with('error', 'No photo was selected to upload')
                     ->withInput();
         }
      

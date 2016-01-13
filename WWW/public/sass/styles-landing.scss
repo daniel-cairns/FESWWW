@@ -97,7 +97,6 @@ body {
 
 #content {
 	width: 100%;
-	min-height: 100%;
 	margin: auto;
 	position: relative;
 	
@@ -205,6 +204,10 @@ footer {
 			
 			a {
 				color: $white;
+			}
+
+			a:hover {
+				color: $amber;
 			}
 		}
 	}
