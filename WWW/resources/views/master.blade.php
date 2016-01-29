@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en">
   <head>
+    <meta description="Capture your day with Faredgestudios photography and photographic consultation. We offer photos for Weddings, Portraits, Seniors, Models and Commercial.">
     @if( Request::is('/admin/') || Request::is('/account/'))
     <meta name="robots" content="noindex">
     @endif

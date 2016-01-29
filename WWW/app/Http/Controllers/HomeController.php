@@ -38,7 +38,7 @@ class HomeController extends Controller
         try {
            $subbrand = Subbrand::where('name', $request->subbrandName)->firstOrFail();
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-            return view('errors.adminError');
+            return view('errors.error');
         }  
 
         $subbrand->subbrandImages;

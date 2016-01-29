@@ -208,7 +208,7 @@ class PackagesController extends Controller
           'location'    => $request->location,
           'address'     => $request->sendAddress,
       ];
-      // dd($data['location']);
+      
       Mail::send('emails.userBooking', $data, function ($message) use ($data) {
         $message->from('info@faredgestudios.co.nz', 'FES');
         $message->subject('package booking');
@@ -237,13 +237,47 @@ class PackagesController extends Controller
 
     public function cancelPackage(Request $request)
     {
-      $user       = Auth::user()->id;
-      $package    = $request->package_id;
+      $user         = Auth::user()->id;
+      $package_id   = $request->package_id;
+            
+      try {
+        $boughtPackage = BoughtPackage::where('user_id', $user)
+                      ->where('id', $package_id)
+                      ->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }
+
+      try {
+        $package = Package::where('id', $boughtPackage->package_id)->firstOrFail();
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+        return view('errors.adminError');
+      }      
       
-      BoughtPackage::where('user_id', $user)
-                      ->where('id', $package)
-                      ->delete();
+      $data = [
+          'package' => $package->name,
+          'date'    => $boughtPackage->booking_date,
+          'user'    => $user,
+      ];
+
+      Mail::send('emails.canceled', $data, function ($message) use ($data) {
+        $message->from('info@faredgestudios.co.nz', 'FES');
+        $message->subject('package booking canceled');
+
+        $message->to('info@faredgestudios.co.nz');
+        // $message->attach($data['logo'], ['as' => 'logo', 'mime' => 'image/png']);
+      });
+
+      Mail::send('emails.userCancel', $data, function ($message) use ($data) {
+        $message->from('info@faredgestudios.co.nz', 'FES');
+        $message->subject('canceled booking');
+
+        $message->to( Auth::user()->email );
+        
+      });
       
+      $boughtPackage->delete();
+
       return back()->with('message', 'Booking canceled!');
     }
 

@@ -402,6 +402,49 @@ class AdminController extends Controller
         }
 
         return back()->with('message', 'Succesfully package from subbrands');
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $validate = Validator::make($request->all(),[
+            'status'   => 'required',
+        ]);
+
+        if( $validate->fails()){
+                return back()
+                        ->withErrors($validate, 'packageAssociation')
+                        ->with('error', 'There was an error when updating the package status')
+                        ->withInput();
+        }
+
+        $package_id = $request->boughtPackage;
+        $status = $request->status;
+
+        $package    = BoughtPackage::where('id', $package_id)
+                                    ->update([ 'status' => $status ]);
+        
+        return back()->with('message', 'Succesfully Updated the Package Status');
+    } 
+
+    public function removeUserPackage(Request $request)
+    {
+        $validate = Validator::make($request->all(),[
+            'deleteBoughtPackage'   => 'required|exists:bought_packages,id',
+        ]);
+
+        if( $validate->fails()){
+                return back()
+                        ->withErrors($validate, 'packageAssociation')
+                        ->with('error', 'There was an error when deleting the package')
+                        ->withInput();
+        }
+
+        $package_id = $request->deleteBoughtPackage;
+        
+        $package    = BoughtPackage::where('id', $package_id)
+                                    ->delete();
+        
+        return back()->with('message', 'Succesfully Deleted the Package');
     } 
 
     public function userDisplay($id)

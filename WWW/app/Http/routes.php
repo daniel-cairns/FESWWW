@@ -51,6 +51,9 @@ Route::post('packageAssociation', 'AdminController@packageAssociation');
 Route::post('updateSubbrandPackages', 'AdminController@updateSubbrandPackages');
 Route::post('deletePackage', 'AdminController@deletePackage');
 
+Route::post('updateStatus', 'AdminController@updateStatus');
+Route::post('removeUserPackage', 'AdminController@removeUserPackage');
+
 // Display pages
 Route::get('gallery', 'GalleryController@index');
 Route::get('about', 'AboutController@index');

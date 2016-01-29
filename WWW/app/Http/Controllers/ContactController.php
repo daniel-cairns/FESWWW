@@ -24,7 +24,7 @@ class ContactController extends Controller
             'firstname' => 'required|min:3|max:25',
             'lastname' 	=> 'required|min:3|max:25',
             'email'		=> 'required|email|min:6|max:255',
-            'phone'		=> 'required|min:6|max:30',
+            'phone'		=> 'min:6|max:30',
             'comment'	=> 'required|min:3|max:500',
         ]);
 
@@ -39,7 +39,7 @@ class ContactController extends Controller
             'lastname' 	=> $request->lastname,
             'email'		=> $request->email,
             'phone'		=> $request->phone,
-            'comment'	=> $request->comments
+            'comment'	=> $request->comment
         ];
 
         Mail::send('emails.contact', $data, function ($message) use ($data) {

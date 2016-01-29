@@ -63,7 +63,14 @@ class AccountController extends Controller
                 ->withInput();
       }
       // Change the users password
-      $user = User::find( Auth::user()->id );
+      
+      
+      try {
+          $user = User::find( Auth::user()->id );
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+          return view('errors.error');
+      }  
+
       $user->password = bcrypt($request->password);
       $user->save();
     
@@ -101,7 +108,12 @@ class AccountController extends Controller
       }
 
       // Change the users password
-      $user = User::find( Auth::user()->id );
+      try {
+          $user = User::find( Auth::user()->id );
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+          return view('errors.error');
+      }  
+
       $user->email = $request->email;
       $user->save();
 
@@ -118,16 +130,15 @@ class AccountController extends Controller
           'new_username'  => 'required|max:255|unique:users,name',
         ]
       );
-      // dd($validator);
+      
+      $validator->after(
 
-       $validator->after(
-
-          function($validator) use($request){
-              
-              if( !Auth::attempt([ 'email'=>Auth::user()->email, 'password'=>$request->password ]) ) {
-                $validator->errors()->add('password', 'Incorrect password');
-              }
+        function($validator) use($request){
+            
+          if( !Auth::attempt([ 'email'=>Auth::user()->email, 'password'=>$request->password ]) ) {
+            $validator->errors()->add('password', 'Incorrect password');
           }
+        }
       );
 
        // If the validation failed
@@ -140,8 +151,13 @@ class AccountController extends Controller
                 ->withInput();
       }
 
-      // Change the users password
-      $user = User::find( Auth::user()->id );
+      // Change the username
+      try {
+          $user = User::find( Auth::user()->id );
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
+          return view('errors.error');
+      }  
+      
       $user->name = $request->new_username;
       $user->save();
 

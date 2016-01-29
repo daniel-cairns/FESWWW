@@ -20,6 +20,7 @@ function getUserInfo()
     
     success:  function(dataFromServer){
       
+      console.log(dataFromServer);
       var user      = dataFromServer.user;
       var packages  = dataFromServer.packages;
       
@@ -87,13 +88,22 @@ function getUserPackages(packages, user){
   
   if (packages.length > 0)
   {
-    $('#packages').before('<div class="row"><div class="columns"><h2>Packages</h2></div></div>');
+    $('#packages').before('<div class="row"><div class="columns"><h2>Users Ordered Packages</h2><hr></div></div>');
   }
 
   for(var i=0; i<packages.length; i++ )
   {
-    $.ajax({
-      url: "/userPackages/"+packages[i].package_id,
+    
+    var package_id  = packages[i].package_id;
+    var bought_id   = packages[i].id;  
+    var status      = packages[i].status;
+    displayPackage( status, package_id, bought_id );   
+  } 
+}
+
+function displayPackage(status, package_id, bought_id ){
+  $.ajax({
+      url: "/userPackages/"+package_id,
 
       success: function(packageFromServer){
 
@@ -102,8 +112,8 @@ function getUserPackages(packages, user){
           for(var i=0; i<packageFromServer.length; i++)
           {
             var currentPackage = packageFromServer[i];
-      
-            $('#packages').append('<li><ul class="small-block-grid-1" data-equalizer-watch="'+currentPackage.id+'"><li><h5>'+currentPackage.name+'</h5></li><li>'+currentPackage.description+'</li><li>'+packages[i].status+'</li><li><button class="tiny button radius insertPackage" id="package_id'+currentPackage.id+'" data-package-id="'+currentPackage.id+'" data-reveal-id="packageModal">Select Package</button></li></ul></li>');
+            
+            $('#packages').append('<li><ul class="small-block-grid-1" data-equalizer-watch="'+currentPackage.id+'"><li><h5>'+currentPackage.name+'</h5></li><li>'+currentPackage.description+'</li><li>Status: '+status+'</li><li><button class="tiny button radius insertPackage" id="package_id'+bought_id+'" data-package-id="'+bought_id+'" data-reveal-id="packageModal">Edit Package</button></li></ul></li>');
             
           }
           
@@ -116,24 +126,13 @@ function getUserPackages(packages, user){
         console.log('cannot connect to packages');
       }
     });
-  }
-
-  $('.insertPackage').click(function(){
-    alert('test');
-    console.log('test');
-    selectUserPackage();
-  });
-
 }
 
-function selectUserPackage()
-{
-  console.log('test');
-
+$(document).on('click', '.insertPackage', function () {
   var userPackage = $(this).data('package-id');
+  console.log(userPackage);
+  $('#boughtPackage').val(userPackage);
+  $('#deleteBoughtPackage').val(userPackage);
+});
 
-  $('#boughtPackage').value(userPackage);
-  
-  console.log(userPackage+'test');
-}
 

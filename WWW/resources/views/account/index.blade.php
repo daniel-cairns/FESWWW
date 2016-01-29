@@ -69,7 +69,7 @@
 						<li data-equalizer-watch>
 							<h5>{{ $boughtPackage->package->name }}</h5>
 							<p>{{ $boughtPackage->package->description }}</p>
-							<p>Price: {{ $boughtPackage->package->price }}</p>
+							<p>Price: ${{ $boughtPackage->package->price }}</p>
 							<p>Hours: {{ $boughtPackage->package->hours }}</p>
 							<p>Booking Date: {{ \Carbon\Carbon::parse( $boughtPackage->booking_date )->toFormattedDateString() }}</p>
 							<p id="address{{ $boughtPackage->id }}"></p>
