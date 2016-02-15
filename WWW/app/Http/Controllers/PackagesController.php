@@ -33,13 +33,13 @@ class PackagesController extends Controller
       try {
         $subbrand   = Subbrand::where('slug', $subbrand)->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }
 
       try {
         $package    = Package::where('slug', $package)->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }      
           
       return view('packages.order', compact('subbrand', 'package'));
@@ -82,13 +82,13 @@ class PackagesController extends Controller
       try {
         $subbrand   = Subbrand::where('id', $order['subbrand'])->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }
 
       try {
         $package    = Package::where('id', $order['package'])->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }      
 
       return view('packages.confirm', compact('order', 'subbrand', 'package'));
@@ -116,13 +116,13 @@ class PackagesController extends Controller
       try {
         $subbrand   = Subbrand::where('id', $request->subbrand)->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }
 
       try {
         $package    = Package::where('id', $request->package)->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }
 
       $password   = uniqid();
@@ -185,13 +185,13 @@ class PackagesController extends Controller
       try {
         $subbrand = Subbrand::where('id', $request->subbrand)->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }
 
       try {
         $package = Package::where('id', $request->package)->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }
       
       $date = $request->date;
@@ -245,13 +245,13 @@ class PackagesController extends Controller
                       ->where('id', $package_id)
                       ->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }
 
       try {
         $package = Package::where('id', $boughtPackage->package_id)->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {    
-        return view('errors.adminError');
+        return view('errors.error');
       }      
       
       $data = [
