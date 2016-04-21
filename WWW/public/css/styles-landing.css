@@ -39,7 +39,7 @@ body {
   transition: all 0.3s linear;
 }
 
-#landing h1 + div:hover {
+#landing h1 + div:hover, h1 + div:focus {
   cursor: pointer;
   background: rgba(33, 33, 33, 0.3);
 }
@@ -89,7 +89,7 @@ body {
   }
 }
 
-#logo a:hover {
+#logo a:hover , a:focus{
   color: #FFC107;
 }
 
@@ -175,17 +175,19 @@ body {
   text-decoration: underline;
 }
 
-#content .image-box .hover-window:hover {
+#content .image-box .hover-window:hover, .hover-window:focus {
   background: none;
 }
 
-#content .image-box .hover-window:hover .hover-window-text {
+#content .image-box .hover-window:hover .hover-window-text, 
+.hover-window:focus .hover-window-text {
   top: 0;
   visibility: visible;
 }
 
 @media all and (min-width: 672px) {
-  #content .image-box .hover-window:hover .hover-window-text {
+  #content .image-box .hover-window:hover .hover-window-text,
+  .hover-window:focus .hover-window-text {
     top: 40%;
   }
 }
